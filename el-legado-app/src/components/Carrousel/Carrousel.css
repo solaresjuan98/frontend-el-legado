@@ -1,0 +1,12 @@
+/* Estilo para pantallas pequeñas (por ejemplo, hasta 768px) */
+@media (max-width: 768px) {
+    .carousel-container .carousel .slide {
+      height: auto;
+    }
+  
+    .carousel-container .carousel .slide img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

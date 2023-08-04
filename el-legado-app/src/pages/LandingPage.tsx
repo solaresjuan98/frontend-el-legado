@@ -1,12 +1,11 @@
-import { Typography } from "@mui/joy"
 
+import {Carrousel} from "../components/Carrousel/Carrousel"
 export const LandingPage = () => {
     return (
         <div>
-
-            <Typography level="h1">
-                Titulo de pruebaa
-            </Typography>
+             
+            <Carrousel/>
+          
         </div>
     )
 }
