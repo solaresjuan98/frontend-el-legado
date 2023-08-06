@@ -4,7 +4,7 @@ import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 
 import Box from '@mui/joy/Box';
-
+ 
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 
@@ -20,7 +20,7 @@ import BookRoundedIcon from '@mui/icons-material/BookRounded';
 // custom
 import Menu from './Menu';
 import Layout from './Layout';
-import Navigation from './Navigation';
+ 
 import { NavLink } from 'react-router-dom';
 
 function ColorSchemeToggle() {
@@ -129,6 +129,11 @@ export const Navbar = () => {
 
           </NavLink>
 
+          <NavLink to="/registro" style={linkStyle}>
+            <Typography level="h2" fontSize="xl" textColor={"common.white"} sx={{ mb: 0.5 }}>Registrarme</Typography>
+
+          </NavLink>
+
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1.5 }}>
@@ -181,8 +186,8 @@ export const Navbar = () => {
           />
           <ColorSchemeToggle />
         </Box>
+     
       </Layout.Header>
-
 
     </CssVarsProvider>
   );

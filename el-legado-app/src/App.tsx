@@ -5,7 +5,7 @@ import { Navbar } from "./components/navbar/Navbar"
 import { Talleres } from "./pages/Talleres"
 import { AcercaDe } from "./pages/AcercaDe"
 import { Expositores } from "./pages/Expositores"
-
+import Footer from "./components/Footer"
 function App() {
 
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/acerca-de" element={<AcercaDe />} />
         <Route path="/expositores" element={<Expositores />} />
       </Routes>
+    
     </BrowserRouter>
   )
 }
