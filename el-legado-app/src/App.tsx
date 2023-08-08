@@ -19,7 +19,8 @@ function App() {
         <Route path="/acerca-de" element={<AcercaDe />} />
         <Route path="/expositores" element={<Expositores />} />
       </Routes>
-    
+      <br/> <br/> <br/> <br/> <br/> <br/>
+    <Footer/>
     </BrowserRouter>
   )
 }

@@ -45,7 +45,7 @@ export const PagoBoleta = () => {
           }}
         >
           <Typography level="title-lg" textColor={"#DAE440"}  startDecorator={<InfoOutlined />}>
-            Pago con Boleta
+          Ingrese la información 
           </Typography>
           <Divider inset="none" />
           <CardContent
@@ -82,7 +82,7 @@ export const PagoBoleta = () => {
           <Input type="number"endDecorator={<LocalActivityIcon />}  />
         </FormControl>
         <FormControl  >
-          <FormLabel  sx={{ color: '#11AAA3' }}>CargarBoleta </FormLabel>
+          <FormLabel  sx={{ color: '#11AAA3' }}>Carga la boleta de pago  </FormLabel>
          
       <input
         type="file"

@@ -42,7 +42,7 @@ function ColorSchemeToggle() {
         if (mode === 'light') {
           setMode('dark');
         } else {
-          setMode('light');
+          setMode('dark');
         }
       }}
     >

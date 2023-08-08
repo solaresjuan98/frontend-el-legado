@@ -31,7 +31,7 @@ export const Expositores = () => {
     <Grid container justifyContent="center" style={{ padding: '5%' }} className="animate__animated animate__backInDown">
 
       <Grid xs={12}>
-        <Typography level="h1" textColor={"#C1DA08"} style={{ textAlign: 'center', marginTop: '30px' }}>
+        <Typography level="h1" textColor={"#C1DA08"} style={{ textAlign: 'center', marginTop: '-2%' }}>
           Conoce a los expositores
         </Typography>
 
@@ -41,7 +41,7 @@ export const Expositores = () => {
       {/* ======== tarjetas de expositores ======== */}
       {
         arrExpositores.map((item) => (
-          <Grid item xs={12} lg={3}>
+          <Grid item xs={12} lg={3} style={{marginTop: '2%'}}>
             <ExpositorCard expositor={item} />
           </Grid>
 

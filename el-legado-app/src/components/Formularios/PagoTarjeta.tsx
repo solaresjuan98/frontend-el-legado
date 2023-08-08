@@ -37,7 +37,7 @@ export const PagoTarjeta = () => {
           }}
         >
           <Typography level="title-lg" textColor={"#DAE440"}  startDecorator={<InfoOutlined />}>
-            Pago con tarjeta
+            Ingrese su información personal porfavor
           </Typography>
           <Divider inset="none" />
           <CardContent
@@ -73,7 +73,14 @@ export const PagoTarjeta = () => {
           <FormLabel  sx={{ color: '#11AAA3' }}>Número de Entradas</FormLabel>
           <Input type="number"endDecorator={<LocalActivityIcon />}  />
         </FormControl>
-        
+        <br/>
+       
+
+        <Typography level="title-lg" textColor={"#DAE440"}  startDecorator={<InfoOutlined />}>
+            Ingrese  la información de su tarjeta
+          </Typography>
+         
+        <br/>
           <FormLabel sx={{ color: '#11AAA3' }}>Número de tu Tarjeta</FormLabel>
           <Input endDecorator={<CreditCardIcon />} />
         </FormControl>

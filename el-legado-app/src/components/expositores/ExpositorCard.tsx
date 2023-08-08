@@ -24,13 +24,14 @@ export const ExpositorCard = ({ expositor }: Props) => {
       sx={{
         // width: 320,
         margin: '10px',
+        height: '100%',
         maxWidth: '100%',
         boxShadow: 'lg',
       }}
     >
       <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
-        <Avatar src="https://engineering.unl.edu/images/staff/Kayla-Person.jpg" sx={{ '--Avatar-size': '4rem' }} />
-        <Chip
+        <Avatar src="https://engineering.unl.edu/images/staff/Kayla-Person.jpg" sx={{ '--Avatar-size': '7rem' }} />
+        {/* <Chip
           size="sm"
           variant="soft"
           color="primary"
@@ -41,13 +42,13 @@ export const ExpositorCard = ({ expositor }: Props) => {
             borderColor: 'background.surface',
           }}
         >
-          PRO
-        </Chip>
+          
+        </Chip> */}
         <Typography level="title-lg" textColor={"#10D9DE"}>{expositor.nombre}</Typography>
         <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>
           {expositor.bio}
         </Typography>
-        <Box
+        {/* <Box
           sx={{
             display: 'flex',
             gap: 2,
@@ -119,15 +120,15 @@ export const ExpositorCard = ({ expositor }: Props) => {
               </svg>
             </SvgIcon>
           </IconButton>
-        </Box>
+        </Box> */}
       </CardContent>
       <CardOverflow sx={{ bgcolor: 'background.level1' }}>
-        <CardActions buttonFlex="1">
+        {/* <CardActions buttonFlex="1">
           <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
             <Button>Message</Button>
             <Button>Connect</Button>
           </ButtonGroup>
-        </CardActions>
+        </CardActions> */}
       </CardOverflow>
     </Card>
   );

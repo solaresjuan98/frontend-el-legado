@@ -1,206 +1,99 @@
-import * as React from 'react';
-import { ColorPaletteProp } from '@mui/joy/styles';
+
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/joy/Box';
 import IconButton from '@mui/joy/IconButton';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
-import Chip from '@mui/joy/Chip';
+import CardOverflow from '@mui/joy/CardOverflow';
+
 import Divider from '@mui/joy/Divider';
-import Input from '@mui/joy/Input';
-import List from '@mui/joy/List';
-import ListSubheader from '@mui/joy/ListSubheader';
-import ListItem from '@mui/joy/ListItem';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import ListItemButton from '@mui/joy/ListItemButton';
+
+ 
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import SendIcon from '@mui/icons-material/Send';
-import ColorLensRoundedIcon from '@mui/icons-material/ColorLensRounded';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
+import { Link } from 'react-router-dom'; // Importar Link si usas react-router
 export default function Footer() {
-  const [color, setColor] = React.useState<ColorPaletteProp>('neutral');
   return (
     <Sheet
       variant="solid"
-      color={color}
       invertedColors
       sx={{
-        ...(color !== 'neutral' && {
-          bgcolor: `${color}.800`,
-        }),
+        bgcolor: '#320587',
         flexGrow: 1,
         p: 2,
         borderRadius: { xs: 0, sm: 'sm' },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <IconButton
-          variant="soft"
-          size="sm"
-          onClick={() => {
-            const colors: ColorPaletteProp[] = [
-              'primary',
-              'neutral',
-              'danger',
-              'success',
-              'warning',
-            ];
-            const nextColor = colors.indexOf(color);
-            setColor(colors[nextColor + 1] ?? colors[0]);
-          }}
-        >
-          <ColorLensRoundedIcon fontSize="small" />
-        </IconButton>
-        <Divider orientation="vertical" />
-        <IconButton variant="plain">
-          <FacebookRoundedIcon />
-        </IconButton>
-        <IconButton variant="plain">
-          <GitHubIcon />
-        </IconButton>
-        <Input
-          variant="soft"
-          placeholder="Type in your email"
-          type="email"
-          name="email"
-          endDecorator={
-            <IconButton variant="soft" aria-label="subscribe">
-              <SendIcon />
-            </IconButton>
-          }
-          sx={{ ml: 'auto', display: { xs: 'none', md: 'flex' } }}
-        />
-      </Box>
-      <Divider sx={{ my: 2 }} />
       <Box
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
-          alignItems: { md: 'flex-start' },
           justifyContent: 'space-between',
-          flexWrap: 'wrap',
+          alignItems: 'center',
           gap: 2,
         }}
       >
-        <Card
-          variant="soft"
-          size="sm"
+        <Box
           sx={{
-            flexDirection: { xs: 'row', md: 'column' },
-            minWidth: { xs: '100%', md: 'auto' },
-            gap: 1,
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' }, // Cambia la dirección en pantallas pequeñas
+            alignItems: 'center',
           }}
         >
-          <AspectRatio
-            ratio="21/9"
-            minHeight={80}
-            sx={{ flexBasis: { xs: 200, md: 'initial' } }}
-          >
-            <img alt="" src="/static/blog/mui-product-comparison/ecosystem.png" />
-          </AspectRatio>
-          <CardContent>
-            <Typography level="body-sm">Intro to the MUI ecosystem</Typography>
-            <Typography level="body-xs" sx={{ mb: 0.5 }}>
-              MUI blog
-            </Typography>
-          </CardContent>
-        </Card>
-        <List
-          size="sm"
-          orientation="horizontal"
-          wrap
-          sx={{ flexGrow: 0, '--ListItem-radius': '8px' }}
+    <Card orientation="vertical" variant="outlined" sx={{ width: 150 }}>
+  <CardOverflow>
+    <AspectRatio ratio="1/1" style={{ width: 145 }}>{/* Ajusta el ancho al 100% */}
+    <img
+    src="https://scontent.fgua9-2.fna.fbcdn.net/v/t39.30808-6/355149497_278947114647321_7070738570593722644_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=CAIG4UPGDIkAX9A9Fhv&_nc_ht=scontent.fgua9-2.fna&oh=00_AfCwqqyd6em9Fy_L0CRq3evUm0QuWbgYTb7eLRPEBwMPuw&oe=64D622C6"
+    alt="efe"
+    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+  />
+    </AspectRatio>
+  </CardOverflow>
+  <CardContent>
+    <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
+      ConJóvenes 
+    </Typography>
+    <Typography level="body-sm">Iglesia de Cristo</Typography>
+  </CardContent>
+</Card>  
+<br/>
+ <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            flexGrow: 1,
+            marginLeft: 20,
+            justifyContent: { xs: 'center', md: 'flex-start' }, // Esto centra el contenido en pantallas pequeñas
+          }}
         >
-          <ListItem nested sx={{ width: { xs: '50%', md: 140 } }}>
-            <ListSubheader>Sitemap</ListSubheader>
-            <List>
-              <ListItem>
-                <ListItemButton>Services</ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>Blog</ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>Contact us</ListItemButton>
-              </ListItem>
-            </List>
-          </ListItem>
-          <ListItem nested sx={{ width: { xs: '50%', md: 180 } }}>
-            <ListSubheader>Product</ListSubheader>
-            <List sx={{ '--ListItemDecorator-size': '32px' }}>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemDecorator>
-                    <img
-                      alt=""
-                      src="/static/branding/product-core-dark.svg"
-                      width="24"
-                    />
-                  </ListItemDecorator>
-                  MUI Core
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemDecorator>
-                    <img
-                      alt=""
-                      src="/static/branding/product-advanced-dark.svg"
-                      width="24"
-                    />
-                  </ListItemDecorator>
-                  MUI X
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemDecorator>
-                    <img
-                      alt=""
-                      src="/static/branding/product-toolpad-dark.svg"
-                      width="24"
-                    />
-                  </ListItemDecorator>
-                  MUI Toolpad
-                  <Chip
-                    variant="soft"
-                    size="sm"
-                    sx={{ minHeight: 20, fontSize: 'xs2', ml: 'auto' }}
-                  >
-                    BETA
-                  </Chip>
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemDecorator>
-                    <img
-                      alt=""
-                      src="/static/branding/product-designkits-dark.svg"
-                      width="24"
-                    />
-                  </ListItemDecorator>
-                  Design kits
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemDecorator>
-                    <img
-                      alt=""
-                      src="/static/branding/product-templates-dark.svg"
-                      width="24"
-                    />
-                  </ListItemDecorator>
-                  Templates
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </ListItem>
-        </List>
+          <Typography sx={{ mb: 1 }}>Contáctanos</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 1,
+            }}
+          >
+            <IconButton variant="plain">
+              <FacebookRoundedIcon />
+            </IconButton>
+            <IconButton variant="plain">
+              <InstagramIcon />
+            </IconButton>
+          </Box>
+        </Box>
+      
+        </Box>
+        <Divider orientation="vertical" sx={{ marginLeft: 75 }} />
+          <Typography level="h3" sx={{ ml: { xs: 0, md: 2 }, mt: { xs: 2, md: 0 } }}>
+          Regístrate en el congreso <strong>el legado</strong> <Link to="/registro-congreso">aquí</Link>
+        </Typography>
       </Box>
     </Sheet>
   );
