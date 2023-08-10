@@ -13,13 +13,13 @@ const Contenido: ContenidoItem[] = [
   {
     Titulo: "Expositores",
     descp: "Conoce a nuestros expertos Expositores, seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
-    img: "https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/335069050_8886639494711461_2048694704273185419_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=sjQlkR8GwloAX92zz4i&_nc_ht=scontent.fgua3-3.fna&oh=00_AfCBe83x68p9eyKmUfj8QDJb7bkygEZbcUmD1EC65cjxwQ&oe=64D329E0",
+    img: "https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/335069050_8886639494711461_2048694704273185419_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=fhd-TJePx1UAX_aGjrC&_nc_ht=scontent.fgua3-3.fna&oh=00_AfAj4F1aDdQw-_dKcEQEwesUYecyEkKT4MF-uf-Lj52bfw&oe=64D918A0",
     ruta :"/Expositores"
   },
   {
     Titulo: "Talleres",
     descp: "Conoce a nuestros talleres,  que fueron seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
-    img: "https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/335161566_182552831168523_3991014698227586479_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=Hs0kKf7cyUUAX8keW2B&_nc_ht=scontent.fgua3-3.fna&oh=00_AfBLdZQsIAA-LcW6qD84qu20Ymx90ZDSjyn7WTdqm_sPIw&oe=64D404F3",
+    img: "https://scontent.fgua3-5.fna.fbcdn.net/v/t39.30808-6/335163875_172719628882600_4754736672555758795_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=oa1iUMMZYAsAX__ww42&_nc_ht=scontent.fgua3-5.fna&oh=00_AfDimzqSxV6FYWMw7V_EUFL6O_TpWZCuWVoRj1HN7gS3sA&oe=64D9F14B",
     ruta :"/Talleres"
   }  
 ];

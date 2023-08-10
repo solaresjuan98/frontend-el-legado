@@ -1,4 +1,4 @@
- 
+
 import Card from '@mui/joy/Card';
 import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent';
@@ -22,14 +22,14 @@ import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 // o
 
 export const PagoBoleta = () => {
-    const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
 
-    const handleFileInputClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-          }
-    };
+  const handleFileInputClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
   return (
     <Grid container>
       <Grid item xs={12} md={110}>
@@ -44,8 +44,8 @@ export const PagoBoleta = () => {
 
           }}
         >
-          <Typography level="title-lg" textColor={"#DAE440"}  startDecorator={<InfoOutlined />}>
-          Ingrese la información 
+          <Typography level="title-lg" textColor={"#DAE440"} startDecorator={<InfoOutlined />}>
+            Ingrese la información
           </Typography>
           <Divider inset="none" />
           <CardContent
@@ -57,53 +57,53 @@ export const PagoBoleta = () => {
               md: 'repeat(2, 1fr)', // Dos columnas en pantallas grandes
             }}
           >
-          
+
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-          <FormLabel sx={{ color: '#11AAA3' }}>Nombre </FormLabel>
-          <Input endDecorator={<PersonIcon />} />
-        </FormControl>
+              <FormLabel sx={{ color: '#11AAA3' }}>Nombre </FormLabel>
+              <Input endDecorator={<PersonIcon />} />
+            </FormControl>
 
-        <FormControl sx={{ gridColumn: '1/-1' }}>
-          <FormLabel sx={{ color: '#11AAA3' }}>Télefono </FormLabel>
-          <Input endDecorator={<PhoneIcon />} />
-        </FormControl>
-
-        <FormControl sx={{ gridColumn: '1/-1' }}>
-          <FormLabel sx={{ color: '#11AAA3' }}>Correo </FormLabel>
-          <Input endDecorator={<EmailIcon />} />
-        </FormControl>
             <FormControl sx={{ gridColumn: '1/-1' }}>
-          <FormLabel sx={{ color: '#11AAA3' }}>Congregación</FormLabel>
-          <Input endDecorator={<BusinessIcon />}   />
-        </FormControl>
-        <FormControl  >
-          <FormLabel  sx={{ color: '#11AAA3' }}>Número de Entradas</FormLabel>
-          <Input type="number"endDecorator={<LocalActivityIcon />}  />
-        </FormControl>
-        <FormControl  >
-          <FormLabel  sx={{ color: '#11AAA3' }}>Carga la boleta de pago  </FormLabel>
-         
-      <input
-        type="file"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={e => {
-          // Aquí puedes manejar la selección de archivos
-          const files = e.target.files;
-          console.log(files);
-        }}
-      />
-      <Button
-        startDecorator={<InsertDriveFileIcon />} 
-        variant="plain" style={{ color: '#FFFFFF',background:'#3E00B9' }}
-        onClick={handleFileInputClick}
-      >
-        Seleccionar archivo
-      </Button>
-        </FormControl>
+              <FormLabel sx={{ color: '#11AAA3' }}>Télefono </FormLabel>
+              <Input endDecorator={<PhoneIcon />} />
+            </FormControl>
+
+            <FormControl sx={{ gridColumn: '1/-1' }}>
+              <FormLabel sx={{ color: '#11AAA3' }}>Correo </FormLabel>
+              <Input endDecorator={<EmailIcon />} />
+            </FormControl>
+            <FormControl sx={{ gridColumn: '1/-1' }}>
+              <FormLabel sx={{ color: '#11AAA3' }}>Congregación</FormLabel>
+              <Input endDecorator={<BusinessIcon />} />
+            </FormControl>
+            <FormControl>
+              <FormLabel sx={{ color: '#11AAA3', gridColumn: '1/-1' }}>Número de Entradas</FormLabel>
+              <Input type="number" endDecorator={<LocalActivityIcon />} />
+            </FormControl>
+            <FormControl  >
+              <FormLabel sx={{ color: '#11AAA3', gridColumn: '1/-1' }}>Carga la boleta de pago  </FormLabel>
+
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={e => {
+                  // Aquí puedes manejar la selección de archivos
+                  const files = e.target.files;
+                  console.log(files);
+                }}
+              />
+              <Button
+                startDecorator={<InsertDriveFileIcon />}
+                variant="plain" style={{ color: '#FFFFFF', background: '#3E00B9' }}
+                onClick={handleFileInputClick}
+              >
+                Seleccionar archivo
+              </Button>
+            </FormControl>
             <CardActions sx={{ gridColumn: '1/-1' }}>
-            <Button   variant="plain" style={{ color: '#FFFFFF',background:'#3E00B9' }} >        Pagar
+              <Button variant="plain" style={{ color: '#FFFFFF', background: '#3E00B9' }} >        Pagar
               </Button>
             </CardActions>
           </CardContent>

@@ -4,7 +4,7 @@ import { Menu } from "./Menu"
 import { Programa } from "../components/Programa/Programa"
 import { Ubicacion } from "../components/Ubicacion/Ubicacion"
 import Button from '@mui/joy/Button';
-import { NavLink } from 'react-router-dom';
+
 export const LandingPage = () => {
     return (
       <div>

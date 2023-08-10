@@ -18,7 +18,7 @@ export const Programa = () => {
  <Card sx={{ width: '100%', height: '500px', flexGrow: 1 }}> {/* Ajusta el alto como desees */}
 <CardCover>
 <img
-     src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/306666950_3157595611220262_6051860655414645581_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=_uDEdT3ysU8AX8qeBvk&_nc_ht=scontent.fgua3-4.fna&oh=00_AfDJ3DVjCODzCFSfZ3QpSJHrjdpowsOFKQByWEGnaSF9VA&oe=64D425F6"
+     src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/306666950_3157595611220262_6051860655414645581_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=EQBZIOx5CYcAX_X7Bcg&_nc_ht=scontent.fgua3-4.fna&oh=00_AfBNkyhpq8NMXZnpqbWqj6yscQmvbabasdAPubhEaYG0yA&oe=64DA14B6"
      srcSet="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/306666950_3157595611220262_6051860655414645581_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=_uDEdT3ysU8AX8qeBvk&_nc_ht=scontent.fgua3-4.fna&oh=00_AfDJ3DVjCODzCFSfZ3QpSJHrjdpowsOFKQByWEGnaSF9VA&oe=64D425F6 2x"
      loading="lazy"
      alt=""
@@ -34,7 +34,7 @@ export const Programa = () => {
             <Card sx={{ width: '100%', height: '500px', flexGrow: 1 }}> {/* Ajusta el alto como desees */}
         <CardCover>
         <img
-                src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/306666950_3157595611220262_6051860655414645581_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=_uDEdT3ysU8AX8qeBvk&_nc_ht=scontent.fgua3-4.fna&oh=00_AfDJ3DVjCODzCFSfZ3QpSJHrjdpowsOFKQByWEGnaSF9VA&oe=64D425F6"
+                src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/306666950_3157595611220262_6051860655414645581_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=EQBZIOx5CYcAX_X7Bcg&_nc_ht=scontent.fgua3-4.fna&oh=00_AfBNkyhpq8NMXZnpqbWqj6yscQmvbabasdAPubhEaYG0yA&oe=64DA14B6"
                 srcSet="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/306666950_3157595611220262_6051860655414645581_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=_uDEdT3ysU8AX8qeBvk&_nc_ht=scontent.fgua3-4.fna&oh=00_AfDJ3DVjCODzCFSfZ3QpSJHrjdpowsOFKQByWEGnaSF9VA&oe=64D425F6 2x"
                 loading="lazy"
                 alt=""
