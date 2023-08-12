@@ -3,32 +3,48 @@ import Typography from '@mui/joy/Typography';
 import { Card } from "@mui/joy";
 
 
-const centerContainer = {
-  display: 'flex',
-  alignItems: 'flex-start', // Change this to 'flex-start'
-  justifyContent: 'center',
-  // padding: '100px'
-};
+// const centerContainer = {
+//   display: 'flex',
+//   alignItems: 'flex-start', // Change this to 'flex-start'
+//   justifyContent: 'center',
+//   // padding: '100px'
+// };
 
 const cardClasses = {
-  margin: '10px', 
-  marginTop: '10px', 
+  margin: '10px',
+  marginTop: '10px',
   height: '400px'
 }
 
 export const AcercaDe = () => {
   return (
-    <Grid justifyContent="center" container marginTop={2} sx={{ flexGrow: 1 }} spacing={2} style={{ padding: '5%' }} className="animate__animated animate__backInDown">
+    <Grid justifyContent="center" container marginTop={2} sx={{ flexGrow: 1 }} spacing={2} style={{ padding: '2%' }} className="animate__animated animate__fadeInUp">
+
       <Grid xs={12}>
+
+        <img
+          src="https://scontent.faqb1-2.fna.fbcdn.net/v/t39.30808-6/339095383_6197972216949167_6972314652665301187_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=dZGx-LzhO7AAX8c3654&_nc_ht=scontent.faqb1-2.fna&oh=00_AfCcP1XOZLxQpAlE2WavFLhjqkH3vJG96Rv_XEb8uogtUA&oe=64DC7C6A"
+          alt=""
+          className=""
+          style={{
+            width: '100%',
+            
+            // height: 
+          }}
+        />
+
+      </Grid>
+
+      <Grid xs={12} className="">
         <Card variant="soft">
           <CardContent>
             {/* <Typography level="title-md">Plain card (default)</Typography> */}
-            <Typography level="h2" textColor={"#DAE440"}>
+            <Typography level="h2" textColor={"#1592E5"}>
               Bienvenidos al emocionante evento "El Legado", un congreso que reunirá a todos los jóvenes de la Iglesia de Cristo en Guatemala.
               Durante dos días inolvidables, nos sumergiremos en un ambiente de inspiración, aprendizaje y comunión.
             </Typography>
             <br />
-            <Typography level="h3" textColor={"#40E2E4"}>
+            <Typography level="h3" textColor={"#94B5CB"}>
               Prepárate para una experiencia transformadora. Cada momento estará diseñado para inspirar y empoderar a la nueva generación de jóvenes
               de la Iglesia de Cristo. Habrá sesiones interactivas, discusiones profundas y actividades significativas que nos ayudarán a crecer espiritualmente
               y como líderes en nuestra sociedad.
@@ -39,12 +55,12 @@ export const AcercaDe = () => {
 
       <Grid xs={12} lg={4} >
         <Card variant="soft" style={cardClasses}>
-          <CardContent>
-            
+          <CardContent style={{alignItems: 'center'}}>
+
             <Typography level="h4" textColor={"#BFE5E6"}>
               Conferencistas Internacionales:
             </Typography>
-            <Typography level="body-lg">
+            <Typography level="body-lg" textColor={"94B5CB"}>
               "El Legado" contará con la presencia de destacados conferencistas de diferentes países, quienes compartirán su sabiduría y experiencias.
               Aprenderemos juntos y fortaleceremos nuestra fe en Cristo mientras descubrimos cómo dejar un impacto positivo en nuestras vidas y comunidades.
             </Typography>

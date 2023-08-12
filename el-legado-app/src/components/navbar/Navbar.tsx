@@ -4,7 +4,7 @@ import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 
 import Box from '@mui/joy/Box';
- 
+import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 
@@ -12,13 +12,7 @@ import Typography from '@mui/joy/Typography';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
-import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
-
-
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
-
-// custom
-import Menu from './Menu';
 import Layout from './Layout';
  
 import { NavLink } from 'react-router-dom';
@@ -46,36 +40,20 @@ function ColorSchemeToggle() {
         }
       }}
     >
-      {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
+      {mode === 'dark' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
     </IconButton>
   );
 }
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const location = useLocation();
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen);
-  };
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   const linkStyle = {
     textDecoration: 'none', // Quitar subrayado
     color: 'inherit', // Para asegurar que el color del texto se herede del contenedor
   };
 
-  const activeLinkStyle = {
-    textDecoration: 'none',
-    color: 'inherit',
-    backgroundColor: 'lightgrey', // Color de fondo cuando el enlace está activo
-  };
 
-  const isActive = (path: string) => {
-    
-    return location.pathname === path;
-
-  }
-
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />
@@ -155,35 +133,7 @@ export const Navbar = () => {
           >
             <BookRoundedIcon />
           </IconButton>
-          <Menu
-            id="app-selector"
-            control={
-              <IconButton
-                size="sm"
-                variant="soft"
-                color="neutral"
-                aria-label="Apps"
-              >
-                <GridViewRoundedIcon />
-              </IconButton>
-            }
-            menus={[
-              {
-                label: 'Email',
-                href: '/joy-ui/getting-started/templates/email/',
-              },
-              {
-                label: 'Team',
-                href: '/joy-ui/getting-started/templates/team/',
-              },
-              {
-                label: 'Files',
-                active: true,
-                'aria-current': 'page',
-                href: '/joy-ui/getting-started/templates/files/',
-              },
-            ]}
-          />
+        
           <ColorSchemeToggle />
         </Box>
      
