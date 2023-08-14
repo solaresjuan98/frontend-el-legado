@@ -13,7 +13,7 @@ const Contenido: ContenidoItem[] = [
   {
     Titulo: "Expositores",
     descp: "Conoce a nuestros expertos Expositores, seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
-    img: "https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/335069050_8886639494711461_2048694704273185419_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=fhd-TJePx1UAX_aGjrC&_nc_ht=scontent.fgua3-3.fna&oh=00_AfAj4F1aDdQw-_dKcEQEwesUYecyEkKT4MF-uf-Lj52bfw&oe=64D918A0",
+    img: "https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/335069050_8886639494711461_2048694704273185419_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=tEmLzX4kUtcAX-Xnf9l&_nc_ht=scontent.fgua3-3.fna&oh=00_AfC5f41RLjCYyT38To622Q0K9YIXtK1PHlCo3dDlDw01RQ&oe=64DF0760",
     ruta :"/Expositores"
   },
   {

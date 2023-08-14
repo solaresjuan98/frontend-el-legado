@@ -21,7 +21,7 @@ export const Carrousel = () => {
         {/* Contenido del primer slide */}
         <div>
           <img
-            src="https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/355486675_278947701313929_2215865153211816696_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_ohc=eQfdyQjCQ2QAX96ByjZ&_nc_ht=scontent.fgua3-3.fna&oh=00_AfALtBYLPHK8aJHlGFJXt7cn3srDU6eJyzJMSPw39OW2Yw&oe=64D8E182"
+            src="https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/355486675_278947701313929_2215865153211816696_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=300f58&_nc_ohc=M2FVKk1zToAAX8-e-0u&_nc_ht=scontent.fgua3-3.fna&oh=00_AfAZMYrCkyyoW7N_EJu9GE7KGMZj6JKBDQsINSWOlC_12Q&oe=64DED042"
             alt="Imagen 1"
           />
           
@@ -30,7 +30,7 @@ export const Carrousel = () => {
         {/* Contenido del segundo slide */}
         <div>
           <img
-            src="https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/355486675_278947701313929_2215865153211816696_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_ohc=eQfdyQjCQ2QAX96ByjZ&_nc_ht=scontent.fgua3-3.fna&oh=00_AfALtBYLPHK8aJHlGFJXt7cn3srDU6eJyzJMSPw39OW2Yw&oe=64D8E182"
+            src="https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/355486675_278947701313929_2215865153211816696_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=300f58&_nc_ohc=M2FVKk1zToAAX8-e-0u&_nc_ht=scontent.fgua3-3.fna&oh=00_AfAZMYrCkyyoW7N_EJu9GE7KGMZj6JKBDQsINSWOlC_12Q&oe=64DED042"
             alt="Imagen 2"
           />
         </div>

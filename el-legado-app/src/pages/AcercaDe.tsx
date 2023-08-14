@@ -23,7 +23,7 @@ export const AcercaDe = () => {
       <Grid xs={12}>
 
         <img
-          src="https://scontent.faqb1-2.fna.fbcdn.net/v/t39.30808-6/339095383_6197972216949167_6972314652665301187_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=dZGx-LzhO7AAX8c3654&_nc_ht=scontent.faqb1-2.fna&oh=00_AfCcP1XOZLxQpAlE2WavFLhjqkH3vJG96Rv_XEb8uogtUA&oe=64DC7C6A"
+          src="https://scontent.fgua3-3.fna.fbcdn.net/v/t39.30808-6/355486675_278947701313929_2215865153211816696_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=300f58&_nc_ohc=M2FVKk1zToAAX8-e-0u&_nc_ht=scontent.fgua3-3.fna&oh=00_AfAZMYrCkyyoW7N_EJu9GE7KGMZj6JKBDQsINSWOlC_12Q&oe=64DED042"
           alt=""
           className=""
           style={{

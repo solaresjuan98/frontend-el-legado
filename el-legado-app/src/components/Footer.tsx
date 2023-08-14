@@ -32,7 +32,7 @@ import { Link } from 'react-router-dom';export default function Footer() {
                 <CardOverflow>
                   <AspectRatio ratio="1/1" style={{ width: 145 }}>
                     <img
-                      src="https://scontent.fgua9-2.fna.fbcdn.net/v/t39.30808-6/355149497_278947114647321_7070738570593722644_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=CAIG4UPGDIkAX9A9Fhv&_nc_ht=scontent.fgua9-2.fna&oh=00_AfCwqqyd6em9Fy_L0CRq3evUm0QuWbgYTb7eLRPEBwMPuw&oe=64D622C6"
+                      src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/355149497_278947114647321_7070738570593722644_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=be3454&_nc_ohc=NCTvR4MGUdcAX-46VlS&_nc_ht=scontent.fgua3-4.fna&oh=00_AfDjb7Snv9b3-gjI9W5wJabU59otWuYv8CX50_-370RwTw&oe=64DE0BC6"
                       alt="efe"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />

@@ -2,15 +2,15 @@ import { Grid, Typography } from "@mui/joy"
 
 export const Talleres = () => {
     return (
-        <Grid container marginTop={2} sx={{ flexGrow: 1 }} className="animate__animated animate__fadeInUp">
-
+        <Grid container marginTop={2} sx={{ flexGrow: 1, marginTop: '5%' }} className="animate__animated animate__fadeInUp">
+         
             <Grid xs={12}>
                 <Typography level="h1" textColor={"#C1DA08"} style={{ textAlign: 'center', marginTop: '-2%' }}>
                     Talleres
                 </Typography>
 
             </Grid>
-
+        
 
             <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
 
