@@ -1,24 +1,60 @@
-
+import React, { useState, useEffect } from 'react';
 import { Carrousel } from "../components/Carrousel/Carrousel"
 import { Menu } from "./Menu"
 import { Programa } from "../components/Programa/Programa"
 import { Ubicacion } from "../components/Ubicacion/Ubicacion"
 import Button from '@mui/joy/Button';
+import Typography from '@mui/joy/Typography'; // Asegúrate de tener este import si no lo tienes ya
+
+interface CountdownProps {
+  targetDate: Date;
+}
+
+const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
+  const [timeLeft, setTimeLeft] = useState<string>("");
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        return `${days} días ${hours} horas ${minutes} minutos`;
+      }
+      return "El evento es hoy!";
+    };
+
+    setTimeLeft(calculateTimeLeft());
+    const interval = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000 * 60); // Actualizado para que se verifique cada minuto
+
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  return <Typography level="h2" textColor={"#9AF9E2"}>{`Faltan ${timeLeft} para el congreso El legado.`}</Typography>;
+};
 
 export const LandingPage = () => {
     return (
       <div>
         <Carrousel />
         <br/>
-        <div style={{ textAlign: 'center' }}> {/* Agrega un div para centrar el botón */}
+        <br/>
+        <div style={{ textAlign: 'center' }}>
+          {/* Agregamos el componente Countdown arriba del botón */}
+          <Countdown targetDate={new Date('2023-11-04 09:00:00')} /> {/* Ajustado para las 9 am */}
+          <br/> <br/>
           <Button
             variant="plain"
             style={{
               color: '#CEFFFB',
               background: '#1A1142',
-              fontSize: '25px', // Aumenta el tamaño del texto
-              padding: '25px 50px', // Aumenta el espaciado interno (superior/inferior izquierdo/derecho)
-              display: 'inline-block', // Asegura que el botón se muestre en línea
+              fontSize: '25px',
+              padding: '25px 50px',
+              display: 'inline-block',
             }}
           >
             Registrate
@@ -32,5 +68,4 @@ export const LandingPage = () => {
         <Ubicacion/>
       </div>
     );
-  }
-  
+}

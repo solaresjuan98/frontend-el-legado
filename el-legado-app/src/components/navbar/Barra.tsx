@@ -67,7 +67,7 @@ export default function Barra({
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography fontSize="lg" fontWeight="lg" sx={{ flex: 1 }}>
+          <Typography fontSize="lg" fontWeight="lg" sx={{ flex: 1,color: "#9AF9E2"  }}>
             {title}
           </Typography>
           <ModalClose sx={{ position: "initial" }} />
