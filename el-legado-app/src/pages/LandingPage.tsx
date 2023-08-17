@@ -14,14 +14,14 @@ export const LandingPage = () => {
           <Button
             variant="plain"
             style={{
-              color: '#FFFFFF',
-              background: '#3E00B9',
+              color: '#CEFFFB',
+              background: '#1A1142',
               fontSize: '25px', // Aumenta el tamaño del texto
               padding: '25px 50px', // Aumenta el espaciado interno (superior/inferior izquierdo/derecho)
               display: 'inline-block', // Asegura que el botón se muestre en línea
             }}
           >
-            Registrarse
+            Registrate
           </Button>
         </div>
   

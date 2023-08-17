@@ -28,8 +28,8 @@ export const TarjetaTalleristas: React.FC<TarjetaTalleristasProps> = ({ titulo, 
           </AspectRatio>
         </CardOverflow>
         <CardContent>
-          <Typography level="title-md" textAlign="center" textColor={"#DAE440"}>{titulo}</Typography>
-          <Typography level="body-sm" textColor={"#11AAA3"} >{descripcion}</Typography>
+          <Typography level="title-md" textAlign="center" textColor={"#9AF9E2"}>{titulo}</Typography>
+          <Typography level="body-sm" textColor={"#E3FEF8"} >{descripcion}</Typography>
         </CardContent>
         <CardOverflow variant="soft" sx={{ bgcolor: 'background.level1' }}>
           <Divider inset="context" />
@@ -37,7 +37,7 @@ export const TarjetaTalleristas: React.FC<TarjetaTalleristasProps> = ({ titulo, 
             <Button
               component="a"
               variant="plain"
-              style={{ color: '#9E00FF' }} // Aplicando el color aquí
+              style={{ color: '#00A99D' }} // Aplicando el color aquí
               href={ruta}
               color="neutral"
               startDecorator={<OpenInNew />}

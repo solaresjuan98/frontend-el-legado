@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';export default function Footer() {
       variant="solid"
       invertedColors
       sx={{
-        bgcolor: '#320587',
+        bgcolor: '#1A1142',
         flexGrow: 1,
         p: { xs: 1, sm: 2 },
         borderRadius: { xs: 0, sm: 'sm' },

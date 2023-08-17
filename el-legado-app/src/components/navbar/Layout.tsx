@@ -33,7 +33,7 @@ function Header(props: BoxProps) {
     sx={{
       p: 2,
       gap: 2,
-      bgcolor: '#320587',
+      bgcolor: '#1A1142',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',

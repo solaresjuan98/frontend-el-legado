@@ -31,7 +31,7 @@ export const PagoBoleta = () => {
     }
   };
   return (
-    <Grid container>
+    <Grid container> 
       <Grid item xs={12} md={110}>
         <Card
           variant="outlined"
@@ -44,7 +44,7 @@ export const PagoBoleta = () => {
 
           }}
         >
-          <Typography level="title-lg" textColor={"#DAE440"} startDecorator={<InfoOutlined />}>
+          <Typography level="title-lg" textColor={"#C3FCEF"} startDecorator={<InfoOutlined />}>
             Ingrese la información
           </Typography>
           <Divider inset="none" />
@@ -60,29 +60,29 @@ export const PagoBoleta = () => {
 
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Nombre </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Nombre </FormLabel>
               <Input endDecorator={<PersonIcon />} />
             </FormControl>
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Télefono </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Télefono </FormLabel>
               <Input endDecorator={<PhoneIcon />} />
             </FormControl>
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Correo </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Correo </FormLabel>
               <Input endDecorator={<EmailIcon />} />
             </FormControl>
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Congregación</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Congregación</FormLabel>
               <Input endDecorator={<BusinessIcon />} />
             </FormControl>
             <FormControl>
-              <FormLabel sx={{ color: '#11AAA3', gridColumn: '1/-1' }}>Número de Entradas</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8', gridColumn: '1/-1' }}>Número de Entradas</FormLabel>
               <Input type="number" endDecorator={<LocalActivityIcon />} />
             </FormControl>
             <FormControl  >
-              <FormLabel sx={{ color: '#11AAA3', gridColumn: '1/-1' }}>Carga la boleta de pago  </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8', gridColumn: '1/-1' }}>Carga la boleta de pago  </FormLabel>
 
               <input
                 type="file"

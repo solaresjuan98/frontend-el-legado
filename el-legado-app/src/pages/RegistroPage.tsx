@@ -14,7 +14,7 @@ export const RegistroPage = () => {
       <div className="animate__animated animate__backInDown">
         <Grid container justifyContent="center">
           <Grid item xs={12}>
-            <Typography level="h1" textColor={"#C1DA08"} style={{ textAlign: 'center', marginTop: '30px' }}>
+            <Typography level="h1" textColor={"#9AF9E2"} style={{ textAlign: 'center', marginTop: '30px' }}>
               Registro
             </Typography>
           </Grid>
@@ -24,7 +24,7 @@ export const RegistroPage = () => {
                 display: 'flex', // Añadir flexbox
                 justifyContent: 'center', // Centrar horizontalmente
                 bgcolor: 'background.body',
-                
+
                 flexGrow: 1,
                 m: -3,
                 overflowX: 'hidden',
@@ -32,7 +32,7 @@ export const RegistroPage = () => {
                 marginTop: 4
               }}
             >
-              <Tabs aria-label="tabs" defaultValue={0} sx={{ bgcolor: 'transparent',}}>
+              <Tabs aria-label="tabs" defaultValue={0} sx={{ bgcolor: 'transparent', }}>
                 <TabList
                   disableUnderline
                   sx={{

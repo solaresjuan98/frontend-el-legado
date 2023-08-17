@@ -19,9 +19,12 @@ import BusinessIcon from '@mui/icons-material/Business';
 
 
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
-// o
+
 
 export const PagoTarjeta = () => {
+
+  
+
   return (
     <Grid container>
       <Grid item xs={12} md={110}>
@@ -36,7 +39,7 @@ export const PagoTarjeta = () => {
 
           }}
         >
-          <Typography level="title-lg" textColor={"#DAE440"} startDecorator={<InfoOutlined />}>
+          <Typography level="title-lg" textColor={"#C3FCEF"} startDecorator={<InfoOutlined />}>
             Información Personal
           </Typography>
           <Divider inset="none" />
@@ -51,51 +54,51 @@ export const PagoTarjeta = () => {
           >
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Nombre </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Nombre </FormLabel>
               <Input endDecorator={<PersonIcon />} />
             </FormControl>
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Télefono </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Télefono </FormLabel>
               <Input endDecorator={<PhoneIcon />} />
             </FormControl>
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Correo </FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Correo </FormLabel>
               <Input endDecorator={<EmailIcon />} />
             </FormControl>
             <FormControl >
-              <FormLabel sx={{ color: '#11AAA3' }}>Congregación</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Congregación</FormLabel>
               <Input endDecorator={<BusinessIcon />} />
             </FormControl>
             <FormControl>
-              <FormLabel sx={{ color: '#11AAA3' }}>Número de Entradas</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Número de Entradas</FormLabel>
               <Input type="number" endDecorator={<LocalActivityIcon />} />
             </FormControl>
-            
-            <Typography level="title-lg" textColor={"#DAE440"} startDecorator={<InfoOutlined />}>
+
+            <Typography level="title-lg" textColor={"#C3FCEF"} startDecorator={<InfoOutlined />}>
               Pago con tarjeta
               <Divider inset="none" />
             </Typography>
-            
-            
+
+
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Número de tu Tarjeta</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Número de tu Tarjeta</FormLabel>
               <Input endDecorator={<CreditCardIcon />} />
             </FormControl>
 
 
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Fecha de Expiración</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>Fecha de Expiración</FormLabel>
               <Input endDecorator={<CreditCardIcon />} />
             </FormControl>
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>CVC/CVV</FormLabel>
+              <FormLabel sx={{ color: '#E3FEF8' }}>CVC/CVV</FormLabel>
               <Input endDecorator={<InfoOutlined />} />
             </FormControl>
             <FormControl sx={{ gridColumn: '1/-1' }}>
-              <FormLabel sx={{ color: '#11AAA3' }}>Nombre Tarjeta</FormLabel>
-              <Input />
+              <FormLabel sx={{ color: '#E3FEF8' }}>Numero Tarjeta</FormLabel>
+              <Input name='hola'  />
             </FormControl>
 
             <CardActions sx={{ gridColumn: '1/-1' }}>
