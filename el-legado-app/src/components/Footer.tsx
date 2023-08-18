@@ -1,83 +1,92 @@
-import AspectRatio from '@mui/joy/AspectRatio';
+import Typography from '@mui/joy/Typography';
+import { Grid, Container } from '@mui/material';
 import Box from '@mui/joy/Box';
-import IconButton from '@mui/joy/IconButton';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
+import AspectRatio from '@mui/joy/AspectRatio';
+import IconButton from '@mui/joy/IconButton';
 import Divider from '@mui/joy/Divider';
-import { Grid, Container } from '@mui/material';
-import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import { Link } from 'react-router-dom';export default function Footer() {
+import { Link } from 'react-router-dom';
+
+export default function Footer() {
   return (
-    <Sheet
-      variant="solid"
-      invertedColors
-      sx={{
-        bgcolor: '#1A1142',
-        flexGrow: 1,
-        p: { xs: 1, sm: 2 },
-        borderRadius: { xs: 0, sm: 'sm' },
-        height: 250,
-      }}
-    >
-      <Container>
-        <Grid container spacing={1} alignItems="flex-start">
-          {/* Lado izquierdo */}
-          <Grid item xs={12} md={4} sx={{ paddingLeft: 0, marginLeft: 0 }}>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
-              <Card orientation="vertical" variant="outlined" sx={{ width: 150 }}>
-                <CardOverflow>
-                  <AspectRatio ratio="1/1" style={{ width: 145 }}>
-                    <img
-                      src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/355149497_278947114647321_7070738570593722644_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=be3454&_nc_ohc=NCTvR4MGUdcAX-46VlS&_nc_ht=scontent.fgua3-4.fna&oh=00_AfDjb7Snv9b3-gjI9W5wJabU59otWuYv8CX50_-370RwTw&oe=64DE0BC6"
-                      alt="efe"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </AspectRatio>
-                </CardOverflow>
-                <CardContent>
-                  <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
-                    ConJóvenes
-                  </Typography>
-                  <Typography level="body-sm">Iglesia de Cristo</Typography>
-                </CardContent>
-              </Card>
-              <Typography level="h4" sx={{ mt: { xs: 1, md: 0 }, ml: { xs: 0, md: 2 } }}>
-                Regístrate en el congreso <strong>el legado</strong> <Link to="/registro-congreso">aquí</Link>
-              </Typography>
-            </Box>
-          </Grid>
+      <Sheet
+          variant="solid"
+          invertedColors
+          sx={{
+              bgcolor: '#1A1142',
+              flexGrow: 1,
+              p: { xs: 3, sm: 2 },
+              borderRadius: { xs: 0, sm: 'sm' },
+              minHeight: { xs: 'auto', md: 250 },
+          }}
+      >
+          <Container>
+              <Grid container spacing={1} alignItems="center">
+                  {/* Lado izquierdo */}
+                  <Grid item xs={8} md={4} sx={{ paddingLeft: 0 }}>
+                      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+                          <Card orientation="vertical" variant="outlined" sx={{ width: 150, marginRight: { md: 2 } }}>
+                              <CardOverflow>
+                                  <AspectRatio ratio="1/1" style={{ width: 145 }}>
+                                      <img
+                                          src="...imagen..."
+                                          alt="efe"
+                                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                      />
+                                  </AspectRatio>
+                              </CardOverflow>
+                              <CardContent>
+                                  <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
+                                      ConJóvenes
+                                  </Typography>
+                                  <Typography level="body-sm">Iglesia de Cristo</Typography>
+                              </CardContent>
+                          </Card>
+                          <Typography level="h4" sx={{ mt: { xs: 1, md: 0 }, textAlign: 'center', flex: 1 }}>
+                              Regístrate en el congreso <strong>el legado</strong> <Link to="/registro-congreso">aquí</Link>
+                          </Typography>
+                      </Box>
+                  </Grid>
 
-          {/* Divider */}
-          <Grid item md={1}>
-            <Divider orientation="vertical" sx={{ height: '100%', mx: 'auto' }} />
-          </Grid>
+                  {/* Divider */}
+                  <Grid item md={2} sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Divider orientation="vertical" sx={{ height: '80%', mx: 'auto' }} />
+                  </Grid>
 
-          {/* Lado derecho */}
-          <Grid item xs={12} md={7}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-              <Typography level="h2" sx={{ mb: 1 }}>Contáctanos</Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: 1,
-                }}
-              >
-                <IconButton variant="plain">
-                  <FacebookRoundedIcon />
-                </IconButton>
-                <IconButton variant="plain">
-                  <InstagramIcon />
-                </IconButton>
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
-    </Sheet>
+                  {/* Lado derecho */}
+                  <Grid item xs={12} md={6}>
+                      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                          <Typography level="h2" sx={{ mb: 1 }}>Contáctanos</Typography>
+                          <Box
+                              sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  gap: 4,
+                                  alignItems: 'center',
+                              }}
+                          >
+                              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                  <IconButton variant="plain">
+                                      <FacebookRoundedIcon />
+                                  </IconButton>
+                                  <Typography>@ConJovenes</Typography>
+                              </Box>
+                              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                  <IconButton variant="plain">
+                                      <InstagramIcon />
+                                  </IconButton>
+                                  <Typography>@ConJovenes</Typography>
+                              </Box>
+                          </Box>
+                      </Box>
+                  </Grid>
+              </Grid>
+          </Container>
+      </Sheet>
   );
 }

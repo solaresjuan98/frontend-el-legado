@@ -181,7 +181,8 @@ export const Navbar = () => {
               alignItems: "center", // Esto asegura que los elementos estén centrados verticalmente
               gap: 5,
               width: "100%", // Asegura que el Box ocupe todo el ancho posible
-              marginLeft: 40, // Este margen puede ser ajustado según tus necesidades
+              marginLeft: 30, // Este margen puede ser ajustado según tus necesidades
+              // padding: 10
             }}
           >
             <NavLink to="/talleres" style={linkStyle}>
@@ -201,7 +202,7 @@ export const Navbar = () => {
                 textColor="common.white"
                 sx={{ mb: 0.5 }}
               >
-                Acerca de
+                Acerca
               </Typography>
             </NavLink>
             <NavLink to="/expositores" style={linkStyle}  >
