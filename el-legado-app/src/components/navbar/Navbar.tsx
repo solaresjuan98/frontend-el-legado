@@ -185,6 +185,16 @@ export const Navbar = () => {
               // padding: 10
             }}
           >
+            <NavLink to="/registro" style={linkStyle}>
+              <Typography
+                level="h2"
+                fontSize="xl"
+                textColor="common.white"
+                sx={{ mb: 0.5 }}
+              >
+                Registro
+              </Typography>
+            </NavLink>
             <NavLink to="/talleres" style={linkStyle}>
               <Typography
                 level="h2"
@@ -215,16 +225,7 @@ export const Navbar = () => {
                 Expositores
               </Typography>
             </NavLink>
-            <NavLink to="/registro" style={linkStyle}>
-              <Typography
-                level="h2"
-                fontSize="xl"
-                textColor="common.white"
-                sx={{ mb: 0.5 }}
-              >
-                Registrarme
-              </Typography>
-            </NavLink>
+            
             <NavLink to="/hospedaje" style={linkStyle}>
               <Typography
                 level="h2"

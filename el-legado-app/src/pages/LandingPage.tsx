@@ -42,11 +42,11 @@ export const LandingPage = () => {
       <div>
         <Carrousel />
         <br/>
-        <br/>
+        
         <div style={{ textAlign: 'center' }}>
           {/* Agregamos el componente Countdown arriba del botón */}
           <Countdown targetDate={new Date('2023-11-04 09:00:00')} /> {/* Ajustado para las 9 am */}
-          <br/> <br/>
+          <br/> 
           <Button
             variant="plain"
             style={{
