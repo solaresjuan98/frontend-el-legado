@@ -34,7 +34,7 @@ export default function Footer() {
                               <CardOverflow>
                                   <AspectRatio ratio="1/1" style={{ width: 145 }}>
                                       <img
-                                          src="...imagen..."
+                                          src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/logo_conjovenes.jpg?raw=true"
                                           alt="efe"
                                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                       />
