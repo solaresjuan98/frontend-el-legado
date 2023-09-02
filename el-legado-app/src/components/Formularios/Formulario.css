@@ -1,0 +1,10 @@
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.formControlCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

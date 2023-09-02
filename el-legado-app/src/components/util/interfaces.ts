@@ -9,9 +9,9 @@ interface PagoBaseInterface {
   telefono: number;
   correo: string;
   congregacion: string;
-  numeroEntradas: number;
+  numero_entradas: number;
   // datos entrada
-  datosEntrada: DetalleEntrada[] | [];
+  detalle_transaccion:  any[];
 }
 
 // Interface de Pago Tarjeta

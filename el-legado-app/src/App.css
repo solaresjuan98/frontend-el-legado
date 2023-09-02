@@ -47,3 +47,10 @@
   right: 0;
   z-index: 1000; 
 }
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* O ajusta este valor según la altura que desees */
+  width: 100%;
+}

@@ -5,41 +5,38 @@ import axios from "axios";
 
  
 
-import "react-toastify/dist/ReactToastify.css";
-export const UseUsuario = () => {
-  // * Obtener token
-  const token = localStorage.getItem("token") || "";
-  
-
-
-  
-
-  const cargarBoleta = async (
+export const UseRegistro =  () => {
+    const cargarBoleta = async (fileExt: string, image: string): Promise<string> => {
+        try {
+            const response = await axios.post(`https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/subirArchivo`, {
+                image,
+                fileExt
+            });
      
-    fileExt: string,
-    imagen: string
-  ) => {
-    await axios
-      .post(
-        `${process.env.API_URL}/subirArchivo`,
-        {
-          imagen,
-          fileExt,
-           
-        },
-         
-      )
-      .then((response) => {
-         
-         console.log(response.data.message);
-         return response.data.imageUrl
-      })
-      .catch((err) => {
-         console.log(err);
-      });
-  };
-
-
+            return response.data.imageUrl;
+        } catch (err) {
+            console.log(err);
+            return "error"
+            throw new Error("Error al cargar la boleta");
+          
+        }
+    };
+    
+    const registro = async (registro:any)   => {
+        console.log(registro)
+        try {
+            const response = await axios.post(`https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/transacciones`, {
+               registro
+            });
+            console.log(response.data)
+            return response.data 
+        } catch (err) {
+            console.log(err);
+            return "error"
+            throw new Error("Error al cargar la boleta");
+          
+        }
+    };
 
   /*
   useEffect(() => {
@@ -52,7 +49,7 @@ export const UseUsuario = () => {
   }, [usuarios]);
 */
   return {
-    cargarBoleta
+    cargarBoleta,registro
   };
 };
 
