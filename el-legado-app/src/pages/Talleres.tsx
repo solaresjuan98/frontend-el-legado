@@ -5,7 +5,7 @@ export const Talleres = () => {
         <Grid container marginTop={2} sx={{ flexGrow: 1, marginTop: '5%' }} className="animate__animated animate__fadeInUp">
          
             <Grid xs={12}>
-                <Typography level="h1" textColor={"#C1DA08"} style={{ textAlign: 'center', marginTop: '-2%' }}>
+                <Typography level="h1" textColor={"#9AF9E2"} style={{ textAlign: 'center', marginTop: '-2%' }}>
                     Talleres
                 </Typography>
 
@@ -15,7 +15,7 @@ export const Talleres = () => {
             <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
 
                 <img
-                    src="https://scontent.faqb1-2.fna.fbcdn.net/v/t39.30808-6/339095383_6197972216949167_6972314652665301187_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=dZGx-LzhO7AAX8c3654&_nc_ht=scontent.faqb1-2.fna&oh=00_AfCcP1XOZLxQpAlE2WavFLhjqkH3vJG96Rv_XEb8uogtUA&oe=64DC7C6A"
+                    src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/taller.jpg?raw=true"
                     alt=""
                     className=""
                     style={{
@@ -30,7 +30,7 @@ export const Talleres = () => {
 
 
                 <Typography level="h2">
-                    Este es un texto de prueba
+                Taller de Jóvenes 1
                 </Typography>
 
             </Grid>
@@ -41,7 +41,7 @@ export const Talleres = () => {
 
 
                 <Typography level="h2">
-                    Este es un texto de prueba
+                   Taller de Jóvenes 2
                 </Typography>
 
             </Grid>
@@ -49,7 +49,7 @@ export const Talleres = () => {
             <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
 
                 <img
-                    src="https://scontent.faqb1-2.fna.fbcdn.net/v/t39.30808-6/339095383_6197972216949167_6972314652665301187_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=dZGx-LzhO7AAX8c3654&_nc_ht=scontent.faqb1-2.fna&oh=00_AfCcP1XOZLxQpAlE2WavFLhjqkH3vJG96Rv_XEb8uogtUA&oe=64DC7C6A"
+                    src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/taller.jpg?raw=true"
                     alt=""
                     className=""
                     style={{

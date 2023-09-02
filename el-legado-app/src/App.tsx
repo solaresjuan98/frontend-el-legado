@@ -6,6 +6,7 @@ import { Talleres } from "./pages/Talleres"
 import { AcercaDe } from "./pages/AcercaDe"
 import { Expositores } from "./pages/Expositores"
 import Footer from "./components/Footer"
+import { Hospedaje } from "./pages/Hospedaje"
 import { CssVarsProvider } from "@mui/joy"
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/talleres" element={<Talleres />} />
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/expositores" element={<Expositores />} />
+          <Route path="/hospedaje" element={<Hospedaje />} />
         </Routes>
         <br /> <br /> <br /> <br /> <br /> <br />
         <Footer />
