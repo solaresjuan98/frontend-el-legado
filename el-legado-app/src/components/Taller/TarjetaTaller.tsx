@@ -27,8 +27,8 @@ export const TarjetaTaller = () => {
             </div>
             <AspectRatio minHeight="120px" maxHeight="200px">
                 <img
-                    src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/taller.jpg?raw=true"
-                    srcSet="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/taller.jpg?raw=true 2x"
+                    src="https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg"
+                    srcSet="https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg 2x"
                     loading="lazy"
                     alt=""
                 />

@@ -23,7 +23,7 @@ export const AcercaDe = () => {
       <Grid xs={12}>
 
         <img
-          src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/Portada%204.jpg?raw=true"
+          src="https://fondos-legado.s3.us-east-2.amazonaws.com/Portada+4.jpg"
           alt=""
           className=""
           style={{

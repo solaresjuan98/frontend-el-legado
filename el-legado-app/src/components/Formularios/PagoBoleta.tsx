@@ -5,8 +5,8 @@ import "./Formulario.css";
 // mui
 import CircularProgress from "@mui/joy/CircularProgress";
 import Alert from "@mui/joy/Alert";
-
-import { Checkbox, Radio } from "@mui/joy";
+import Tooltip from '@mui/joy/Tooltip';
+import { Checkbox, Radio, RadioGroup } from "@mui/joy";
 import { Grid } from "@mui/material"; // Importa el componente Grid
 import BusinessIcon from "@mui/icons-material/Business";
 import Button from "@mui/joy/Button";
@@ -25,33 +25,34 @@ import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Typography from "@mui/joy/Typography";
 //interfaces
-
+import { ErrorMessage } from "../util/interfaces";
 import { PagoBoletaInterface } from "../util/interfaces";
 
 //hooks
 import { UseRegistro } from "../../hooks/userRegistro";
 
 export const PagoBoleta = () => {
-  const {registro}=UseRegistro()
+  const { registro } = UseRegistro();
   const [detallesTransaccion, setDetallesTransaccion] = useState<any[]>([]);
+
+  const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
+
   const handlePago = async () => {
-   
-    const pago={
-      "nombre":formData.nombre,
-      "telefono":formData.correo,
-      "congregacion":formData.congregacion,
-      "transaccion":{
-        "enlace":linkImagen,
-        "total_pagar":formattedTotal,
-        "detalle_transaccion":detallesTransaccion
-          }
-
-
-    }
-    await registro(pago)
- 
+    const pago = {
+      nombre: formData.nombre,
+      telefono: formData.telefono,
+      correo: formData.correo,
+      congregacion: formData.congregacion,
+      transaccion: {
+        enlace: linkImagen,
+        total_pagar: totalAmount,
+        numero_entradas: formData.numero_entradas,
+        detalle_transaccion: detallesTransaccion,
+      },
+    };
+    await registro(pago);
   };
-  
+
   const [loading, setLoading] = useState<boolean>(false);
   const [errorloading, seterrorLoading] = useState<boolean>(false);
   const { cargarBoleta } = UseRegistro();
@@ -67,7 +68,6 @@ export const PagoBoleta = () => {
   };
 
   /*handle para las edades */
-
   const handleRadioChange = (index: number, value: string) => {
     setDetallesTransaccion((prev) => {
       const updated = [...prev];
@@ -113,6 +113,10 @@ export const PagoBoleta = () => {
       reader.readAsDataURL(file);
     }
   };
+  const agregarNuevoError = (campo: string, mensaje: string) => {
+    setErrorData((prevErrors) => [...prevErrors, { campo, mensaje }]);
+  };
+
   const cargar = async (image: string, fileExt: string) => {
     setLoading(true);
     const imageUrl = await cargarBoleta(fileExt, image);
@@ -120,6 +124,8 @@ export const PagoBoleta = () => {
     if (imageUrl == "error") {
       seterrorLoading(true);
       setLoading(false);
+
+      agregarNuevoError("link", "Correo electrónico no válido");
     } else {
       setLinkImagen(imageUrl);
       seterrorLoading(false);
@@ -128,10 +134,64 @@ export const PagoBoleta = () => {
     }
   };
 
+  /**
+   *
+   * validaciones
+   */
+  const validateTelefono = (value: string) => {
+    const telefonoRegExp =
+      /^(\+?\d{1,3}[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+    return telefonoRegExp.test(value);
+  };
+
+  const validateCorreo = (value: string) => {
+    const correoRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return correoRegExp.test(value);
+  };
+
+  const validateNumeroEntradas = (value: string) => {
+    return parseInt(value, 10) > 0;
+  };
+  const validateNombre = (value: string) => {
+    return value && value.trim() !== "";
+  };
+
+  const onBlur = (e: any) => {
+    const { name, value } = e.target;
+
+    setErrorData((prevErrors) => {
+      let newErrors = prevErrors.filter((error) => error.campo !== name);
+
+      if (name === "telefono" && !validateTelefono(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "Número de teléfono no válido",
+        });
+      } else if (name === "correo" && !validateCorreo(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "Correo electrónico no válido",
+        });
+      } else if (name === "numero_entradas" && !validateNumeroEntradas(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "El número de entradas debe ser mayor a 0",
+        });
+      } else if (name === "nombre" && !validateNombre(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "Debe ingresar un nombre para poder realizar su transacción",
+        });
+      }
+
+      return newErrors;
+    });
+  };
+
   const {
     formData,
     handleInputBlur,
-    numberInputRef,
+
     numberInputIsTouched,
     onChangeForm,
   } = useForm<PagoBoletaInterface>({
@@ -188,19 +248,34 @@ export const PagoBoleta = () => {
               <Input
                 endDecorator={<PersonIcon />}
                 name="nombre"
+                onBlur={onBlur}
                 onChange={onChangeForm}
                 value={formData.nombre}
               />
+              {errorData
+                .filter((error) => error.campo === "nombre")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
             </FormControl>
-
             <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Télefono </FormLabel>
+              <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono </FormLabel>
               <Input
                 endDecorator={<PhoneIcon />}
                 name="telefono"
                 onChange={onChangeForm}
+                onBlur={onBlur}
                 value={formData.telefono}
               />
+              {errorData
+                .filter((error) => error.campo === "telefono")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
             </FormControl>
 
             <FormControl sx={{ gridColumn: "1/-1" }}>
@@ -209,8 +284,16 @@ export const PagoBoleta = () => {
                 endDecorator={<EmailIcon />}
                 name="correo"
                 onChange={onChangeForm}
+                onBlur={onBlur}
                 value={formData.correo}
               />
+              {errorData
+                .filter((error) => error.campo === "correo")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
             </FormControl>
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Congregación</FormLabel>
@@ -222,33 +305,39 @@ export const PagoBoleta = () => {
               />
             </FormControl>
             <Grid
-                    sx={{
-                      display: "grid",
-                      gap: "1em",
-                      gridColumn: "1/-1",
-                    }}
-                  >
-            <FormControl>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
-                Número de Entradas
-              </FormLabel>
-              <Input
-                type="number"
-                endDecorator={<LocalActivityIcon />}
-                name="numero_entradas"
-                onChange={onChangeForm}
-                onBlur={handleInputBlur}
-                defaultValue={0}
-                slotProps={{
-                  input: {
-                    ref: numberInputRef,
-                    min: 1,
-                    max: 10,
-                    step: 1,
-                  },
-                }}
-              />
-            </FormControl>
+              sx={{
+                display: "grid",
+                gap: "1em",
+                gridColumn: "1/-1",
+              }}
+            >
+              <FormControl>
+                <FormLabel sx={{ color: "#E3FEF8" }}>
+                  Número de Entradas
+                </FormLabel>
+                <Input
+                  type="number"
+                  endDecorator={<LocalActivityIcon />}
+                  name="numero_entradas"
+                  onChange={onChangeForm}
+                  onBlur={handleInputBlur}
+                  defaultValue={0}
+                  slotProps={{
+                    input: {
+                      min: 1,
+                      max: 10,
+                      step: 1,
+                    },
+                  }}
+                />
+                {errorData
+                  .filter((error) => error.campo === "numero_entradas")
+                  .map((error, index) => (
+                    <div key={index} style={{ color: "red" }}>
+                      {error.mensaje}
+                    </div>
+                  ))}
+              </FormControl>
             </Grid>
             {numberInputIsTouched &&
               numberMap.map((item, index) => (
@@ -264,19 +353,20 @@ export const PagoBoleta = () => {
                       <Typography level="h4" sx={{ color: "#C3FCEF" }}>
                         Entrada {item}
                       </Typography>
-
-                      <Radio
-                        label="12-16 años"
-                        onChange={() => handleRadioChange(index, "12-16")}
-                      />
-                      <Radio
-                        label="16-20 años"
-                        onChange={() => handleRadioChange(index, "16-20")}
-                      />
-                      <Radio
-                        label="20-24 años"
-                        onChange={() => handleRadioChange(index, "20-24")}
-                      />
+                      <RadioGroup
+                        value={detallesTransaccion[index]?.rango_edad}
+                        onChange={(e) =>
+                          handleRadioChange(index, e.target.value)
+                        }
+                      >
+                        <Radio
+                          value="menor de 12 años"
+                          label="menor de 12 años"
+                        />
+                        <Radio value="12-16" label="12-16 años" />
+                        <Radio value="16-20" label="16-20 años" />
+                        <Radio value="20-24" label="20-24 años" />
+                      </RadioGroup>
                       <Checkbox
                         label=" Bautizado"
                         onChange={(e) =>
@@ -377,15 +467,17 @@ export const PagoBoleta = () => {
                   <Button
                     variant="plain"
                     style={{
-                      color: "#FFFFFF",
-                      background: "#3E00B9",
+                      color: totalAmount > 0 && errorData.length === 0 && linkImagen ? "#FFFFFF" : "#FFFFFF",
+                      background: totalAmount > 0 && errorData.length === 0 && linkImagen ? "#3E00B9" : "#19004B",
                       width: "80%",
                       height: "100%",
                     }}
                     onClick={handlePago}
+                    disabled={totalAmount <= 0 || errorData.length > 0 || !linkImagen  }
                   >
                     Pagar
                   </Button>
+
                 </Grid>
               </Grid>
             </CardActions>

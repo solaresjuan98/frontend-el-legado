@@ -27,6 +27,10 @@ export interface PagoBoletaInterface extends PagoBaseInterface {
   // No additional properties needed for PagoBoletaInterface
   numeroBoleta: string;
 }
+export interface ErrorMessage {
+  campo: string;
+  mensaje: string;
+}
 
 interface DetalleEntrada {
   tipo1: boolean; // * 12-16 años

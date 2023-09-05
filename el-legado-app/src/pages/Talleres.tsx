@@ -15,7 +15,7 @@ export const Talleres = () => {
             <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
 
                 <img
-                    src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/taller.jpg?raw=true"
+                    src="https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg"
                     alt=""
                     className=""
                     style={{
@@ -49,7 +49,7 @@ export const Talleres = () => {
             <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
 
                 <img
-                    src="https://github.com/JuanDiegoAlv1234/ImagenesVarias/blob/master/taller.jpg?raw=true"
+                    src="https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg"
                     alt=""
                     className=""
                     style={{

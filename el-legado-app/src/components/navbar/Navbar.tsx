@@ -76,7 +76,7 @@ export const Navbar = () => {
             </IconButton>
             <NavLink to="/ " style={linkStyle} onClick={() => setOpen(null)}>
               <img
-                src="https://raw.githubusercontent.com/JuanDiegoAlv1234/ImagenesVarias/master/Icono.png"
+                src="https://fondos-legado.s3.us-east-2.amazonaws.com/Icono.png"
                 loading="lazy"
                 alt="legado"
                 style={{
