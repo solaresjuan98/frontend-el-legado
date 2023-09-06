@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
- 
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+
 
  
 
@@ -15,7 +17,7 @@ export const UseRegistro =  () => {
      
             return response.data.imageUrl;
         } catch (err) {
-            console.log(err);
+         
             return "error"
             throw new Error("Error al cargar la boleta");
           
@@ -34,10 +36,32 @@ export const UseRegistro =  () => {
                nombre,telefono,correo,congregacion,transaccion
                
             });
-            console.log(response.data)
+     
+            toast.success("Su registro se ha realizado correctamente", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+    
             return response.data 
         } catch (err) {
             console.log(err);
+            toast.error("ocurrio un error", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+    
             return "error"
             throw new Error("Error al cargar la boleta");
           

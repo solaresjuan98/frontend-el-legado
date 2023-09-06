@@ -8,12 +8,14 @@ import { Expositores } from "./pages/Expositores"
 import Footer from "./components/Footer"
 import { Hospedaje } from "./pages/Hospedaje"
 import { CssVarsProvider } from "@mui/joy"
+import { ToastContainer } from 'react-toastify';
 function App() {
 
   return (
     <CssVarsProvider defaultMode="dark">
 
       <BrowserRouter>
+      <ToastContainer />
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />

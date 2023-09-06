@@ -20,7 +20,18 @@ export const useForm = <T>(initialState: T) => {
   const handleInputBlur = () => {
     setNumberInpuIsTouched(true);
   };
-
+  const resetForm = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      nombre: "",
+      telefono: 0,
+      correo: "",
+      congregacion: "",
+      numero_entradas: 0,
+      numeroBoleta: "",
+      detalle_transaccion: [],
+    }));
+  };
   const hasEmailFormat = (field: string) => {
     const emailRegex = /\S+@\S+\.\S+/;
 
@@ -32,6 +43,7 @@ export const useForm = <T>(initialState: T) => {
     isNotEmpty,
     hasEmailFormat,
     formData,
+    resetForm,
     handleInputBlur,
     numberInputIsTouched,
     numberInputRef,

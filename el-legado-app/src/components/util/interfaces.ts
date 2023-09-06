@@ -13,6 +13,24 @@ interface PagoBaseInterface {
   // datos entrada
   detalle_transaccion:  any[];
 }
+export interface PagoDataType {
+  nombre: string;
+  telefono: number;
+  correo: string;
+  congregacion: string;
+  transaccion: {
+    enlace: string | null;
+    total_pagar: number;
+    numero_entradas: number;
+    detalle_transaccion: any[];
+  };
+}
+export interface ModalResumenProps {
+  pago: PagoDataType | null;
+  onConfirm: (confirm: boolean) => void;
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 // Interface de Pago Tarjeta
 export interface PagoTarjetaInterface extends PagoBaseInterface {

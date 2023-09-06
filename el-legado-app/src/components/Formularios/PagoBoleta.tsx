@@ -2,10 +2,11 @@ import { useForm } from "../../hooks/useForm";
 import { useState, useRef } from "react";
 import TarjetaPago from "./TarjetaPago";
 import "./Formulario.css";
+import ModalResumen from "./ModalResumen";
 // mui
 import CircularProgress from "@mui/joy/CircularProgress";
 import Alert from "@mui/joy/Alert";
-import Tooltip from '@mui/joy/Tooltip';
+ 
 import { Checkbox, Radio, RadioGroup } from "@mui/joy";
 import { Grid } from "@mui/material"; // Importa el componente Grid
 import BusinessIcon from "@mui/icons-material/Business";
@@ -27,18 +28,21 @@ import Typography from "@mui/joy/Typography";
 //interfaces
 import { ErrorMessage } from "../util/interfaces";
 import { PagoBoletaInterface } from "../util/interfaces";
-
+import { PagoDataType } from "../util/interfaces";
 //hooks
 import { UseRegistro } from "../../hooks/userRegistro";
 
 export const PagoBoleta = () => {
   const { registro } = UseRegistro();
   const [detallesTransaccion, setDetallesTransaccion] = useState<any[]>([]);
+  const [openModal, setOpenModal] =  useState(false);
+  const [pagoData, setPagoData] = useState<PagoDataType | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
 
-  const handlePago = async () => {
-    const pago = {
+  const handlePago =   () => {
+ 
+    const pago: PagoDataType = {
       nombre: formData.nombre,
       telefono: formData.telefono,
       correo: formData.correo,
@@ -50,8 +54,37 @@ export const PagoBoleta = () => {
         detalle_transaccion: detallesTransaccion,
       },
     };
-    await registro(pago);
+    setOpenModal(true);
+    setPagoData(pago);
+   
   };
+  const handleSubmit = async (pagoData: PagoDataType) => {
+  
+      // Llama a la función de registro con los datos de pago
+      const response = await registro(pagoData);
+      
+      resetForm();
+      formData.numero_entradas=0
+      setLinkImagen(null)
+      setPreviewImage(null)
+      setDetallesTransaccion([])
+
+    
+  };
+  
+  
+  const handleModalConfirm = (confirm:boolean) => {
+    if (confirm) {
+      if (pagoData !== null) {
+        handleSubmit(pagoData);
+      } else {
+        console.error('pagoData es null');
+      }
+    } else {
+      console.log("La información no es correcta");
+    }
+  };
+
 
   const [loading, setLoading] = useState<boolean>(false);
   const [errorloading, seterrorLoading] = useState<boolean>(false);
@@ -116,6 +149,11 @@ export const PagoBoleta = () => {
   const agregarNuevoError = (campo: string, mensaje: string) => {
     setErrorData((prevErrors) => [...prevErrors, { campo, mensaje }]);
   };
+  const removeErrorByCampo = (campo: any) => {
+    setErrorData((prevErrorData) =>
+      prevErrorData.filter((error) => error.campo !== campo)
+    );
+  };
 
   const cargar = async (image: string, fileExt: string) => {
     setLoading(true);
@@ -125,8 +163,9 @@ export const PagoBoleta = () => {
       seterrorLoading(true);
       setLoading(false);
 
-      agregarNuevoError("link", "Correo electrónico no válido");
+      agregarNuevoError("image", "imagen no valida");
     } else {
+      removeErrorByCampo("image");
       setLinkImagen(imageUrl);
       seterrorLoading(false);
       setLoading(false);
@@ -191,7 +230,7 @@ export const PagoBoleta = () => {
   const {
     formData,
     handleInputBlur,
-
+    resetForm,
     numberInputIsTouched,
     onChangeForm,
   } = useForm<PagoBoletaInterface>({
@@ -212,6 +251,13 @@ export const PagoBoleta = () => {
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
   return (
     <Grid container>
+        {openModal && <ModalResumen 
+  pago={pagoData} 
+  onConfirm={handleModalConfirm} 
+  openModal={openModal} 
+  setOpenModal={setOpenModal} 
+/>}
+
       <Grid item xs={12} md={110}>
         <Card
           variant="outlined"
@@ -321,7 +367,7 @@ export const PagoBoleta = () => {
                   name="numero_entradas"
                   onChange={onChangeForm}
                   onBlur={handleInputBlur}
-                  defaultValue={0}
+                  value={formData.numero_entradas}
                   slotProps={{
                     input: {
                       min: 1,
@@ -354,7 +400,7 @@ export const PagoBoleta = () => {
                         Entrada {item}
                       </Typography>
                       <RadioGroup
-                        value={detallesTransaccion[index]?.rango_edad}
+                        value={detallesTransaccion[index]?.rango_edad ?? ''}
                         onChange={(e) =>
                           handleRadioChange(index, e.target.value)
                         }
@@ -386,7 +432,7 @@ export const PagoBoleta = () => {
                 gridColumn: "1/-1", // Esto hace que el `FormControl` ocupe todo el ancho disponible.
               }}
             >
-              <FormControl className=" ">
+              <FormControl className="">
                 <FormLabel sx={{ color: "#E3FEF8" }}>
                   Carga la boleta de pago
                 </FormLabel>
@@ -404,18 +450,24 @@ export const PagoBoleta = () => {
                   <div className="loadingContainer">
                     <CircularProgress />
                   </div> // O cualquier otro componente o animación de carga que desees mostrar
+                ) : previewImage ? (
+                  <img
+                    src={previewImage}
+                    alt="Vista previa"
+                    style={{ maxWidth: "100%", height: "200px" }}
+                  />
                 ) : (
-                  previewImage && (
+                  <div>
                     <img
-                      src={previewImage}
+                      src="https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg"
                       alt="Vista previa"
                       style={{ maxWidth: "100%", height: "200px" }}
                     />
-                  )
+                  </div> // Este div mostrará un mensaje cuando no haya ninguna imagen cargada
                 )}
                 {errorloading ? (
                   <Alert color="danger">
-                    Ocurrio un error al momento de carga la imagen , porfavor
+                    Ocurrio un error al momento de carga la imagen, por favor
                     carga una de menor tamaño.
                   </Alert>
                 ) : (
@@ -467,17 +519,24 @@ export const PagoBoleta = () => {
                   <Button
                     variant="plain"
                     style={{
-                      color: totalAmount > 0 && errorData.length === 0 && linkImagen ? "#FFFFFF" : "#FFFFFF",
-                      background: totalAmount > 0 && errorData.length === 0 && linkImagen ? "#3E00B9" : "#19004B",
+                      color:
+                        totalAmount > 0 && errorData.length === 0 && linkImagen
+                          ? "#FFFFFF"
+                          : "#FFFFFF",
+                      background:
+                        totalAmount > 0 && errorData.length === 0 && linkImagen
+                          ? "#3E00B9"
+                          : "#19004B",
                       width: "80%",
                       height: "100%",
                     }}
                     onClick={handlePago}
-                    disabled={totalAmount <= 0 || errorData.length > 0 || !linkImagen  }
+                    disabled={
+                      totalAmount <= 0 || errorData.length > 0 || !linkImagen
+                    }
                   >
                     Pagar
                   </Button>
-
                 </Grid>
               </Grid>
             </CardActions>
