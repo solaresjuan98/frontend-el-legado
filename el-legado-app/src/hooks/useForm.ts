@@ -1,9 +1,12 @@
 import { ChangeEvent, useRef, useState } from "react";
 
-export const useForm = <T>(initialState: T) => {
+export const useForm = <T>(initialState: T, errorCallback: (campo: string, mensaje: string) => void, removeErrorCallback: (campo: string) => void) => {
+ 
+
   const [formData, setFormData] = useState<T>(initialState);
   const numberInputRef = useRef<HTMLInputElement | null>(null);
   const [numberInputIsTouched, setNumberInpuIsTouched] = useState(false);
+ 
 
   const onChangeForm = (ev: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = ev.target;
@@ -11,14 +14,21 @@ export const useForm = <T>(initialState: T) => {
       ...prev,
       [name]: value,
     }));
+    if (name === 'numero_entradas' && parseInt(value, 10) > 10) {
+      errorCallback('numero_entradas', 'El número de entradas no puede ser mayor a 10');
+    }else {
+      removeErrorCallback('numero_entradas');
+    }
   };
+ 
 
-  const isNotEmpty = (field: string): boolean => {
+  const isNotEmpty = (field: string): boolean => { 
     return field.trim().length > 0 ? true : false;
   };
 
   const handleInputBlur = () => {
     setNumberInpuIsTouched(true);
+ 
   };
   const resetForm = () => {
     setFormData(prevState => ({

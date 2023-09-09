@@ -41,6 +41,12 @@ export const PagoBoleta = () => {
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
 
   const handlePago =   () => {
+
+    if(formData.nombre!=""){
+
+
+
+    }
  
     const pago: PagoDataType = {
       nombre: formData.nombre,
@@ -178,15 +184,17 @@ export const PagoBoleta = () => {
    * validaciones
    */
   const validateTelefono = (value: string) => {
-    const telefonoRegExp =
-      /^(\+?\d{1,3}[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+    const telefonoRegExp = /^\d{8}$/;
     return telefonoRegExp.test(value);
   };
+  
 
   const validateCorreo = (value: string) => {
-    const correoRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const correoRegExp = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.(com|net|org|edu|gov|gt)){1}$/;
+
     return correoRegExp.test(value);
   };
+  
 
   const validateNumeroEntradas = (value: string) => {
     return parseInt(value, 10) > 0;
@@ -233,19 +241,23 @@ export const PagoBoleta = () => {
     resetForm,
     numberInputIsTouched,
     onChangeForm,
-  } = useForm<PagoBoletaInterface>({
-    nombre: "",
-    telefono: 0,
-    correo: "",
-    congregacion: "",
-    numero_entradas: 0,
-    numeroBoleta: "",
-    detalle_transaccion: detallesTransaccion,
-  });
-  const numberMap = Array.from(
-    { length: formData.numero_entradas },
-    (_, index) => index + 1
+  } = useForm<PagoBoletaInterface>(
+    {
+      nombre: "",
+      telefono: 0,
+      correo: "",
+      congregacion: "",
+      numero_entradas: 0,
+      numeroBoleta: "",
+      detalle_transaccion: detallesTransaccion,
+    },
+    agregarNuevoError, // pasando la función de error callback aquí
+    removeErrorByCampo, // pasando la función de remover error callback aquí
   );
+  const numberMap = formData.numero_entradas > 10 
+  ? Array.from({ length: 10 }, (_, index) => index + 1) // si es mayor a 10, limita a 10
+  : Array.from({ length: formData.numero_entradas }, (_, index) => index + 1); // si es 10 o menos, usa el valor actual
+
 
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
@@ -520,11 +532,11 @@ export const PagoBoleta = () => {
                     variant="plain"
                     style={{
                       color:
-                        totalAmount > 0 && errorData.length === 0 && linkImagen
+                        totalAmount > 0 && errorData.length === 0 && linkImagen &&formData.nombre && formData.telefono&&formData.correo
                           ? "#FFFFFF"
                           : "#FFFFFF",
                       background:
-                        totalAmount > 0 && errorData.length === 0 && linkImagen
+                        totalAmount > 0 && errorData.length === 0 && linkImagen&&formData.nombre && formData.telefono&&formData.correo
                           ? "#3E00B9"
                           : "#19004B",
                       width: "80%",
@@ -532,7 +544,7 @@ export const PagoBoleta = () => {
                     }}
                     onClick={handlePago}
                     disabled={
-                      totalAmount <= 0 || errorData.length > 0 || !linkImagen
+                      totalAmount <= 0 || errorData.length > 0 || !linkImagen||!formData.nombre || !formData.telefono||!formData.correo
                     }
                   >
                     Pagar
