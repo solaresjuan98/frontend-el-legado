@@ -1,4 +1,5 @@
 import { useForm } from "../../hooks/useForm";
+import { useState } from "react";
 // mui
 import { Checkbox, Radio } from "@mui/joy";
 import { Grid } from "@mui/material"; // Importa el componente Grid
@@ -18,38 +19,52 @@ import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Typography from "@mui/joy/Typography";
-import { PagoTarjetaInterface } from "../util/interfaces";
+import { PagoBoletaInterface } from "../util/interfaces";
+import { ErrorMessage } from "../util/interfaces";
 import TarjetaPago from "./TarjetaPago";
 
 export const PagoTarjeta = () => {
   // const inputRef = useRef<HTMLInputElement | null>(null);
 
+  const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
+
+  const agregarNuevoError = (campo: string, mensaje: string) => {
+    setErrorData((prevErrors) => [...prevErrors, { campo, mensaje }]);
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const removeErrorByCampo = (campo: any) => {
+    setErrorData((prevErrorData) =>
+      prevErrorData.filter((error) => error.campo !== campo)
+    );
+  };
+
+
   const {
     formData,
     handleInputBlur,
-    numberInputRef,
+    
     numberInputIsTouched,
     onChangeForm,
-  } = useForm<PagoTarjetaInterface>({
-    nombre: "",
-    telefono: 0,
-    correo: "",
-    congregacion: "",
-    numeroTarjeta: 0,
-    fechaVencimiento: "",
-    codigoCVC: 0,
-    nombreTarjeta: "",
-    numeroEntradas: 0,
-    datosEntrada: [],
-  });
-
+  } = useForm<PagoBoletaInterface>(
+    {
+      nombre: "",
+      telefono: 0,
+      correo: "",
+      congregacion: "",
+      numero_entradas: 0,
+      numeroBoleta: "",
+      detalle_transaccion: []
+    },
+    agregarNuevoError, // pasando la función de error callback aquí
+    removeErrorByCampo, // pasando la función de remover error callback aquí
+  );
+  
   const numberMap = Array.from(
-    { length: formData.numeroEntradas },
+    { length: formData.numero_entradas },
     (_, index) => index + 1
   );
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
-
   return (
     <Grid container>
       <Grid item xs={12} md={110}>
@@ -122,26 +137,32 @@ export const PagoTarjeta = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
-                Número de Entradas
-              </FormLabel>
-              <Input
-                type="number"
-                endDecorator={<LocalActivityIcon />}
-                name="numeroEntradas"
-                onChange={onChangeForm}
-                onBlur={handleInputBlur}
-                defaultValue={0}
-                slotProps={{
-                  input: {
-                    ref: numberInputRef,
-                    min: 1,
-                    max: 10,
-                    step: 1,
-                  },
-                }}
-              />
-            </FormControl>
+                <FormLabel sx={{ color: "#E3FEF8" }}>
+                  Número de Entradas
+                </FormLabel>
+                <Input
+                  type="number"
+                  endDecorator={<LocalActivityIcon />}
+                  name="numero_entradas"
+                  onChange={onChangeForm}
+                  onBlur={handleInputBlur}
+                  value={formData.numero_entradas}
+                  slotProps={{
+                    input: {
+                      min: 1,
+                      max: 10,
+                      step: 1,
+                    },
+                  }}
+                />
+                {errorData
+                  .filter((error) => error.campo === "numero_entradas")
+                  .map((error, index) => (
+                    <div key={index} style={{ color: "red" }}>
+                      {error.mensaje}
+                    </div>
+                  ))}
+              </FormControl>
 
             {/* validar cantidad de entradas aca */}
 
@@ -192,7 +213,7 @@ export const PagoTarjeta = () => {
                 endDecorator={<CreditCardIcon />}
                 name="numeroTarjeta"
                 onChange={onChangeForm}
-                value={formData.numeroTarjeta}
+            
               />
             </FormControl>
 
@@ -204,7 +225,7 @@ export const PagoTarjeta = () => {
                 endDecorator={<CreditCardIcon />}
                 name="fechaVencimiento"
                 onChange={onChangeForm}
-                value={formData.fechaVencimiento}
+               
               />
             </FormControl>
             <FormControl sx={{ gridColumn: "1/-1" }}>
@@ -213,7 +234,7 @@ export const PagoTarjeta = () => {
                 endDecorator={<InfoOutlined />}
                 name="codigoCVC"
                 onChange={onChangeForm}
-                value={formData.codigoCVC}
+                 
               />
             </FormControl>
             <FormControl sx={{ gridColumn: "1/-1" }}>
@@ -221,7 +242,7 @@ export const PagoTarjeta = () => {
               <Input
                 name="numeroTarjeta"
                 onChange={onChangeForm}
-                value={formData.numeroTarjeta}
+              
               />
             </FormControl>
 

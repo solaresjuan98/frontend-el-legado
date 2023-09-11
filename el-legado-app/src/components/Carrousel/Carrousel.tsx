@@ -3,10 +3,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './Carrousel.css'; // Importar el archivo CSS con los estilos
 
 export const Carrousel = () => {
-  const linkStyle = {
-    textDecoration: 'none', // Quitar subrayado
-    color: 'inherit', // Para asegurar que el color del texto se herede del contenedor
-  };
+ 
 
   return (
     <div className="carousel-container">

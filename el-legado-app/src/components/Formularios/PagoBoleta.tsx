@@ -68,7 +68,7 @@ export const PagoBoleta = () => {
   
       // Llama a la función de registro con los datos de pago
       const response = await registro(pagoData);
-      
+      console.log(response)
       resetForm();
       formData.numero_entradas=0
       setLinkImagen(null)

@@ -11,7 +11,7 @@ interface TarjetaHospedajeProps {
     ruta: string;
     imagen: string;
   }
-export const TarjetaHospedaje : React.FC<TarjetaHospedajeProps> = ({ titulo, descripcion, ruta, imagen })=> {
+export const TarjetaHospedaje : React.FC<TarjetaHospedajeProps> = ({ titulo, descripcion, imagen })=> {
   return (
     <Card
     variant="outlined"
