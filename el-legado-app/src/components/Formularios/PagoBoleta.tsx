@@ -51,6 +51,7 @@ export const PagoBoleta = () => {
       congregacion: formData.congregacion,
       transaccion: {
         enlace: linkImagen,
+        estado:"en_proceso",
         total_pagar: totalAmount,
         numero_entradas: formData.numero_entradas,
         detalle_transaccion: detallesTransaccion,

@@ -19,6 +19,7 @@ export interface PagoDataType {
   correo: string;
   congregacion: string;
   transaccion: {
+    estado: string | null;
     enlace: string | null;
     total_pagar: number;
     numero_entradas: number;
