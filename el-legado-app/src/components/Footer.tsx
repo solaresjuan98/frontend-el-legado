@@ -48,7 +48,7 @@ export default function Footer() {
                               </CardContent>
                           </Card>
                           <Typography level="h4" sx={{ mt: { xs: 1, md: 0 }, textAlign: 'center', flex: 1 }}>
-                              Regístrate en el congreso <strong>el legado</strong> <Link to="/registro-congreso">aquí</Link>
+                              Regístrate en el congreso <strong>el legado</strong> <Link to="/registro">aquí</Link>
                           </Typography>
                       </Box>
                   </Grid>

@@ -6,7 +6,7 @@ import ModalResumen from "./ModalResumen";
 // mui
 import CircularProgress from "@mui/joy/CircularProgress";
 import Alert from "@mui/joy/Alert";
- 
+
 import { Checkbox, Radio, RadioGroup } from "@mui/joy";
 import { Grid } from "@mui/material"; // Importa el componente Grid
 import BusinessIcon from "@mui/icons-material/Business";
@@ -35,19 +35,15 @@ import { UseRegistro } from "../../hooks/userRegistro";
 export const PagoBoleta = () => {
   const { registro } = UseRegistro();
   const [detallesTransaccion, setDetallesTransaccion] = useState<any[]>([]);
-  const [openModal, setOpenModal] =  useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [pagoData, setPagoData] = useState<PagoDataType | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
 
-  const handlePago =   () => {
-
-    if(formData.nombre!=""){
-
-
-
+  const handlePago = () => {
+    if (formData.nombre != "") {
     }
- 
+
     const pago: PagoDataType = {
       nombre: formData.nombre,
       telefono: formData.telefono,
@@ -62,35 +58,29 @@ export const PagoBoleta = () => {
     };
     setOpenModal(true);
     setPagoData(pago);
-   
   };
   const handleSubmit = async (pagoData: PagoDataType) => {
-  
-      // Llama a la función de registro con los datos de pago
-      const response = await registro(pagoData);
-      console.log(response)
-      resetForm();
-      formData.numero_entradas=0
-      setLinkImagen(null)
-      setPreviewImage(null)
-      setDetallesTransaccion([])
-
-    
+    // Llama a la función de registro con los datos de pago
+    const response = await registro(pagoData);
+    console.log(response);
+    resetForm();
+    formData.numero_entradas = 0;
+    setLinkImagen(null);
+    setPreviewImage(null);
+    setDetallesTransaccion([]);
   };
-  
-  
-  const handleModalConfirm = (confirm:boolean) => {
+
+  const handleModalConfirm = (confirm: boolean) => {
     if (confirm) {
       if (pagoData !== null) {
         handleSubmit(pagoData);
       } else {
-        console.error('pagoData es null');
+        console.error("pagoData es null");
       }
     } else {
       console.log("La información no es correcta");
     }
   };
-
 
   const [loading, setLoading] = useState<boolean>(false);
   const [errorloading, seterrorLoading] = useState<boolean>(false);
@@ -187,14 +177,13 @@ export const PagoBoleta = () => {
     const telefonoRegExp = /^\d{8}$/;
     return telefonoRegExp.test(value);
   };
-  
 
   const validateCorreo = (value: string) => {
-    const correoRegExp = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.(com|net|org|edu|gov|gt)){1}$/;
+    const correoRegExp =
+      /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.(com|net|org|edu|gov|gt)){1}$/;
 
     return correoRegExp.test(value);
   };
-  
 
   const validateNumeroEntradas = (value: string) => {
     return parseInt(value, 10) > 0;
@@ -252,23 +241,28 @@ export const PagoBoleta = () => {
       detalle_transaccion: detallesTransaccion,
     },
     agregarNuevoError, // pasando la función de error callback aquí
-    removeErrorByCampo, // pasando la función de remover error callback aquí
+    removeErrorByCampo // pasando la función de remover error callback aquí
   );
-  const numberMap = formData.numero_entradas > 10 
-  ? Array.from({ length: 10 }, (_, index) => index + 1) // si es mayor a 10, limita a 10
-  : Array.from({ length: formData.numero_entradas }, (_, index) => index + 1); // si es 10 o menos, usa el valor actual
-
+  const numberMap =
+    formData.numero_entradas > 10
+      ? Array.from({ length: 10 }, (_, index) => index + 1) // si es mayor a 10, limita a 10
+      : Array.from(
+          { length: formData.numero_entradas },
+          (_, index) => index + 1
+        ); // si es 10 o menos, usa el valor actual
 
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
   return (
     <Grid container>
-        {openModal && <ModalResumen 
-  pago={pagoData} 
-  onConfirm={handleModalConfirm} 
-  openModal={openModal} 
-  setOpenModal={setOpenModal} 
-/>}
+      {openModal && (
+        <ModalResumen
+          pago={pagoData}
+          onConfirm={handleModalConfirm}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
+      )}
 
       <Grid item xs={12} md={110}>
         <Card
@@ -281,6 +275,32 @@ export const PagoBoleta = () => {
             resize: "horizontal",
           }}
         >
+      
+          <Card
+            orientation="horizontal"
+            sx={{
+              width: 400,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >  <Typography level="title-lg">
+           Realizar el depósito a la siguiente cuenta:{" "}
+        </Typography>
+              <Typography level="title-md" >
+                  Bi Monetaria Iglesia de  Cristo   
+                  408-002325-4{" "}
+              </Typography>
+            </CardContent>
+          </Card>
           <Typography
             level="title-lg"
             textColor={"#C3FCEF"}
@@ -288,6 +308,7 @@ export const PagoBoleta = () => {
           >
             Ingrese la información
           </Typography>
+
           <Divider inset="none" />
           <CardContent
             sx={{
@@ -412,7 +433,7 @@ export const PagoBoleta = () => {
                         Entrada {item}
                       </Typography>
                       <RadioGroup
-                        value={detallesTransaccion[index]?.rango_edad ?? ''}
+                        value={detallesTransaccion[index]?.rango_edad ?? ""}
                         onChange={(e) =>
                           handleRadioChange(index, e.target.value)
                         }
@@ -532,11 +553,21 @@ export const PagoBoleta = () => {
                     variant="plain"
                     style={{
                       color:
-                        totalAmount > 0 && errorData.length === 0 && linkImagen &&formData.nombre && formData.telefono&&formData.correo
+                        totalAmount > 0 &&
+                        errorData.length === 0 &&
+                        linkImagen &&
+                        formData.nombre &&
+                        formData.telefono &&
+                        formData.correo
                           ? "#FFFFFF"
                           : "#FFFFFF",
                       background:
-                        totalAmount > 0 && errorData.length === 0 && linkImagen&&formData.nombre && formData.telefono&&formData.correo
+                        totalAmount > 0 &&
+                        errorData.length === 0 &&
+                        linkImagen &&
+                        formData.nombre &&
+                        formData.telefono &&
+                        formData.correo
                           ? "#3E00B9"
                           : "#19004B",
                       width: "80%",
@@ -544,7 +575,12 @@ export const PagoBoleta = () => {
                     }}
                     onClick={handlePago}
                     disabled={
-                      totalAmount <= 0 || errorData.length > 0 || !linkImagen||!formData.nombre || !formData.telefono||!formData.correo
+                      totalAmount <= 0 ||
+                      errorData.length > 0 ||
+                      !linkImagen ||
+                      !formData.nombre ||
+                      !formData.telefono ||
+                      !formData.correo
                     }
                   >
                     Pagar

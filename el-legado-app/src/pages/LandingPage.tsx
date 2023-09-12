@@ -5,7 +5,7 @@ import { Programa } from "../components/Programa/Programa"
 import { Ubicacion } from "../components/Ubicacion/Ubicacion"
 import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography'; // Asegúrate de tener este import si no lo tienes ya
-
+import { NavLink } from "react-router-dom";
 interface CountdownProps {
   targetDate: Date;
 }
@@ -47,7 +47,12 @@ export const LandingPage = () => {
           {/* Agregamos el componente Countdown arriba del botón */}
           <Countdown targetDate={new Date('2023-11-04 09:00:00')} /> {/* Ajustado para las 9 am */}
           <br/> 
-          <Button
+          <NavLink
+                    to="/registro"
+                
+            
+                  >
+                    <Button
             variant="plain"
             style={{
               color: '#CEFFFB',
@@ -57,8 +62,10 @@ export const LandingPage = () => {
               display: 'inline-block',
             }}
           >
-            Registrate
+              Registrate
           </Button>
+                  </NavLink>
+          
         </div>
   
         <br/> <br/> <br/>
