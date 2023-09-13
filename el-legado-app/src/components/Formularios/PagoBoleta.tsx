@@ -265,18 +265,23 @@ export const PagoBoleta = () => {
         />
       )}
 
-      <Grid item xs={12} md={110}>
+      <Grid item xs={12} md={12}>
         <Card
           variant="outlined"
           sx={{
             maxHeight: "max-content",
             maxWidth: "100%",
             mx: "auto",
+            display: "flex",       // Añadido esto
+            flexDirection: "column", // Añadido esto
+            justifyContent: "center", // Añadido esto
+            alignItems: "center",     // Añadido esto
             overflow: "auto",
             resize: "horizontal",
           }}
         >
       
+   
           <Card
             orientation="horizontal"
             sx={{
@@ -284,6 +289,7 @@ export const PagoBoleta = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              height:'100%'
             }}
           >
             <CardContent
@@ -302,6 +308,8 @@ export const PagoBoleta = () => {
               </Typography>
             </CardContent>
           </Card>
+          <Divider inset="none" />
+             
           <Typography
             level="title-lg"
             textColor={"#C3FCEF"}
@@ -309,8 +317,6 @@ export const PagoBoleta = () => {
           >
             Ingrese la información
           </Typography>
-
-          <Divider inset="none" />
           <CardContent
             sx={{
               display: "grid",
