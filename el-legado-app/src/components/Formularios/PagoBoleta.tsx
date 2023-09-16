@@ -590,7 +590,7 @@ export const PagoBoleta = () => {
                       !formData.correo
                     }
                   >
-                    Pagar
+                   Registrarse
                   </Button>
                 </Grid>
               </Grid>

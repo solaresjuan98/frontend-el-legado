@@ -37,7 +37,7 @@ export const UseRegistro =  () => {
                
             });
      
-            toast.success("Su registro se ha realizado correctamente", {
+            toast.success("Su registro se ha realizado correctamente, recibira un correo de confirmación ", {
               position: "top-center",
               autoClose: 5000,
               hideProgressBar: false,
