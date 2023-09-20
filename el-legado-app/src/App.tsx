@@ -9,6 +9,8 @@ import Footer from "./components/Footer"
 import { Hospedaje } from "./pages/Hospedaje"
 import { CssVarsProvider } from "@mui/joy"
 import { ToastContainer } from 'react-toastify';
+import { PagoExitoso } from "./pages/PagoExitoso"
+import { PagoError } from "./pages/PagoError"
 function App() {
 
   return (
@@ -25,6 +27,11 @@ function App() {
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/expositores" element={<Expositores />} />
           <Route path="/hospedaje" element={<Hospedaje />} />
+
+          {/* ====== PANTALLAS DE AVISO DE PAGO ====== */}
+          <Route path="/pago-exitoso" element={<PagoExitoso />} />
+          <Route path="/pago-error" element={<PagoError />} />
+
         </Routes>
         <br /> <br /> <br /> <br /> <br /> <br />
         <Footer />

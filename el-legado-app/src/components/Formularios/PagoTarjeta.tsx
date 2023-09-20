@@ -8,7 +8,7 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+ 
 import Divider from "@mui/joy/Divider";
 import EmailIcon from "@mui/icons-material/Email";
 import FormControl from "@mui/joy/FormControl";
@@ -53,7 +53,9 @@ export const PagoTarjeta = () => {
       congregacion: "",
       numero_entradas: 0,
       numeroBoleta: "",
-      detalle_transaccion: []
+      detalle_transaccion: [],
+
+      numero_autorizacion:0
     },
     agregarNuevoError, // pasando la función de error callback aquí
     removeErrorByCampo, // pasando la función de remover error callback aquí
@@ -192,60 +194,7 @@ export const PagoTarjeta = () => {
                 </>
               ))}
 
-            {/* 
-            <br /><br /> */}
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <Typography
-                level="title-lg"
-                textColor={"#C3FCEF"}
-                startDecorator={<InfoOutlined />}
-              >
-                Pago con tarjeta
-                <Divider inset="none" />
-              </Typography>
-            </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
-                Número de tu Tarjeta
-              </FormLabel>
-              <Input
-                endDecorator={<CreditCardIcon />}
-                name="numeroTarjeta"
-                onChange={onChangeForm}
-            
-              />
-            </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
-                Fecha de Expiración
-              </FormLabel>
-              <Input
-                endDecorator={<CreditCardIcon />}
-                name="fechaVencimiento"
-                onChange={onChangeForm}
-               
-              />
-            </FormControl>
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>CVC/CVV</FormLabel>
-              <Input
-                endDecorator={<InfoOutlined />}
-                name="codigoCVC"
-                onChange={onChangeForm}
-                 
-              />
-            </FormControl>
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Numero Tarjeta</FormLabel>
-              <Input
-                name="numeroTarjeta"
-                onChange={onChangeForm}
-              
-              />
-            </FormControl>
-
+           
             <CardActions
               sx={{
                 gridColumn: "1/-1",
@@ -287,7 +236,7 @@ export const PagoTarjeta = () => {
                       height: "100%",
                     }}
                   >
-                    Pagar
+                    Pagar con tarjeta
                   </Button>
                 </Grid>
               </Grid>

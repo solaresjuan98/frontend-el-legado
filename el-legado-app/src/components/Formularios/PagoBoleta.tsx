@@ -2,6 +2,7 @@ import { useForm } from "../../hooks/useForm";
 import { useState, useRef } from "react";
 import TarjetaPago from "./TarjetaPago";
 import "./Formulario.css";
+import React, { ChangeEvent } from "react";
 import ModalResumen from "./ModalResumen";
 // mui
 import CircularProgress from "@mui/joy/CircularProgress";
@@ -23,8 +24,12 @@ import Input from "@mui/joy/Input";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+
 import PhoneIcon from "@mui/icons-material/Phone";
 import Typography from "@mui/joy/Typography";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 //interfaces
 import { ErrorMessage } from "../util/interfaces";
 import { PagoBoletaInterface } from "../util/interfaces";
@@ -51,9 +56,10 @@ export const PagoBoleta = () => {
       congregacion: formData.congregacion,
       transaccion: {
         enlace: linkImagen,
-        estado:"en_proceso",
+        estado: "en_proceso",
         total_pagar: totalAmount,
         numero_entradas: formData.numero_entradas,
+        numero_autorizacion:formData.numero_autorizacion,
         detalle_transaccion: detallesTransaccion,
       },
     };
@@ -65,6 +71,7 @@ export const PagoBoleta = () => {
     const response = await registro(pagoData);
     console.log(response);
     resetForm();
+    setCountryCode("")
     formData.numero_entradas = 0;
     setLinkImagen(null);
     setPreviewImage(null);
@@ -175,9 +182,68 @@ export const PagoBoleta = () => {
    * validaciones
    */
   const validateTelefono = (value: string) => {
-    const telefonoRegExp = /^\d{8}$/;
+    const telefonoRegExp = /^\+\d+(-\d+)?(\s\d+)?\s*$/;
     return telefonoRegExp.test(value);
   };
+  
+  
+  
+  const [countryCode, setCountryCode] = useState("");
+
+  const countryAndStates = [
+    { label: "Argentina", value: "+54" },
+    { label: "Bolivia", value: "+591" },
+    { label: "Brasil", value: "+55" },
+    { label: "Chile", value: "+56" },
+    { label: "Colombia", value: "+57" },
+    { label: "Costa Rica", value: "+506" },
+    { label: "Cuba", value: "+53" },
+    { label: "República Dominicana +1-809 ", value: "+1-809" },
+    { label: "República Dominicana 1-829 ", value: "+1-829" },
+    { label: "República Dominicana 1-849", value: "+1-849" },
+    { label: "Ecuador", value: "+593" },
+    { label: "El Salvador", value: "+503" },
+    { label: "Guatemala", value: "+502" },
+    { label: "Honduras", value: "+504" },
+    { label: "México", value: "+52" },
+    { label: "Nicaragua", value: "+505" },
+    { label: "Panamá", value: "+507" },
+    { label: "Paraguay", value: "+595" },
+    { label: "Perú", value: "+51" },
+    { label: "Puerto Rico", value: "+1-787" },
+    { label: "Puerto Rico", value: "+1-939" },
+    { label: "Uruguay", value: "+598" },
+    { label: "Venezuela", value: "+58" },
+    { label: "Belice", value: "+501" },
+    { label: "Guyana", value: "+592" },
+    { label: "Surinam", value: "+597" },
+    { label: "Guyana Francesa", value: "+594" },
+    { label: "Estados Unidos", value: "+1" },
+    { label: "Canadá", value: "+1" },
+    // ... (puedes seguir agregando más países si es necesario)
+  ];
+  
+
+  const handleSelectChange = (event: any, value: any) => {
+    const newCountryCode = value;
+    setCountryCode(newCountryCode);
+  
+    console.log(event);
+    const newEvent = {
+      target: {
+        name: "telefono",
+        value:
+          newCountryCode +
+          (formData.telefono.toString().slice(countryCode.length) === '0'
+            ? ''
+            : formData.telefono.toString().slice(countryCode.length)) +
+          " ",
+      },
+    } as unknown as ChangeEvent<HTMLInputElement>;
+  
+    onChangeForm(newEvent);
+  };
+  
 
   const validateCorreo = (value: string) => {
     const correoRegExp =
@@ -218,7 +284,12 @@ export const PagoBoleta = () => {
         newErrors.push({
           campo: name,
           mensaje: "Debe ingresar un nombre para poder realizar su transacción",
-        });
+        });}
+        else if (name === "numero_autorizacion" && !validateNombre(value)) {
+          newErrors.push({
+            campo: name,
+            mensaje: "Debe ingresar un numero de autorizacion para poder realizar su transacción",
+          });
       }
 
       return newErrors;
@@ -239,6 +310,7 @@ export const PagoBoleta = () => {
       congregacion: "",
       numero_entradas: 0,
       numeroBoleta: "",
+      numero_autorizacion:0,
       detalle_transaccion: detallesTransaccion,
     },
     agregarNuevoError, // pasando la función de error callback aquí
@@ -272,16 +344,14 @@ export const PagoBoleta = () => {
             maxHeight: "max-content",
             maxWidth: "100%",
             mx: "auto",
-            display: "flex",       // Añadido esto
+            display: "flex", // Añadido esto
             flexDirection: "column", // Añadido esto
             justifyContent: "center", // Añadido esto
-            alignItems: "center",     // Añadido esto
+            alignItems: "center", // Añadido esto
             overflow: "auto",
             resize: "horizontal",
           }}
         >
-      
-   
           <Card
             orientation="horizontal"
             sx={{
@@ -289,7 +359,7 @@ export const PagoBoleta = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height:'100%'
+              height: "100%",
             }}
           >
             <CardContent
@@ -299,17 +369,18 @@ export const PagoBoleta = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            >  <Typography level="title-lg">
-           Realizar el depósito a la siguiente cuenta:{" "}
-        </Typography>
-              <Typography level="title-md" >
-                  Bi Monetaria Iglesia de  Cristo   
-                  408-002325-4{" "}
+            >
+              {" "}
+              <Typography level="title-lg">
+                Realizar el depósito a la siguiente cuenta:{" "}
+              </Typography>
+              <Typography level="title-md">
+                Bi Monetaria Iglesia de Cristo 408-002325-4{" "}
               </Typography>
             </CardContent>
           </Card>
           <Divider inset="none" />
-             
+
           <Typography
             level="title-lg"
             textColor={"#C3FCEF"}
@@ -346,23 +417,50 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono </FormLabel>
-              <Input
-                endDecorator={<PhoneIcon />}
-                name="telefono"
-                onChange={onChangeForm}
-                onBlur={onBlur}
-                value={formData.telefono}
-              />
-              {errorData
-                .filter((error) => error.campo === "telefono")
-                .map((error, index) => (
-                  <div key={index} style={{ color: "red" }}>
-                    {error.mensaje}
-                  </div>
-                ))}
-            </FormControl>
+
+            <Grid container spacing={2} alignItems="center" sx={{ gridColumn: "1/-1"  }}>
+              <Grid item xs={12} sm={6}>
+              <FormControl sx={{ gridColumn: "1/-1"  }}>
+     
+                  <FormLabel sx={{ color: "#E3FEF8" }}>
+                    Seleccione el  país de donde nos visita
+                  </FormLabel>
+                  <Select
+                    placeholder="Seleccione un país..."
+                    onChange={handleSelectChange}
+                    sx={{ width: 240 }}
+                  >
+                    {countryAndStates.map((item, index) => (
+                      <Option key={index} value={item.value}>
+                        {item.label}
+                      </Option>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+              <FormControl sx={{ gridColumn: "1/-1"  }}>
+     
+                  <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono</FormLabel>
+                  <Input
+                    endDecorator={<PhoneIcon />}
+                    name="telefono"
+                    onChange={onChangeForm}
+                    onBlur={onBlur}
+                    value={formData.telefono}
+                  />
+
+                  {errorData
+                    .filter((error) => error.campo === "telefono")
+                    .map((error, index) => (
+                      <div key={index} style={{ color: "red" }}>
+                        {error.mensaje}
+                      </div>
+                    ))}
+                </FormControl>
+              </Grid>
+            </Grid>
 
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Correo </FormLabel>
@@ -464,6 +562,24 @@ export const PagoBoleta = () => {
                   <br />
                 </>
               ))}
+                <FormControl sx={{ gridColumn: "1/-1" }}>
+              <FormLabel sx={{ color: "#E3FEF8" }}>Numero de Autorización </FormLabel>
+              <Input
+                endDecorator={<ConfirmationNumberIcon />}
+                name="numero_autorizacion"
+                onBlur={onBlur}
+                type="number"
+                onChange={onChangeForm}
+                value={formData.numero_autorizacion}
+              />
+              {errorData
+                .filter((error) => error.campo === "numero_autorizacion")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
+            </FormControl>
             <Grid
               sx={{
                 display: "grid",
@@ -564,7 +680,7 @@ export const PagoBoleta = () => {
                         errorData.length === 0 &&
                         linkImagen &&
                         formData.nombre &&
-                        formData.telefono &&
+                        formData.telefono && formData.numero_autorizacion&&
                         formData.correo
                           ? "#FFFFFF"
                           : "#FFFFFF",
@@ -573,7 +689,7 @@ export const PagoBoleta = () => {
                         errorData.length === 0 &&
                         linkImagen &&
                         formData.nombre &&
-                        formData.telefono &&
+                        formData.telefono && formData.numero_autorizacion&&
                         formData.correo
                           ? "#3E00B9"
                           : "#19004B",
@@ -587,10 +703,10 @@ export const PagoBoleta = () => {
                       !linkImagen ||
                       !formData.nombre ||
                       !formData.telefono ||
-                      !formData.correo
+                      !formData.correo ||!formData.numero_autorizacion
                     }
                   >
-                   Registrarse
+                    Registrarse
                   </Button>
                 </Grid>
               </Grid>

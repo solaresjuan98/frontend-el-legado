@@ -10,6 +10,7 @@ interface PagoBaseInterface {
   correo: string;
   congregacion: string;
   numero_entradas: number;
+  numero_autorizacion:number;
   // datos entrada
   detalle_transaccion:  any[];
 }
@@ -23,6 +24,8 @@ export interface PagoDataType {
     enlace: string | null;
     total_pagar: number;
     numero_entradas: number;
+
+    numero_autorizacion: number;
     detalle_transaccion: any[];
   };
 }

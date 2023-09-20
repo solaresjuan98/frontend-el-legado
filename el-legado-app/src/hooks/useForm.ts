@@ -39,6 +39,7 @@ export const useForm = <T>(initialState: T, errorCallback: (campo: string, mensa
       congregacion: "",
       numero_entradas: 0,
       numeroBoleta: "",
+      numero_autorizacion:0,
       detalle_transaccion: [],
     }));
   };
