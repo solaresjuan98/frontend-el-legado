@@ -59,10 +59,11 @@ export const PagoBoleta = () => {
         estado: "en_proceso",
         total_pagar: totalAmount,
         numero_entradas: formData.numero_entradas,
-        numero_autorizacion:formData.numero_autorizacion,
+        numero_transaccion:formData.numero_autorizacion,
         detalle_transaccion: detallesTransaccion,
       },
     };
+    console.log(pago)
     setOpenModal(true);
     setPagoData(pago);
   };
