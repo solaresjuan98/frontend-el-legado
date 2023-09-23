@@ -36,6 +36,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pwd
+          ls
           node --version
           npm i 
 
