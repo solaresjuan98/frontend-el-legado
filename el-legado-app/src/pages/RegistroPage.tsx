@@ -30,11 +30,11 @@ export const RegistroPage = () => {
                 alignItems: 'center',
                 bgcolor: 'background.body',
                 flexGrow: 1,
-                m: -2,
+                m: -3,
                 overflowX: 'hidden',
                 borderRadius: 'md',
                 marginTop: 4,
-                width: '100%',
+                width: '450px',
                 height: '100%',
                 maxWidth: 800,
               

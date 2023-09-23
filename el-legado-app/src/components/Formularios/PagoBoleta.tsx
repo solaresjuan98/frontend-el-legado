@@ -369,6 +369,7 @@ export const PagoBoleta = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                
               }}
             >
               {" "}
@@ -392,6 +393,7 @@ export const PagoBoleta = () => {
           <CardContent
             sx={{
               display: "grid",
+              
               gridTemplateColumns: {
                 xs: "1fr",
                 md: "repeat(2, minmax(80px, 1fr))",
@@ -447,6 +449,7 @@ export const PagoBoleta = () => {
                     name="telefono"
                     onChange={onChangeForm}
                     onBlur={onBlur}
+                   
                     value={formData.telefono}
                   />
 
