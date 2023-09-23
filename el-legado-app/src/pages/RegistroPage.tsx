@@ -21,7 +21,7 @@ export const RegistroPage = () => {
             </Typography>
           </Grid>
           
-          <Grid item xs={12} sm={12} md={8} lg={6}>
+          <Grid item xs={12}  >
             <Box
               sx={{
                 display: 'flex',
@@ -37,12 +37,10 @@ export const RegistroPage = () => {
                 width: '100%',
                 height: '100%',
                 maxWidth: 800,
-                [theme.breakpoints.down('xs')]: {
-                  width: '100%',
-                }
+              
               }}
             >
-              <div style={{ width: '100%', margin: '0 auto' ,marginLeft:'220'}}>
+              <div style={{ width: '100%', margin: '0 auto'  }}>
                 <Tabs aria-label="tabs" style={{ margin: '0 auto',   textAlign: 'center' ,marginLeft:'30px'}}>
                   <TabList
                     disableUnderline
