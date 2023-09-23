@@ -4,12 +4,12 @@ import Tab, { tabClasses } from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
 import { Typography } from "@mui/joy";
 import Box from '@mui/joy/Box';
-import { Grid, useTheme } from "@mui/material";
+import { Grid } from "@mui/material";
 import { PagoTarjeta } from '../components/Formularios/PagoTarjeta';
 import { PagoBoleta } from '../components/Formularios/PagoBoleta';
 
 export const RegistroPage = () => {
-  const theme = useTheme();
+ 
 
   return (
     <>
