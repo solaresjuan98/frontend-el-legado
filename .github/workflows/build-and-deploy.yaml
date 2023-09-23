@@ -42,6 +42,7 @@ jobs:
 
       - name: Build Static website
         run: |
+          cd el-legado-app
           npm run build
 
       - name: Copy files to the production website with AWS CLI
