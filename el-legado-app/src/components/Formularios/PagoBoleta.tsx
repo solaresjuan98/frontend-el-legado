@@ -356,7 +356,7 @@ export const PagoBoleta = () => {
           <Card
             orientation="horizontal"
             sx={{
-              width: 400,
+             
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -419,9 +419,7 @@ export const PagoBoleta = () => {
                 ))}
             </FormControl>
 
-            <Grid container spacing={2} alignItems="center" sx={{ gridColumn: "1/-1"  }}>
-              <Grid item xs={12} sm={6}>
-              <FormControl sx={{ gridColumn: "1/-1"  }}>
+             <FormControl sx={{ gridColumn: "1/-1"  }}>
      
                   <FormLabel sx={{ color: "#E3FEF8" }}>
                     Seleccione el  país de donde nos visita
@@ -429,7 +427,7 @@ export const PagoBoleta = () => {
                   <Select
                     placeholder="Seleccione un país..."
                     onChange={handleSelectChange}
-                    sx={{ width: 240 }}
+                    sx={{ width: 300 }}
                   >
                     {countryAndStates.map((item, index) => (
                       <Option key={index} value={item.value}>
@@ -438,9 +436,9 @@ export const PagoBoleta = () => {
                     ))}
                   </Select>
                 </FormControl>
-              </Grid>
+          
 
-              <Grid item xs={12} sm={6}>
+        
               <FormControl sx={{ gridColumn: "1/-1"  }}>
      
                   <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono</FormLabel>
@@ -460,8 +458,7 @@ export const PagoBoleta = () => {
                       </div>
                     ))}
                 </FormControl>
-              </Grid>
-            </Grid>
+           
 
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Correo </FormLabel>
