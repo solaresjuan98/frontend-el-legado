@@ -34,7 +34,7 @@ export const RegistroPage = () => {
                 overflowX: 'hidden',
                 borderRadius: 'md',
                 marginTop: 4,
-               
+                width: 'auto',
                 height: '100%',
                 maxWidth: 800,
               

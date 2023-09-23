@@ -411,6 +411,8 @@ export const PagoBoleta = () => {
                 onBlur={onBlur}
                 onChange={onChangeForm}
                 value={formData.nombre}
+                sx={{ width: '100%' }}
+
               />
               {errorData
                 .filter((error) => error.campo === "nombre")
@@ -449,7 +451,8 @@ export const PagoBoleta = () => {
                     name="telefono"
                     onChange={onChangeForm}
                     onBlur={onBlur}
-                   
+                    sx={{ width: '100%' }}
+
                     value={formData.telefono}
                   />
 
@@ -470,6 +473,8 @@ export const PagoBoleta = () => {
                 name="correo"
                 onChange={onChangeForm}
                 onBlur={onBlur}
+                sx={{ width: '100%' }}
+
                 value={formData.correo}
               />
               {errorData
@@ -486,6 +491,8 @@ export const PagoBoleta = () => {
                 endDecorator={<BusinessIcon />}
                 name="congregacion"
                 onChange={onChangeForm}
+                sx={{ width: '100%' }}
+
                 value={formData.congregacion}
               />
             </FormControl>
@@ -506,6 +513,8 @@ export const PagoBoleta = () => {
                   name="numero_entradas"
                   onChange={onChangeForm}
                   onBlur={handleInputBlur}
+                  sx={{ width: '100%' }}
+
                   value={formData.numero_entradas}
                   slotProps={{
                     input: {
@@ -570,6 +579,8 @@ export const PagoBoleta = () => {
                 name="numero_autorizacion"
                 onBlur={onBlur}
                 type="number"
+                sx={{ width: '100%' }}
+
                 onChange={onChangeForm}
                 value={formData.numero_autorizacion}
               />
@@ -598,6 +609,8 @@ export const PagoBoleta = () => {
                   type="file"
                   accept="image/*"
                   ref={fileInputRef}
+                
+
                   style={{ display: "none" }}
                   onChange={handleFileChange}
                 />
