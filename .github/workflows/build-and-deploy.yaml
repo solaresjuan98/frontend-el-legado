@@ -47,6 +47,7 @@ jobs:
 
       - name: Copy files to the production website with AWS CLI
         run: |
+          cd el-legado-app
           aws s3 sync --delete ${{ env.DIST }} s3://${{env.BUCKET}}
 
       - name: Copy files to the production website with the AWS CLI
