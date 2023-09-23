@@ -38,6 +38,7 @@ jobs:
         run: |
           pwd
           ls
+          cd el-legado-app
           node --version
           npm i 
 
