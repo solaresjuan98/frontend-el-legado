@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BUCKET: www.conjoveneslegado.com
-      DIST: build
+      DIST: dist
       REGION: us-east-2
       DIST_ID: EDUEKLOL6SEBV
 
@@ -42,7 +42,6 @@ jobs:
 
       - name: Build Static website
         run: |
-          cd el-legado-app
           npm run build
 
       - name: Copy files to the production website with AWS CLI
