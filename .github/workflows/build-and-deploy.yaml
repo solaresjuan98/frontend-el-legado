@@ -52,6 +52,7 @@ jobs:
 
       - name: Copy files to the production website with the AWS CLI
         run: |
+          cd el-legado-app
           aws cloudfront create-invalidation \    
           --distribution-id ${{ env.DIST_ID }} \
           --paths "/*"
