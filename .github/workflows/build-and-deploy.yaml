@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           node --version
-          npm i --production
+          npm i 
 
       - name: Build Static website
         run: npm run build
