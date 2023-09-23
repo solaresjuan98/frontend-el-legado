@@ -427,7 +427,7 @@ export const PagoBoleta = () => {
                   <Select
                     placeholder="Seleccione un país..."
                     onChange={handleSelectChange}
-                    sx={{ width: 300 }}
+                    sx={{ width: 240 }}
                   >
                     {countryAndStates.map((item, index) => (
                       <Option key={index} value={item.value}>
