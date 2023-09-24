@@ -13,8 +13,8 @@ export const RegistroPage = () => {
  
 
   return (
-    <div className="animate__animated animate__backInDown">
-      <Grid item xs={10} sm={8} md={6}>
+    <div className="animate__animated animate__backInDown" style={{ overflowX: 'hidden' }}>
+    <Grid item xs={10} sm={8} md={6}>
           <Typography level="h2" style={{ textAlign: 'center', marginTop: '1.5rem', color: "#9AF9E2" }}>
             Registroo
           </Typography>
@@ -30,6 +30,9 @@ export const RegistroPage = () => {
               justifyContent: 'center',
               alignItems: 'center',
               bgcolor: 'background.body',
+
+              marginLeft: 0 ,// Agregamos este margen para evitar que el usuario pueda mover el Box hacia la izquierda
+
               borderRadius: 'md',
               mt: 2,
               width: '100%',
