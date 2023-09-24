@@ -16,7 +16,7 @@ export const RegistroPage = () => {
     <div className="animate__animated animate__backInDown">
       <Grid item xs={10} sm={8} md={6}>
           <Typography level="h2" style={{ textAlign: 'center', marginTop: '1.5rem', color: "#9AF9E2" }}>
-            Registro
+            Registroo
           </Typography>
         </Grid>
       <Grid container justifyContent="center" >
