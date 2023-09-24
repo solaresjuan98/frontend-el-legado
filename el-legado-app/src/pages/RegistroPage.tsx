@@ -7,10 +7,10 @@ import Box from '@mui/joy/Box';
 import { Grid } from "@mui/material";
 import { PagoTarjeta } from '../components/Formularios/PagoTarjeta';
 import { PagoBoleta } from '../components/Formularios/PagoBoleta';
-import { useTheme } from "@mui/material/styles";
+ 
 
 export const RegistroPage = () => {
-  const theme = useTheme();
+ 
 
   return (
     <div className="animate__animated animate__backInDown">
