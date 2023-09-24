@@ -7,70 +7,64 @@ import Box from '@mui/joy/Box';
 import { Grid } from "@mui/material";
 import { PagoTarjeta } from '../components/Formularios/PagoTarjeta';
 import { PagoBoleta } from '../components/Formularios/PagoBoleta';
+import { useTheme } from "@mui/material/styles";
 
 export const RegistroPage = () => {
  
 
   return (
-    <>
-      <div className="animate__animated animate__backInDown">
-        <Grid container justifyContent="center" flexDirection="column" alignItems="center">
-          <Grid item xs={12}>
-            <Typography level="h1" textColor={"#9AF9E2"} style={{ textAlign: 'center', marginTop: '30px' }}>
-              Registro
-            </Typography>
-          </Grid>
-          
-          <Grid item xs={12}  >
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                bgcolor: 'background.body',
-                flexGrow: 1,
-                m: -3,
-                overflowX: 'hidden',
-                borderRadius: 'md',
-                marginTop: 4,
-                width: 'auto',
-                height: '100%',
-                maxWidth: 800,
-              
-              }}
-            >
-              <div style={{ width: '100%', margin: '0 auto'  }}>
-                <Tabs aria-label="tabs" style={{ margin: '0 auto',   textAlign: 'center' ,marginLeft:'30px'}}>
-                  <TabList
-                    disableUnderline
-                    sx={{
-                      p: 0.5,
-                      gap: 0.5,
-                      borderRadius: 'xl',
-                      bgcolor: 'background.level1',
-                      justifyContent: 'center',
-                      [`& .${tabClasses.root}[aria-selected="true"]`]: {
-                        boxShadow: 'sm',
-                        bgcolor: 'background.surface',
-                      },
-                    }}
-                  >
-                    <Tab disableIndicator>Registro con Tarjeta</Tab>
-                    <Tab disableIndicator> Registro con boleta</Tab>
-                  </TabList>
-                  <TabPanel value={0}>
-                    <PagoTarjeta />
-                  </TabPanel>
-                  <TabPanel value={1}>
-                    <PagoBoleta />
-                  </TabPanel>
-                </Tabs>
-              </div>
-            </Box>
-          </Grid>
+    <div className="animate__animated animate__backInDown">
+      <Grid item xs={10} sm={8} md={6}>
+          <Typography level="h2" style={{ textAlign: 'center', marginTop: '1.5rem', color: "#9AF9E2" }}>
+            Registro
+          </Typography>
         </Grid>
-      </div>
-    </>
+      <Grid container justifyContent="center" >
+        
+
+        <Grid item xs={12}  >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              bgcolor: 'background.body',
+              borderRadius: 'md',
+              mt: 2,
+              width: '100%',
+              p: { xs: 0.5, sm: 1, md: 2 },
+            }}
+          >
+        <Tabs aria-label="tabs" style={{ margin: '0 auto',   textAlign: 'center'  }}>
+              <TabList
+                disableUnderline
+                sx={{
+                  p: 0.5,
+                  gap: 0.5,
+                  borderRadius: 'xl',
+                  bgcolor: 'background.level1',
+                  [`& .${tabClasses.root}[aria-selected="true"]`]: {
+                    boxShadow: 'sm',
+                    bgcolor: 'background.surface',
+                  },
+                  mx: { xs: 0, sm: 0, md: 0 }, // Aquí agregamos el margen horizontal para que las tabs estén centradas en pantallas grandes.
+                  mt: { xs: 0, sm: 0, md: (window.innerHeight - 200) / 2 } // Aquí agregamos un margen superior dinámico para que la navbar no se desplace.
+                }}
+              >
+                <Tab disableIndicator>Registro con Tarjeta</Tab>
+                <Tab disableIndicator>Registro con boleta</Tab>
+              </TabList>
+              <TabPanel value={0}>
+                <PagoTarjeta />
+              </TabPanel>
+              <TabPanel value={1}>
+                <PagoBoleta />
+              </TabPanel>
+            </Tabs>
+          </Box>
+        </Grid>
+      </Grid>
+    </div>
   );
 }
