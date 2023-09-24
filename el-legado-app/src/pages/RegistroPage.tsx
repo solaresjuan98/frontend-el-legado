@@ -10,7 +10,7 @@ import { PagoBoleta } from '../components/Formularios/PagoBoleta';
 import { useTheme } from "@mui/material/styles";
 
 export const RegistroPage = () => {
- 
+  const theme = useTheme();
 
   return (
     <div className="animate__animated animate__backInDown">
@@ -49,7 +49,7 @@ export const RegistroPage = () => {
                     bgcolor: 'background.surface',
                   },
                   mx: { xs: 0, sm: 0, md: 0 }, // Aquí agregamos el margen horizontal para que las tabs estén centradas en pantallas grandes.
-                  mt: { xs: 0, sm: 0, md: (window.innerHeight - 200) / 2 } // Aquí agregamos un margen superior dinámico para que la navbar no se desplace.
+                  mt: { xs: 0, sm: 0, md: 0 } // Aquí eliminamos el margen superior.
                 }}
               >
                 <Tab disableIndicator>Registro con Tarjeta</Tab>
