@@ -24,7 +24,7 @@ import Input from "@mui/joy/Input";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 import PhoneIcon from "@mui/icons-material/Phone";
 import Typography from "@mui/joy/Typography";
@@ -59,11 +59,11 @@ export const PagoBoleta = () => {
         estado: "en_proceso",
         total_pagar: totalAmount,
         numero_entradas: formData.numero_entradas,
-        numero_transaccion:formData.numero_autorizacion,
+        numero_transaccion: formData.numero_autorizacion,
         detalle_transaccion: detallesTransaccion,
       },
     };
-    console.log(pago)
+    console.log(pago);
     setOpenModal(true);
     setPagoData(pago);
   };
@@ -72,7 +72,7 @@ export const PagoBoleta = () => {
     const response = await registro(pagoData);
     console.log(response);
     resetForm();
-    setCountryCode("")
+    setCountryCode("");
     formData.numero_entradas = 0;
     setLinkImagen(null);
     setPreviewImage(null);
@@ -186,9 +186,7 @@ export const PagoBoleta = () => {
     const telefonoRegExp = /^\+\d+(-\d+)?(\s\d+)?\s*$/;
     return telefonoRegExp.test(value);
   };
-  
-  
-  
+
   const [countryCode, setCountryCode] = useState("");
 
   const countryAndStates = [
@@ -223,28 +221,26 @@ export const PagoBoleta = () => {
     { label: "Canadá", value: "+1" },
     // ... (puedes seguir agregando más países si es necesario)
   ];
-  
 
   const handleSelectChange = (event: any, value: any) => {
     const newCountryCode = value;
     setCountryCode(newCountryCode);
-  
+
     console.log(event);
     const newEvent = {
       target: {
         name: "telefono",
         value:
           newCountryCode +
-          (formData.telefono.toString().slice(countryCode.length) === '0'
-            ? ''
+          (formData.telefono.toString().slice(countryCode.length) === "0"
+            ? ""
             : formData.telefono.toString().slice(countryCode.length)) +
           " ",
       },
     } as unknown as ChangeEvent<HTMLInputElement>;
-  
+
     onChangeForm(newEvent);
   };
-  
 
   const validateCorreo = (value: string) => {
     const correoRegExp =
@@ -285,12 +281,13 @@ export const PagoBoleta = () => {
         newErrors.push({
           campo: name,
           mensaje: "Debe ingresar un nombre para poder realizar su transacción",
-        });}
-        else if (name === "numero_autorizacion" && !validateNombre(value)) {
-          newErrors.push({
-            campo: name,
-            mensaje: "Debe ingresar un numero de autorizacion para poder realizar su transacción",
-          });
+        });
+      } else if (name === "numero_autorizacion" && !validateNombre(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje:
+            "Debe ingresar un numero de autorizacion para poder realizar su transacción",
+        });
       }
 
       return newErrors;
@@ -311,7 +308,7 @@ export const PagoBoleta = () => {
       congregacion: "",
       numero_entradas: 0,
       numeroBoleta: "",
-      numero_autorizacion:0,
+      numero_autorizacion: 0,
       detalle_transaccion: detallesTransaccion,
     },
     agregarNuevoError, // pasando la función de error callback aquí
@@ -356,7 +353,6 @@ export const PagoBoleta = () => {
           <Card
             orientation="horizontal"
             sx={{
-              width: 400,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -390,17 +386,20 @@ export const PagoBoleta = () => {
             Ingrese la información
           </Typography>
           <CardContent
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "repeat(2, minmax(80px, 1fr))",
-              }, // Utiliza diferentes configuraciones según el tamaño de pantalla
-              gap: 1.5,
-              sm: "repeat(2, 1fr)", // Dos columnas en pantallas medianas
-              md: "repeat(2, 1fr)", // Dos columnas en pantallas grandes
-            }}
-          >
+  sx={{
+    display: "grid",
+    gap: 1.5,
+    gridTemplateColumns: {
+      xs: "1fr",
+      sm: "repeat(2, 1fr)",
+      md: "repeat(2, 1fr)",
+    },
+      "@media (max-width: 350px)": {
+      padding: "0.5rem", // O cualquier otro valor que se adapte
+      margin: 0,
+    }
+  }}
+>
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Nombre </FormLabel>
               <Input
@@ -409,6 +408,7 @@ export const PagoBoleta = () => {
                 onBlur={onBlur}
                 onChange={onChangeForm}
                 value={formData.nombre}
+                sx={{ width: "100%" }}
               />
               {errorData
                 .filter((error) => error.campo === "nombre")
@@ -419,49 +419,41 @@ export const PagoBoleta = () => {
                 ))}
             </FormControl>
 
-            <Grid container spacing={2} alignItems="center" sx={{ gridColumn: "1/-1"  }}>
-              <Grid item xs={12} sm={6}>
-              <FormControl sx={{ gridColumn: "1/-1"  }}>
-     
-                  <FormLabel sx={{ color: "#E3FEF8" }}>
-                    Seleccione el  país de donde nos visita
-                  </FormLabel>
-                  <Select
-                    placeholder="Seleccione un país..."
-                    onChange={handleSelectChange}
-                    sx={{ width: 240 }}
-                  >
-                    {countryAndStates.map((item, index) => (
-                      <Option key={index} value={item.value}>
-                        {item.label}
-                      </Option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
+            <FormControl sx={{ gridColumn: "1/-1" }}>
+              <FormLabel sx={{ color: "#E3FEF8" }}>
+                Seleccione el país de donde nos visita
+              </FormLabel>
+              <Select
+                placeholder="Seleccione un país..."
+                onChange={handleSelectChange}
+              >
+                {countryAndStates.map((item, index) => (
+                  <Option key={index} value={item.value}>
+                    {item.label}
+                  </Option>
+                ))}
+              </Select>
+            </FormControl>
 
-              <Grid item xs={12} sm={6}>
-              <FormControl sx={{ gridColumn: "1/-1"  }}>
-     
-                  <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono</FormLabel>
-                  <Input
-                    endDecorator={<PhoneIcon />}
-                    name="telefono"
-                    onChange={onChangeForm}
-                    onBlur={onBlur}
-                    value={formData.telefono}
-                  />
+            <FormControl sx={{ gridColumn: "1/-1" }}>
+              <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono</FormLabel>
+              <Input
+                endDecorator={<PhoneIcon />}
+                name="telefono"
+                onChange={onChangeForm}
+                onBlur={onBlur}
+                sx={{ width: "100%" }}
+                value={formData.telefono}
+              />
 
-                  {errorData
-                    .filter((error) => error.campo === "telefono")
-                    .map((error, index) => (
-                      <div key={index} style={{ color: "red" }}>
-                        {error.mensaje}
-                      </div>
-                    ))}
-                </FormControl>
-              </Grid>
-            </Grid>
+              {errorData
+                .filter((error) => error.campo === "telefono")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
+            </FormControl>
 
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Correo </FormLabel>
@@ -470,6 +462,7 @@ export const PagoBoleta = () => {
                 name="correo"
                 onChange={onChangeForm}
                 onBlur={onBlur}
+                sx={{ width: "100%" }}
                 value={formData.correo}
               />
               {errorData
@@ -486,6 +479,7 @@ export const PagoBoleta = () => {
                 endDecorator={<BusinessIcon />}
                 name="congregacion"
                 onChange={onChangeForm}
+                sx={{ width: "100%" }}
                 value={formData.congregacion}
               />
             </FormControl>
@@ -506,6 +500,7 @@ export const PagoBoleta = () => {
                   name="numero_entradas"
                   onChange={onChangeForm}
                   onBlur={handleInputBlur}
+                  sx={{ width: "100%" }}
                   value={formData.numero_entradas}
                   slotProps={{
                     input: {
@@ -563,13 +558,16 @@ export const PagoBoleta = () => {
                   <br />
                 </>
               ))}
-                <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Numero de Autorización </FormLabel>
+            <FormControl sx={{ gridColumn: "1/-1" }}>
+              <FormLabel sx={{ color: "#E3FEF8" }}>
+                Numero de Autorización{" "}
+              </FormLabel>
               <Input
                 endDecorator={<ConfirmationNumberIcon />}
                 name="numero_autorizacion"
                 onBlur={onBlur}
                 type="number"
+                sx={{ width: "100%" }}
                 onChange={onChangeForm}
                 value={formData.numero_autorizacion}
               />
@@ -681,7 +679,8 @@ export const PagoBoleta = () => {
                         errorData.length === 0 &&
                         linkImagen &&
                         formData.nombre &&
-                        formData.telefono && formData.numero_autorizacion&&
+                        formData.telefono &&
+                        formData.numero_autorizacion &&
                         formData.correo
                           ? "#FFFFFF"
                           : "#FFFFFF",
@@ -690,7 +689,8 @@ export const PagoBoleta = () => {
                         errorData.length === 0 &&
                         linkImagen &&
                         formData.nombre &&
-                        formData.telefono && formData.numero_autorizacion&&
+                        formData.telefono &&
+                        formData.numero_autorizacion &&
                         formData.correo
                           ? "#3E00B9"
                           : "#19004B",
@@ -704,7 +704,8 @@ export const PagoBoleta = () => {
                       !linkImagen ||
                       !formData.nombre ||
                       !formData.telefono ||
-                      !formData.correo ||!formData.numero_autorizacion
+                      !formData.correo ||
+                      !formData.numero_autorizacion
                     }
                   >
                     Registrarse
