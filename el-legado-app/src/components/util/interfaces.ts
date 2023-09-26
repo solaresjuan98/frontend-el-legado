@@ -4,7 +4,7 @@ export interface Expositor {
   img?: string;
 }
 
-interface PagoBaseInterface {
+export interface PagoBaseInterface {
   nombre: string;
   telefono: number;
   correo: string;
