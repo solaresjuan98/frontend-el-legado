@@ -14,13 +14,13 @@ const Contenido: ContenidoItem[] = [
     Titulo: "Expositores",
     descp: "Conoce a nuestros expertos Expositores, seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
     img: "https://fondos-legado.s3.us-east-2.amazonaws.com/tallerista.jpg",
-    ruta :"/Expositores"
+    ruta :"/expositores"
   },
   {
     Titulo: "Talleres",
     descp: "Conoce a nuestros talleres,  que fueron seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
     img: "https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg",
-    ruta :"/Talleres"
+    ruta :"/talleres"
   } ,
   {
     Titulo: "Hospedaje",
