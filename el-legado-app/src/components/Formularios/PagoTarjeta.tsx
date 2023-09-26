@@ -8,7 +8,7 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
- 
+
 import Divider from "@mui/joy/Divider";
 import EmailIcon from "@mui/icons-material/Email";
 import FormControl from "@mui/joy/FormControl";
@@ -38,11 +38,10 @@ export const PagoTarjeta = () => {
     );
   };
 
-
   const {
     formData,
     handleInputBlur,
-    
+
     numberInputIsTouched,
     onChangeForm,
   } = useForm<PagoBoletaInterface>(
@@ -55,12 +54,12 @@ export const PagoTarjeta = () => {
       numeroBoleta: "",
       detalle_transaccion: [],
 
-      numero_autorizacion:0
+      numero_autorizacion: 0,
     },
     agregarNuevoError, // pasando la función de error callback aquí
-    removeErrorByCampo, // pasando la función de remover error callback aquí
+    removeErrorByCampo // pasando la función de remover error callback aquí
   );
-  
+
   const numberMap = Array.from(
     { length: formData.numero_entradas },
     (_, index) => index + 1
@@ -91,13 +90,16 @@ export const PagoTarjeta = () => {
           <CardContent
             sx={{
               display: "grid",
+              gap: 1.5,
               gridTemplateColumns: {
                 xs: "1fr",
-                md: "repeat(2, minmax(80px, 1fr))",
-              }, // Utiliza diferentes configuraciones según el tamaño de pantalla
-              gap: 1.5,
-              sm: "repeat(2, 1fr)", // Dos columnas en pantallas medianas
-              md: "repeat(2, 1fr)", // Dos columnas en pantallas grandes
+                sm: "repeat(2, 1fr)",
+                md: "repeat(2, 1fr)",
+              },
+              "@media (max-width: 350px)": {
+                padding: "0.5rem", // O cualquier otro valor que se adapte
+                margin: 0,
+              },
             }}
           >
             <FormControl sx={{ gridColumn: "1/-1" }}>
@@ -139,32 +141,32 @@ export const PagoTarjeta = () => {
               />
             </FormControl>
             <FormControl>
-                <FormLabel sx={{ color: "#E3FEF8" }}>
-                  Número de Entradas
-                </FormLabel>
-                <Input
-                  type="number"
-                  endDecorator={<LocalActivityIcon />}
-                  name="numero_entradas"
-                  onChange={onChangeForm}
-                  onBlur={handleInputBlur}
-                  value={formData.numero_entradas}
-                  slotProps={{
-                    input: {
-                      min: 1,
-                      max: 10,
-                      step: 1,
-                    },
-                  }}
-                />
-                {errorData
-                  .filter((error) => error.campo === "numero_entradas")
-                  .map((error, index) => (
-                    <div key={index} style={{ color: "red" }}>
-                      {error.mensaje}
-                    </div>
-                  ))}
-              </FormControl>
+              <FormLabel sx={{ color: "#E3FEF8" }}>
+                Número de Entradas
+              </FormLabel>
+              <Input
+                type="number"
+                endDecorator={<LocalActivityIcon />}
+                name="numero_entradas"
+                onChange={onChangeForm}
+                onBlur={handleInputBlur}
+                value={formData.numero_entradas}
+                slotProps={{
+                  input: {
+                    min: 1,
+                    max: 10,
+                    step: 1,
+                  },
+                }}
+              />
+              {errorData
+                .filter((error) => error.campo === "numero_entradas")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
+            </FormControl>
 
             {/* validar cantidad de entradas aca */}
 
@@ -194,7 +196,6 @@ export const PagoTarjeta = () => {
                 </>
               ))}
 
-           
             <CardActions
               sx={{
                 gridColumn: "1/-1",
@@ -210,7 +211,7 @@ export const PagoTarjeta = () => {
                   md={6}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-               <TarjetaPago total={formattedTotal} />
+                  <TarjetaPago total={formattedTotal} />
                 </Grid>
                 <Grid
                   item
