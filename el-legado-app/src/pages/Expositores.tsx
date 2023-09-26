@@ -22,7 +22,7 @@ const arrExpositores: Expositor[] = [
   },
   {
     nombre: 'Jairo Chin',
-    bio: 'Miembro del consejo de jovnes'
+    bio: 'Miembro del consejo de jovenes de la Iglesia'
   },
 ];
 
