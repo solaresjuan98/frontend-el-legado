@@ -31,8 +31,9 @@ function App() {
           {/* ====== PANTALLAS DE AVISO DE PAGO ====== */}
           <Route path="/pago-exitoso" element={<PagoExitoso />} />
           <Route path="/pago-error" element={<PagoError />} />
-
+          <Route path="*" element={<LandingPage />} />
         </Routes>
+
         <br /> <br /> <br /> <br /> <br /> <br />
         <Footer />
       </BrowserRouter>
