@@ -84,7 +84,7 @@ export const PagoTarjeta = () => {
               description: 'Entrada para congreso'
             },
             currency: 'gtq',
-            unit_amount: 150 * 1000
+            unit_amount: 150 * 100
           },
           quantity: formData.numero_entradas
         }
