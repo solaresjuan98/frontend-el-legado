@@ -22,7 +22,7 @@ import Typography from "@mui/joy/Typography";
 import { ErrorMessage } from "../util/interfaces";
 import TarjetaPago from "./TarjetaPago";
 import { usePayment } from "../../hooks/usePayment";
-import { OrderData, PaymentData } from "../../hooks/interfaces";
+import { OrderData } from "../../hooks/interfaces";
 
 export const PagoTarjeta = () => {
   // const inputRef = useRef<HTMLInputElement | null>(null);
