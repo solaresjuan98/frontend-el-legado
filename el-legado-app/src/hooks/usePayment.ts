@@ -12,7 +12,7 @@ export const usePayment = () => {
           line_items: paymentData,
           mode: "payment",
           success_url: `https://www.conjoveneslegado.com/pago-exitoso`, // * Redigir a frontend, y enviar correo (ver flujo después)
-          cancel_url: 'https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/cancel' // * Redirigr a frontend, pero con una vista que diga que no se pudo
+          cancel_url: 'https://www.conjoveneslegado.com/pago-error' // * Redirigr a frontend, pero con una vista que diga que no se pudo
   
         }
       )
