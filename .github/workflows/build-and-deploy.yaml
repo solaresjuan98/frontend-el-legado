@@ -30,9 +30,7 @@ jobs:
       #         node-version: '14'
       - name: Verify folder
         run: |
-            pwd
-            cd el-legado-app
-            ls  
+            cd el-legado-app 
 
       - name: Install dependencies
         run: |

@@ -1,7 +1,7 @@
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
 // mui
-import { Checkbox, Radio } from "@mui/joy";
+import { Checkbox, Radio, RadioGroup } from "@mui/joy";
 import { Grid } from "@mui/material"; // Importa el componente Grid
 import BusinessIcon from "@mui/icons-material/Business";
 import Button from "@mui/joy/Button";
@@ -19,14 +19,19 @@ import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Typography from "@mui/joy/Typography";
-import { PagoBoletaInterface } from "../util/interfaces";
 import { ErrorMessage } from "../util/interfaces";
 import TarjetaPago from "./TarjetaPago";
+import { usePayment } from "../../hooks/usePayment";
+import { OrderData, PaymentData } from "../../hooks/interfaces";
 
 export const PagoTarjeta = () => {
   // const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
+  const [detallesTransaccion, setDetallesTransaccion] = useState<any[]>([])
+
+  // * Hook payment
+  const { createCheckoutSession } = usePayment();
 
   const agregarNuevoError = (campo: string, mensaje: string) => {
     setErrorData((prevErrors) => [...prevErrors, { campo, mensaje }]);
@@ -41,19 +46,17 @@ export const PagoTarjeta = () => {
   const {
     formData,
     handleInputBlur,
-
     numberInputIsTouched,
     onChangeForm,
-  } = useForm<PagoBoletaInterface>(
+  } = useForm(
     {
-      nombre: "",
-      telefono: 0,
-      correo: "",
-      congregacion: "",
+      nombre: "Josue Lopez",
+      telefono: 59099770,
+      correo: "josue99@correo.com",
+      congregacion: "centro historico",
       numero_entradas: 0,
       numeroBoleta: "",
-      detalle_transaccion: [],
-
+      detalle_transaccion: detallesTransaccion,
       numero_autorizacion: 0,
     },
     agregarNuevoError, // pasando la función de error callback aquí
@@ -66,6 +69,61 @@ export const PagoTarjeta = () => {
   );
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
+
+  const onSendPayment = () => {
+    formData.detalle_transaccion = detallesTransaccion;
+    console.log(formData);
+
+    const datosEntradas: OrderData[] = [];
+    detallesTransaccion.map((item) => {
+      datosEntradas.push(
+        {
+          price_data: {
+            product_data: {
+              name: `Entrada de rango de edad ${item.rango_edad}`,
+              description: 'Entrada para congreso'
+            },
+            currency: 'gtq',
+            unit_amount: 150 * 1000
+          },
+          quantity: formData.numero_entradas
+        }
+      )
+    })
+
+    console.log(datosEntradas);
+
+
+    createCheckoutSession(datosEntradas);
+  }
+
+
+  /*handle para las edades */
+  const handleRadioChange = (index: number, value: string) => {
+    setDetallesTransaccion((prev) => {
+      const updated = [...prev];
+      if (!updated[index]) {
+        updated[index] = { rango_edad: value, esta_bautizado: false };
+      } else {
+        updated[index].rango_edad = value;
+      }
+      return updated;
+    });
+  };
+
+  const handleCheckboxChange = (index: number, checked: boolean) => {
+    setDetallesTransaccion((prev) => {
+      const updated = [...prev];
+      if (!updated[index]) {
+        updated[index] = { rango_edad: "", esta_bautizado: checked };
+      } else {
+        updated[index].esta_bautizado = checked;
+      }
+      return updated;
+    });
+  };
+
+
   return (
     <Grid container>
       <Grid item xs={12} md={110}>
@@ -107,6 +165,7 @@ export const PagoTarjeta = () => {
               <Input
                 endDecorator={<PersonIcon />}
                 name="nombre"
+                autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.nombre}
               />
@@ -117,6 +176,7 @@ export const PagoTarjeta = () => {
               <Input
                 endDecorator={<PhoneIcon />}
                 name="telefono"
+                autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.telefono}
               />
@@ -127,6 +187,7 @@ export const PagoTarjeta = () => {
               <Input
                 endDecorator={<EmailIcon />}
                 name="correo"
+                autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.correo}
               />
@@ -136,6 +197,7 @@ export const PagoTarjeta = () => {
               <Input
                 endDecorator={<BusinessIcon />}
                 name="congregacion"
+                autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.congregacion}
               />
@@ -171,12 +233,11 @@ export const PagoTarjeta = () => {
             {/* validar cantidad de entradas aca */}
 
             {numberInputIsTouched &&
-              numberMap.map((item) => (
+              numberMap.map((item, index) => (
                 <>
                   <Grid
                     sx={{
                       display: "grid",
-
                       gap: "1em", // Espacio entre los elementos del grid
                       gridColumn: "1/-1", // Esto hace que el `FormControl` ocupe todo el ancho disponible.
                     }}
@@ -185,11 +246,24 @@ export const PagoTarjeta = () => {
                       <Typography level="h4" sx={{ color: "#C3FCEF" }}>
                         Entrada {item}
                       </Typography>
+                      <RadioGroup
+                        value={detallesTransaccion[index]?.rango_edad ?? ""}
+                        onChange={(e) =>
+                          handleRadioChange(index, e.target.value)
+                        }
+                      >
+                        <Radio
+                          value="menor de 12 años"
+                          label="menor de 12 años"
+                        />
+                        <Radio value="12-16" label="12-16 años" />
+                        <Radio value="16-20" label="16-20 años" />
+                        <Radio value="20-24" label="20-24 años" />
+                      </RadioGroup>
 
-                      <Radio label="12-16 años" />
-                      <Radio label="16-20 años" />
-                      <Radio label="20-24 años" />
-                      <Checkbox label="   Bautizado" />
+                      <Checkbox label=" Bautizado"
+                        onChange={(e) => handleCheckboxChange(index, e.target.checked)}
+                      />
                     </Card>
                   </Grid>
                   <br />
@@ -236,6 +310,7 @@ export const PagoTarjeta = () => {
                       width: "80%",
                       height: "100%",
                     }}
+                    onClick={onSendPayment}
                   >
                     Pagar con tarjeta
                   </Button>
