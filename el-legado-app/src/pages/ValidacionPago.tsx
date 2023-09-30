@@ -18,9 +18,9 @@ export const ValidacionPago = () => {
 
     // * Validar si el usuario existe y es valido
     if(cardPaymentUser.valid && userDataStr) {
-        return <Navigate to="pago-exitoso" />
+        return <Navigate to="/pago-exitoso" />
     }else {
-        return <Navigate to="pago-error" />
+        return <Navigate to="/pago-error" />
     }
 
 

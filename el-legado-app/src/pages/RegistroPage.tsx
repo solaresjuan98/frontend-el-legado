@@ -20,10 +20,9 @@ export const RegistroPage = () => {
           sx={{
             textAlign: "center",
             marginTop: "1.5rem",
-            background: "linear-gradient(90deg, #d4f03a, #d4f03a)",
-            color: "transparent",
-            "-webkit-background-clip": "text",
-            "background-clip": "text",
+           
+            color: "#C6D2FF",
+         
           }}
         >
           Registro

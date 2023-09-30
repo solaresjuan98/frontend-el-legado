@@ -15,7 +15,7 @@ export const usePayment = () => {
         {
           line_items: userData.line_items,
           mode: "payment",
-          success_url: "https://www.conjoveneslegado.com/pago-exitoso", //"https://www.conjoveneslegado.com/pago-exitoso", // * Redigir a frontend, y enviar correo (ver flujo después)
+          success_url: "https://www.conjoveneslegado.com/validacion", //"https://www.conjoveneslegado.com/validacion", // * Redigir a frontend, y enviar correo (ver flujo después)
           cancel_url: "https://www.conjoveneslegado.com/pago-error", // * Redirigr a frontend, pero con una vista que diga que no se pudo
         }
       )
