@@ -74,6 +74,7 @@ export const PagoTarjeta = () => {
     formData.detalle_transaccion = detallesTransaccion;
     console.log(formData);
 
+
     const datosEntradas: OrderData[] = [];
     detallesTransaccion.map((item) => {
       datosEntradas.push(
@@ -91,10 +92,28 @@ export const PagoTarjeta = () => {
       )
     })
 
-    console.log(datosEntradas);
+
+    const paymentInfo: any = {
+      nombre: formData.nombre,
+      telefono: formData.telefono,
+      correo: formData.correo,
+      congregacion: formData.congregacion,
+      transaccion: {
+          enlace: "_",
+          estado: "en_proceso",
+          total_pagar: totalAmount,
+          numero_entradas: formData.numero_entradas,
+          numero_transaccion: "0",
+          detalle_transaccion: detallesTransaccion,
+      },
+      line_items: datosEntradas,
+      mode: 'payment'
+    };
+
+    // console.log(datosEntradas);
 
 
-    createCheckoutSession(datosEntradas);
+    createCheckoutSession(paymentInfo);
   }
 
 
@@ -242,7 +261,7 @@ export const PagoTarjeta = () => {
                       gridColumn: "1/-1", // Esto hace que el `FormControl` ocupe todo el ancho disponible.
                     }}
                   >
-                    <Card variant={"soft"} sx={{ width: "100%" }}>
+                    <Card variant={"soft"} sx={{ width: "100%" }} key={index}>
                       <Typography level="h4" sx={{ color: "#C3FCEF" }}>
                         Entrada {item}
                       </Typography>

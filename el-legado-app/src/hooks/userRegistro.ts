@@ -51,6 +51,7 @@ export const UseRegistro =  () => {
             return response.data 
         } catch (err) {
             console.log(err);
+            
             toast.error("ocurrio un error", {
               position: "top-center",
               autoClose: 5000,
@@ -63,7 +64,6 @@ export const UseRegistro =  () => {
             });
     
             return "error"
-            throw new Error("Error al cargar la boleta");
           
         }
     };

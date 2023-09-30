@@ -34,7 +34,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     return () => clearInterval(interval);
   }, [targetDate]);
 
-  return <Typography level="h2" textColor={"#9AF9E2"}>{`Faltan ${timeLeft} para el congreso El legado.`}</Typography>;
+  return <Typography level="h2" textColor={"#d4f03a"}>{`Faltan ${timeLeft} para el congreso El legado.`}</Typography>;
 };
 
 export const LandingPage = () => {
@@ -55,7 +55,7 @@ export const LandingPage = () => {
                     <Button
             variant="plain"
             style={{
-              color: '#CEFFFB',
+              color: '#e0daf1',
               background: '#1A1142',
               fontSize: '25px',
               padding: '25px 50px',

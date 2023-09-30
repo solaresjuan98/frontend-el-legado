@@ -18,7 +18,7 @@ export const Carrousel = () => {
         {/* Contenido del primer slide */}
         <div>
           <img
-            src="https://fondos-legado.s3.us-east-2.amazonaws.com/Portada.jpg"
+            src="https://fondos-legado.s3.us-east-2.amazonaws.com/PORTAD+1.jpg"
             alt="Imagen 1"
           />
           
@@ -27,7 +27,7 @@ export const Carrousel = () => {
         {/* Contenido del segundo slide */}
         <div>
           <img
-            src="https://fondos-legado.s3.us-east-2.amazonaws.com/Portada+3.jpg"
+            src="https://fondos-legado.s3.us-east-2.amazonaws.com/PORTAD+2.jpg"
             alt="Imagen 2"
           />
         </div>

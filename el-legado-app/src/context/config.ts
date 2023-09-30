@@ -1,12 +1,11 @@
 import { createContext } from "react";
-import { PagoBaseInterface } from "../components/util/interfaces";
-
-
+import { PaymentData } from "../hooks/interfaces";
+import { Payment } from "./AppProvider";
 
 interface IContextProps {
-    user: PagoBaseInterface;
-
+  cardPaymentUser: Payment;
+  storePayment: (updatedData: PaymentData) => void;
+  validatePaymentSession: () => Promise<void>;
 }
-
 
 export const AppContext = createContext({} as IContextProps);

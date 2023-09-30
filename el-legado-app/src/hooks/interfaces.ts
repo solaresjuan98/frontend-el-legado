@@ -21,6 +21,7 @@ export interface UserData {
     correo: string;
     congregacion: string;
     numero_entradas: number;
+    numero_transaccion: string;
 }
 
 export interface PaymentData {
@@ -29,7 +30,8 @@ export interface PaymentData {
     // * Datos minimos Obligatorios para stripe
     line_items: OrderData[];
     mode: "payment";
-    success_url: string;
-    cancel_url: string;
+    detalles_transaccion: any[];
+    success_url?: string;
+    cancel_url?: string;
 
 }

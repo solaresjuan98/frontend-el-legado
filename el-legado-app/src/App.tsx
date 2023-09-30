@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import { PagoExitoso } from "./pages/PagoExitoso"
 import { PagoError } from "./pages/PagoError"
 import { AppProvider } from "./context/AppProvider"
+import { ValidacionPago } from "./pages/ValidacionPago"
 function App() {
 
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/hospedaje" element={<Hospedaje />} />
 
             {/* ====== PANTALLAS DE AVISO DE PAGO ====== */}
+            <Route path="/validacion" element={<ValidacionPago />} />
             <Route path="/pago-exitoso" element={<PagoExitoso />} />
             <Route path="/pago-error" element={<PagoError />} />
             <Route path="*" element={<LandingPage />} />
