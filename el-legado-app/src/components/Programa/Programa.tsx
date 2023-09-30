@@ -7,7 +7,7 @@ export const Programa = () => {
   return (
     <>
      <Grid item xs={12} marginTop={6} container justifyContent="center">
-          <Typography level="h1" sx={{ color: "#9AF9E2" }}>
+          <Typography level="h1" sx={{ color: "#C5FFFB" }}>
             Programa del evento
           </Typography>
         </Grid>

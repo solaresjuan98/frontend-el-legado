@@ -187,8 +187,7 @@ export const PagoBoleta = () => {
     return telefonoRegExp.test(value);
   };
 
-  const [countryCode, setCountryCode] = useState("");
-
+  const [countryCode, setCountryCode] = useState("+502");
   const countryAndStates = [
     { label: "Argentina", value: "+54" },
     { label: "Bolivia", value: "+591" },
@@ -421,11 +420,12 @@ export const PagoBoleta = () => {
 
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>
-                Seleccione el país de donde nos visita
+                Selecciona el país de donde nos visitas
               </FormLabel>
               <Select
                 placeholder="Seleccione un país..."
                 onChange={handleSelectChange}
+                value={countryCode}
               >
                 {countryAndStates.map((item, index) => (
                   <Option key={index} value={item.value}>
@@ -443,7 +443,7 @@ export const PagoBoleta = () => {
                 onChange={onChangeForm}
                 onBlur={onBlur}
                 sx={{ width: "100%" }}
-                value={formData.telefono}
+                value={formData.telefono ? formData.telefono : "+502 "}
               />
 
               {errorData
@@ -560,24 +560,18 @@ export const PagoBoleta = () => {
               ))}
             <FormControl sx={{ gridColumn: "1/-1" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>
-                Numero de Autorización{" "}
+                Numero de Autorización(opcional){" "}
               </FormLabel>
               <Input
                 endDecorator={<ConfirmationNumberIcon />}
                 name="numero_autorizacion"
-                onBlur={onBlur}
+                placeholder="opcional"
                 type="number"
                 sx={{ width: "100%" }}
                 onChange={onChangeForm}
                 value={formData.numero_autorizacion}
               />
-              {errorData
-                .filter((error) => error.campo === "numero_autorizacion")
-                .map((error, index) => (
-                  <div key={index} style={{ color: "red" }}>
-                    {error.mensaje}
-                  </div>
-                ))}
+              
             </FormControl>
             <Grid
               sx={{
@@ -690,7 +684,7 @@ export const PagoBoleta = () => {
                         linkImagen &&
                         formData.nombre &&
                         formData.telefono &&
-                        formData.numero_autorizacion &&
+                     
                         formData.correo
                           ? "#3E00B9"
                           : "#19004B",
@@ -704,8 +698,8 @@ export const PagoBoleta = () => {
                       !linkImagen ||
                       !formData.nombre ||
                       !formData.telefono ||
-                      !formData.correo ||
-                      !formData.numero_autorizacion
+                      !formData.correo 
+                    
                     }
                   >
                     Registrarse
