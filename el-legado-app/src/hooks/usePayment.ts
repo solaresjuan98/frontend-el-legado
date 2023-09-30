@@ -1,10 +1,9 @@
 import axios from "axios";
 // import { PaymentData } from "./interfaces";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { AppContext } from "../context/config";
 
 export const usePayment = () => {
-  // const { storePayment } = useContext(AppContext);
   const [validPayment, setValidPayment] = useState(false);
 
   const createCheckoutSession = async (userData: any) => {
@@ -15,8 +14,8 @@ export const usePayment = () => {
         {
           line_items: userData.line_items,
           mode: "payment",
-          success_url: "https://www.conjoveneslegado.com/validacion", //"https://www.conjoveneslegado.com/validacion", // * Redigir a frontend, y enviar correo (ver flujo después)
-          cancel_url: "https://www.conjoveneslegado.com/pago-error", // * Redirigr a frontend, pero con una vista que diga que no se pudo
+          success_url: "http://localhost:5173/validacion", //"https://www.conjoveneslegado.com/validacion",
+          cancel_url: "http://localhost:5173/pago-error", //"https://www.conjoveneslegado.com/pago-error",
         }
       )
       .then((res) => {
@@ -25,7 +24,7 @@ export const usePayment = () => {
         // console.log(userData);
 
         localStorage.setItem("userData", JSON.stringify(userData));
-        localStorage.setItem("idSession", JSON.stringify(res.data.id));
+        localStorage.setItem("idSession", res.data.id);
         // storePayment(userData);
 
         // Reemplazar la entrada actual en el historial
@@ -41,29 +40,59 @@ export const usePayment = () => {
   };
 
   const validatePayment = async (sessionId: string) => {
+    // console.log(sessionId);
+    let validacion=false
     await axios
       .post(
         `https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/validate-payment`,
         {
-          sessionId,
+          sessionId: sessionId,
         }
       )
       .then((response) => {
-        console.log(response.data.status);
+        const isValidPayment = response.data.status; // Obtener el valor de la respuesta
+        //console.log("peticion: ", isValidPayment);
+        setValidPayment(isValidPayment);
 
-        if (response.data.status === true) {
-          setValidPayment(true);
+        if(response.data.status) {
+ 
+          validacion=isValidPayment
+     
         }
+    
+
+                
+        
+        
       })
       .catch((err) => {
         console.log(err);
         setValidPayment(false);
       });
+
+      return validacion
+
   };
+  const cargardata = async (idSessionStr:string) => {
+    if (idSessionStr) {
+
+        const variable = await validatePayment(idSessionStr);
+
+        console.log(idSessionStr, "variable?", variable)
+        return variable
+    }
+}
+
+  useEffect(() => {
+    // const idSession = localStorage.getItem("idSession");
+    // if (idSession) {
+    //   validatePayment(idSession);
+    // }
+  }, []);
 
   return {
     createCheckoutSession,
     validatePayment,
-    validPayment,
+    validPayment,cargardata
   };
 };

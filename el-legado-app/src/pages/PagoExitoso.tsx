@@ -14,26 +14,41 @@ import { useState, useEffect, useContext } from "react";
 import Stack from '@mui/joy/Stack';
 import { UseRegistro } from "../hooks/userRegistro";
 import { AppContext } from "../context/config";
-
+import { usePayment } from "../hooks/usePayment";
 
 // import { useContext } from 'react'
 // import { AppContext } from "../context/config";
 const userDataStr = localStorage.getItem('userData');
-
+const idSessionStr = localStorage.getItem('idSession');
 
 export const PagoExitoso = () => {
 
-
-  const { validatePaymentSession, cardPaymentUser } = useContext(AppContext);
-
+  const [validador, setValidador] = useState(false);
+  const [cargando, setCargando] = useState(true);
+  const { cargardata } = usePayment();
   useEffect(() => {
 
-      validatePaymentSession();
+    console.log("?")
 
+    verificarInfo();
 
-  }, [cardPaymentUser.valid])
+}, [validador]);
 
-  if (userDataStr && cardPaymentUser.valid) {
+const verificarInfo = async () => {
+  if (idSessionStr) {
+
+      const variable = await cargardata(idSessionStr)||false;
+
+     
+      setValidador(variable)
+      setCargando(false); //
+  }
+}
+
+if (cargando) { // Si está cargando, mostramos un mensaje de espera
+  return <div>Cargando...</div>;
+}
+  if (userDataStr && validador) {
     // const { cardPaymentUser } = useContext(AppContext);
     const [progress, setProgress] = useState(0);
 

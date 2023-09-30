@@ -3,20 +3,16 @@ import { AppContext } from "./config";
 // import { PaymentData } from "../hooks/interfaces";
 import { useState } from "react";
 import { usePayment } from "../hooks/usePayment";
-
+import axios from "axios";
 export interface Payment {
-    success_url: string;
-    cancel_url: string;
-    line_items: never[];
+    success_url?: string;
+    cancel_url?: string;
+    line_items?: never[];
     mode: string;
     valid: boolean;
 }
 
 const userPayment: Payment = {
-
-    success_url: '',
-    cancel_url: '',
-    line_items: [],
     mode: 'payment',
     valid: false
 
@@ -24,7 +20,7 @@ const userPayment: Payment = {
 
 export const AppProvider = ({ children }: any) => {
 
-    const { validatePayment, validPayment } = usePayment();
+    //const { validatePayment, validPayment } = usePayment();
     const [paymentState, setPaymentState] = useState(userPayment);
     const idSessionStr = localStorage.getItem('idSession');
 
@@ -39,19 +35,30 @@ export const AppProvider = ({ children }: any) => {
     }
 
 
-    const validatePaymentSession = async () => {
+const validatePaymentSession = async () => {
+    if (idSessionStr) {
+        try {
+            const response = await axios.post(
+                `https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/validate-payment`,
+                {
+                    sessionId: idSessionStr,
+                }
+            );
 
-        if (idSessionStr) {
-            await validatePayment(idSessionStr);
-            setPaymentState({
-                ...paymentState,
-                valid: validPayment
-            })
+            const isValidPayment = response.data.status;
+
+            setPaymentState(prevState => ({
+                ...prevState,
+                valid: isValidPayment
+            }));
+
+        } catch (error) {
+            console.log(error);
         }
-
     }
+}
 
-
+ 
 
     return (
         <AppContext.Provider value={{
