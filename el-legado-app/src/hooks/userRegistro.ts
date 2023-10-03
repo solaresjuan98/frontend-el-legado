@@ -23,7 +23,32 @@ export const UseRegistro =  () => {
           
         }
     };
-    
+    const envioCorreo = async (objetocorreo: any): Promise<string> => {
+      const correo = objetocorreo.correo;
+  
+      const numero_entradas = objetocorreo.numero_entradas;
+  
+      const id_transaccion = objetocorreo.id_transaccion;
+  
+      const nombre = objetocorreo.nombre;
+  
+      const aceptado = objetocorreo.aceptado;
+      const mensaje = objetocorreo.mensaje;
+  
+      try {
+        const response = await axios.post(
+          `https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/enviarCorreo`,
+          {
+            correo,numero_entradas,id_transaccion,nombre,aceptado,mensaje
+          }
+        );
+  
+        return response.data;
+      } catch (err) {
+        return "error";
+        throw new Error("Error al cargar la boleta");
+      }
+    };
     const registro = async (registro:any)   => {
         console.log(registro)
         const nombre= registro.nombre
@@ -67,6 +92,27 @@ export const UseRegistro =  () => {
           
         }
     };
+    const registro_tarjeta = async (registro:any)   => {
+      console.log(registro)
+      const nombre= registro.nombre
+      const telefono = registro.telefono
+      const correo= registro.correo
+      const congregacion=registro.congregacion
+      const transaccion=registro.transaccion
+      try {
+          const response = await axios.post(`https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/transacciones`, {
+             nombre,telefono,correo,congregacion,transaccion
+             
+          });
+    
+          return response.data 
+      } catch (err) {
+          console.log(err);
+       
+          return "error"
+        
+      }
+  };
 
   /*
   useEffect(() => {
@@ -79,7 +125,7 @@ export const UseRegistro =  () => {
   }, [usuarios]);
 */
   return {
-    cargarBoleta,registro
+    cargarBoleta,registro,envioCorreo,registro_tarjeta
   };
 };
 

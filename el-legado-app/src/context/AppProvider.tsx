@@ -1,9 +1,7 @@
-
 import { AppContext } from "./config";
-// import { PaymentData } from "../hooks/interfaces";
 import { useState } from "react";
-import { usePayment } from "../hooks/usePayment";
-import axios from "axios";
+ 
+
 export interface Payment {
     success_url?: string;
     cancel_url?: string;
@@ -15,59 +13,43 @@ export interface Payment {
 const userPayment: Payment = {
     mode: 'payment',
     valid: false
-
 }
 
-export const AppProvider = ({ children }: any) => {
+interface AppProviderProps {
+    children: React.ReactNode;
+}
 
-    //const { validatePayment, validPayment } = usePayment();
+export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [paymentState, setPaymentState] = useState(userPayment);
-    const idSessionStr = localStorage.getItem('idSession');
+  
 
     const storePayment = () => {
-
+        // Esta función parece estar incompleta. Actualiza el estado con la información que necesites.
         setPaymentState({
             ...paymentState,
             // user: updatedData.user,
             // line_items: updatedData.line_items,
-        })
-
+        });
     }
 
+    const validatePaymentSession = async () => {
+        // ... aquí tu código para validar la sesión de pago ...
 
-const validatePaymentSession = async () => {
-    if (idSessionStr) {
-        try {
-            const response = await axios.post(
-                `https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/validate-payment`,
-                {
-                    sessionId: idSessionStr,
-                }
-            );
-
-            const isValidPayment = response.data.status;
-
-            setPaymentState(prevState => ({
-                ...prevState,
-                valid: isValidPayment
-            }));
-
-        } catch (error) {
-            console.log(error);
-        }
+        // Si la validación es exitosa, puedes actualizar el estado "valid" a true
+        setPaymentState(prevState => ({
+            ...prevState,
+            valid: true
+        }));
+        console.log("validate",paymentState)
     }
-}
-
- 
 
     return (
         <AppContext.Provider value={{
-            cardPaymentUser: userPayment,
+            cardPaymentUser: paymentState, // Cambiado a paymentState
             storePayment,
             validatePaymentSession
         }}>
             {children}
         </AppContext.Provider>
-    )
-
+    );
 }

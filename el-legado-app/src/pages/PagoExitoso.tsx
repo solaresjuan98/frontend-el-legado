@@ -10,49 +10,25 @@ import Typography from "@mui/joy/Typography";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LinearProgress from "@mui/joy/LinearProgress";
 import { NavLink } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Stack from '@mui/joy/Stack';
 import { UseRegistro } from "../hooks/userRegistro";
-import { AppContext } from "../context/config";
-import { usePayment } from "../hooks/usePayment";
+ 
 
 // import { useContext } from 'react'
 // import { AppContext } from "../context/config";
 const userDataStr = localStorage.getItem('userData');
 const idSessionStr = localStorage.getItem('idSession');
-
-export const PagoExitoso = () => {
-
-  const [validador, setValidador] = useState(false);
-  const [cargando, setCargando] = useState(true);
-  const { cargardata } = usePayment();
-  useEffect(() => {
-
-    console.log("?")
-
-    verificarInfo();
-
-}, [validador]);
-
-const verificarInfo = async () => {
-  if (idSessionStr) {
-
-      const variable = await cargardata(idSessionStr)||false;
-
-     
-      setValidador(variable)
-      setCargando(false); //
-  }
+interface PagoExitosoProps {
+  validador: boolean;
 }
-
-if (cargando) { // Si está cargando, mostramos un mensaje de espera
-  return <div>Cargando...</div>;
-}
-  if (userDataStr && validador) {
+export const PagoExitoso: React.FC<PagoExitosoProps> = ({ validador }) => {
+   
+  if (userDataStr && validador&&idSessionStr) {
     // const { cardPaymentUser } = useContext(AppContext);
     const [progress, setProgress] = useState(0);
 
-    const { registro } = UseRegistro();
+    const { registro_tarjeta,envioCorreo } = UseRegistro();
 
     // ! Validar
     useEffect(() => {
@@ -86,7 +62,7 @@ if (cargando) { // Si está cargando, mostramos un mensaje de espera
 
 
       const userData = JSON.parse(userDataStr);
-
+    
       const dataToSent = {
         nombre: userData.nombre,
         telefono: userData.telefono,
@@ -95,13 +71,25 @@ if (cargando) { // Si está cargando, mostramos un mensaje de espera
         transaccion: userData.transaccion,
 
       }
+      const response=await registro_tarjeta(dataToSent);
+      const objetocorreo={
+        nombre: userData.nombre,
+        telefono: userData.telefono,
+        correo: userData.correo,
+        id_transaccion:response.id,
+        numero_entradas: userData.transaccion.numero_entradas,
+        aceptado:true,
+        mensaje:""
 
-      await registro(dataToSent);
+      }
+
+     
+      const responseEnvio=  await envioCorreo(objetocorreo)
+      console.log(responseEnvio)
       // * Eliminar el objecto del local storage
       localStorage.removeItem('userData');
-      localStorage.removeItem('sessionId');
-      alert('data enviada')
-
+      localStorage.removeItem('idSession');
+  
 
     }
 

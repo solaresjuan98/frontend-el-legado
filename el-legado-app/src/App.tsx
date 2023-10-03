@@ -9,7 +9,7 @@ import Footer from "./components/Footer"
 import { Hospedaje } from "./pages/Hospedaje"
 import { CssVarsProvider } from "@mui/joy"
 import { ToastContainer } from 'react-toastify';
-import { PagoExitoso } from "./pages/PagoExitoso"
+ 
 import { PagoError } from "./pages/PagoError"
 import { AppProvider } from "./context/AppProvider"
 import { ValidacionPago } from "./pages/ValidacionPago"
@@ -33,7 +33,7 @@ function App() {
 
             {/* ====== PANTALLAS DE AVISO DE PAGO ====== */}
             <Route path="/validacion" element={<ValidacionPago />} />
-            <Route path="/pago-exitoso" element={<PagoExitoso />} />
+      
             <Route path="/pago-error" element={<PagoError />} />
             <Route path="*" element={<LandingPage />} />
           </Routes>

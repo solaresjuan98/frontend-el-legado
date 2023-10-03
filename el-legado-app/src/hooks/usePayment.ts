@@ -73,15 +73,7 @@ export const usePayment = () => {
       return validacion
 
   };
-  const cargardata = async (idSessionStr:string) => {
-    if (idSessionStr) {
-
-        const variable = await validatePayment(idSessionStr);
-
-        console.log(idSessionStr, "variable?", variable)
-        return variable
-    }
-}
+ 
 
   useEffect(() => {
     // const idSession = localStorage.getItem("idSession");
@@ -93,6 +85,6 @@ export const usePayment = () => {
   return {
     createCheckoutSession,
     validatePayment,
-    validPayment,cargardata
+    validPayment
   };
 };
