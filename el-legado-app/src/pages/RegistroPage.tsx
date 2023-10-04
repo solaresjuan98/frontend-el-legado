@@ -21,7 +21,7 @@ export const RegistroPage = () => {
             textAlign: "center",
             marginTop: "1.5rem",
            
-            color: "#C6D2FF",
+            color: "#B5D534",
          
           }}
         >

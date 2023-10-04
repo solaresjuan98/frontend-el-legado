@@ -1,5 +1,5 @@
 import { useForm } from "../../hooks/useForm";
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
 import TarjetaPago from "./TarjetaPago";
 import "./Formulario.css";
 import React, { ChangeEvent } from "react";
@@ -46,8 +46,7 @@ export const PagoBoleta = () => {
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
 
   const handlePago = () => {
-    if (formData.nombre != "") {
-    }
+   
 
     const pago: PagoDataType = {
       nombre: formData.nombre,
@@ -63,7 +62,7 @@ export const PagoBoleta = () => {
         detalle_transaccion: detallesTransaccion,
       },
     };
-    console.log(pago);
+     
     setOpenModal(true);
     setPagoData(pago);
   };
@@ -151,6 +150,20 @@ export const PagoBoleta = () => {
       reader.readAsDataURL(file);
     }
   };
+  const esRangoEdadValido = () => {
+    const esvalido=Number(formData.numero_entradas)===detallesTransaccion.length
+ 
+    return esvalido
+  };
+  const handlevalidarRango = () => {
+    if (!esRangoEdadValido()) {
+      console.log("no valido?")
+      agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
+      return;
+    }
+  
+    // Aquí el código para procesar o enviar los datos de detallesTransaccion...
+  };
   const agregarNuevoError = (campo: string, mensaje: string) => {
     setErrorData((prevErrors) => [...prevErrors, { campo, mensaje }]);
   };
@@ -183,7 +196,8 @@ export const PagoBoleta = () => {
    * validaciones
    */
   const validateTelefono = (value: string) => {
-    const telefonoRegExp = /^\+\d+(-\d+)?(\s\d+)?\s*$/;
+    const telefonoRegExp = /^\+\d+(\s+)?\d+\s*$/;
+
     return telefonoRegExp.test(value);
   };
 
@@ -324,7 +338,7 @@ export const PagoBoleta = () => {
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
   return (
-    <Grid container>
+    <Grid container >
       {openModal && (
         <ModalResumen
           pago={pagoData}
@@ -355,7 +369,7 @@ export const PagoBoleta = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",
+              height: "100%",width:'100%'
             }}
           >
             <CardContent
@@ -375,32 +389,32 @@ export const PagoBoleta = () => {
               </Typography>
             </CardContent>
           </Card>
-          <Divider inset="none" />
-
+     
+            
           <Typography
             level="title-lg"
-            textColor={"#C3FCEF"}
+            textColor={"#F8F0FD"}
             startDecorator={<InfoOutlined />}
           >
             Ingrese la información
-          </Typography>
+          </Typography>     <Divider inset="none" />
           <CardContent
-  sx={{
-    display: "grid",
-    gap: 1.5,
-    gridTemplateColumns: {
-      xs: "1fr",
-      sm: "repeat(2, 1fr)",
-      md: "repeat(2, 1fr)",
-    },
-      "@media (max-width: 350px)": {
-      padding: "0.5rem", // O cualquier otro valor que se adapte
-      margin: 0,
-    }
-  }}
->
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Nombre </FormLabel>
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >    <FormControl        sx={{ width: "100%" }}>
+              <FormLabel
+                sx={{
+                  color: "#FFFFFF",
+                  textShadow: `-1px 0 #DFCAFF, 0 1px #DFCAFF, 1px 0 ##F2F6FA, 0 -1px ##F2F6FA`,
+                }}
+              >
+                Nombre
+              </FormLabel>
+
               <Input
                 endDecorator={<PersonIcon />}
                 name="nombre"
@@ -417,9 +431,9 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>
                 Selecciona el país de donde nos visitas
               </FormLabel>
               <Select
@@ -434,9 +448,9 @@ export const PagoBoleta = () => {
                 ))}
               </Select>
             </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Teléfono</FormLabel>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>Teléfono</FormLabel>
               <Input
                 endDecorator={<PhoneIcon />}
                 name="telefono"
@@ -454,9 +468,9 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Correo </FormLabel>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>Correo </FormLabel>
               <Input
                 endDecorator={<EmailIcon />}
                 name="correo"
@@ -473,8 +487,9 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Congregación</FormLabel>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>Congregación</FormLabel>
               <Input
                 endDecorator={<BusinessIcon />}
                 name="congregacion"
@@ -483,15 +498,10 @@ export const PagoBoleta = () => {
                 value={formData.congregacion}
               />
             </FormControl>
-            <Grid
-              sx={{
-                display: "grid",
-                gap: "1em",
-                gridColumn: "1/-1",
-              }}
-            >
-              <FormControl>
-                <FormLabel sx={{ color: "#E3FEF8" }}>
+            <br/>
+            
+             <FormControl        sx={{ width: "100%" }}>
+                <FormLabel sx={{ color: "#F8F0FD" }}>
                   Número de Entradas
                 </FormLabel>
                 <Input
@@ -518,16 +528,19 @@ export const PagoBoleta = () => {
                     </div>
                   ))}
               </FormControl>
-            </Grid>
+              <br/>
+            
             {numberInputIsTouched &&
               numberMap.map((item, index) => (
                 <>
                   <Grid
-                    sx={{
-                      display: "grid",
-                      gap: "1em",
-                      gridColumn: "1/-1",
-                    }}
+                   sx={{ 
+                    display: "grid",
+                    gap: "1em",
+                    gridColumn: "1/-1",
+                    maxWidth: "1200px", // Ajusta según necesidad
+                    width: "100%"
+                 }}
                   >
                     <Card variant={"soft"} sx={{ width: "100%" }}>
                       <Typography level="h4" sx={{ color: "#C3FCEF" }}>
@@ -538,6 +551,7 @@ export const PagoBoleta = () => {
                         onChange={(e) =>
                           handleRadioChange(index, e.target.value)
                         }
+                
                       >
                         <Radio
                           value="menor de 12 años"
@@ -546,6 +560,7 @@ export const PagoBoleta = () => {
                         <Radio value="12-16" label="12-16 años" />
                         <Radio value="16-20" label="16-20 años" />
                         <Radio value="20-24" label="20-24 años" />
+                        <Radio value="mayor a 25 años" label="mayor a 25 años" />
                       </RadioGroup>
                       <Checkbox
                         label=" Bautizado"
@@ -554,12 +569,20 @@ export const PagoBoleta = () => {
                         }
                       />
                     </Card>
+                    {errorData
+                  .filter((error) => error.campo === "rango")
+                  .map((error, index) => (
+                    <div key={index} style={{ color: "red" }}>
+                      {error.mensaje}
+                    </div>
+                  ))}
                   </Grid>
                   <br />
                 </>
               ))}
-            <FormControl sx={{ gridColumn: "1/-1" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
+                 <br/>
+            <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>
                 Numero de Autorización(opcional){" "}
               </FormLabel>
               <Input
@@ -571,8 +594,8 @@ export const PagoBoleta = () => {
                 onChange={onChangeForm}
                 value={formData.numero_autorizacion}
               />
-              
             </FormControl>
+            <br/>
             <Grid
               sx={{
                 display: "grid",
@@ -582,7 +605,7 @@ export const PagoBoleta = () => {
               }}
             >
               <FormControl className="">
-                <FormLabel sx={{ color: "#E3FEF8" }}>
+                <FormLabel sx={{ color: "#F8F0FD" }}>
                   Carga la boleta de pago
                 </FormLabel>
 
@@ -675,7 +698,7 @@ export const PagoBoleta = () => {
                         formData.nombre &&
                         formData.telefono &&
                         formData.numero_autorizacion &&
-                        formData.correo
+                        formData.correo  
                           ? "#FFFFFF"
                           : "#FFFFFF",
                       background:
@@ -683,8 +706,7 @@ export const PagoBoleta = () => {
                         errorData.length === 0 &&
                         linkImagen &&
                         formData.nombre &&
-                        formData.telefono &&
-                     
+                        formData.telefono &&!esRangoEdadValido() &&
                         formData.correo
                           ? "#3E00B9"
                           : "#19004B",
@@ -698,8 +720,7 @@ export const PagoBoleta = () => {
                       !linkImagen ||
                       !formData.nombre ||
                       !formData.telefono ||
-                      !formData.correo 
-                    
+                      !formData.correo ||!esRangoEdadValido() 
                     }
                   >
                     Registrarse

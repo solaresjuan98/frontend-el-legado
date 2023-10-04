@@ -23,12 +23,13 @@ import { ErrorMessage } from "../util/interfaces";
 import TarjetaPago from "./TarjetaPago";
 import { usePayment } from "../../hooks/usePayment";
 import { OrderData } from "../../hooks/interfaces";
-
+import { PagoDataType } from "../util/interfaces";
 export const PagoTarjeta = () => {
   // const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
   const [detallesTransaccion, setDetallesTransaccion] = useState<any[]>([])
+  const [pagoData, setPagoData] = useState<PagoDataType | null>(null);
 
   // * Hook payment
   const { createCheckoutSession } = usePayment();
@@ -142,16 +143,120 @@ export const PagoTarjeta = () => {
     });
   };
 
+  const validateTelefono = (value: string) => {
+    const telefonoRegExp = /^\+\d+(\s+)?\d+\s*$/;
+
+    return telefonoRegExp.test(value);
+  };
+
+  const [countryCode, setCountryCode] = useState("+502");
+  const countryAndStates = [
+    { label: "Argentina", value: "+54" },
+    { label: "Bolivia", value: "+591" },
+    { label: "Brasil", value: "+55" },
+    { label: "Chile", value: "+56" },
+    { label: "Colombia", value: "+57" },
+    { label: "Costa Rica", value: "+506" },
+    { label: "Cuba", value: "+53" },
+    { label: "República Dominicana +1-809 ", value: "+1-809" },
+    { label: "República Dominicana 1-829 ", value: "+1-829" },
+    { label: "República Dominicana 1-849", value: "+1-849" },
+    { label: "Ecuador", value: "+593" },
+    { label: "El Salvador", value: "+503" },
+    { label: "Guatemala", value: "+502" },
+    { label: "Honduras", value: "+504" },
+    { label: "México", value: "+52" },
+    { label: "Nicaragua", value: "+505" },
+    { label: "Panamá", value: "+507" },
+    { label: "Paraguay", value: "+595" },
+    { label: "Perú", value: "+51" },
+    { label: "Puerto Rico", value: "+1-787" },
+    { label: "Puerto Rico", value: "+1-939" },
+    { label: "Uruguay", value: "+598" },
+    { label: "Venezuela", value: "+58" },
+    { label: "Belice", value: "+501" },
+    { label: "Guyana", value: "+592" },
+    { label: "Surinam", value: "+597" },
+    { label: "Guyana Francesa", value: "+594" },
+    { label: "Estados Unidos", value: "+1" },
+    { label: "Canadá", value: "+1" },
+    // ... (puedes seguir agregando más países si es necesario)
+  ];
+  const handleModalConfirm = (confirm: boolean) => {
+    if (confirm) {
+      if (pagoData !== null) {
+     //   handleSubmit(pagoData);
+      } else {
+        console.error("pagoData es null");
+      }
+    } else {
+      console.log("La información no es correcta");
+    }
+  };
+  const validateCorreo = (value: string) => {
+    const correoRegExp =
+      /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.(com|net|org|edu|gov|gt)){1}$/;
+
+    return correoRegExp.test(value);
+  };
+
+  const validateNumeroEntradas = (value: string) => {
+    return parseInt(value, 10) > 0;
+  };
+  const validateNombre = (value: string) => {
+    return value && value.trim() !== "";
+  };
+  const onBlur = (e: any) => {
+    const { name, value } = e.target;
+
+    setErrorData((prevErrors) => {
+      let newErrors = prevErrors.filter((error) => error.campo !== name);
+
+      if (name === "telefono" && !validateTelefono(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "Número de teléfono no válido",
+        });
+      } else if (name === "correo" && !validateCorreo(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "Correo electrónico no válido",
+        });
+      } else if (name === "numero_entradas" && !validateNumeroEntradas(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "El número de entradas debe ser mayor a 0",
+        });
+      } else if (name === "nombre" && !validateNombre(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje: "Debe ingresar un nombre para poder realizar su transacción",
+        });
+      } else if (name === "numero_autorizacion" && !validateNombre(value)) {
+        newErrors.push({
+          campo: name,
+          mensaje:
+            "Debe ingresar un numero de autorizacion para poder realizar su transacción",
+        });
+      }
+
+      return newErrors;
+    });
+  };
 
   return (
     <Grid container>
-      <Grid item xs={12} md={110}>
-        <Card
+        <Grid item xs={12} md={12}>
+      <Card
           variant="outlined"
           sx={{
             maxHeight: "max-content",
             maxWidth: "100%",
             mx: "auto",
+            display: "flex", // Añadido esto
+            flexDirection: "column", // Añadido esto
+            justifyContent: "center", // Añadido esto
+            alignItems: "center", // Añadido esto
             overflow: "auto",
             resize: "horizontal",
           }}
@@ -165,21 +270,14 @@ export const PagoTarjeta = () => {
           </Typography>
           <Divider inset="none" />
           <CardContent
-            sx={{
-              display: "grid",
-              gap: 1.5,
-              gridTemplateColumns: {
-                xs: "1fr",
-                sm: "repeat(2, 1fr)",
-                md: "repeat(2, 1fr)",
-              },
-              "@media (max-width: 350px)": {
-                padding: "0.5rem", // O cualquier otro valor que se adapte
-                margin: 0,
-              },
-            }}
-          >
-            <FormControl sx={{ gridColumn: "1/-1" }}>
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+            <FormControl        sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Nombre </FormLabel>
               <Input
                 endDecorator={<PersonIcon />}
@@ -187,10 +285,11 @@ export const PagoTarjeta = () => {
                 autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.nombre}
+                sx={{ width: "100%" }}
               />
             </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
+              <br/>
+            <FormControl        sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Télefono </FormLabel>
               <Input
                 endDecorator={<PhoneIcon />}
@@ -198,10 +297,11 @@ export const PagoTarjeta = () => {
                 autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.telefono}
+                sx={{ width: "100%" }}
               />
             </FormControl>
-
-            <FormControl sx={{ gridColumn: "1/-1" }}>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Correo </FormLabel>
               <Input
                 endDecorator={<EmailIcon />}
@@ -209,9 +309,11 @@ export const PagoTarjeta = () => {
                 autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.correo}
+                sx={{ width: "100%" }}
               />
             </FormControl>
-            <FormControl>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>Congregación</FormLabel>
               <Input
                 endDecorator={<BusinessIcon />}
@@ -219,9 +321,11 @@ export const PagoTarjeta = () => {
                 autoComplete="off"
                 onChange={onChangeForm}
                 value={formData.congregacion}
+         
               />
             </FormControl>
-            <FormControl>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#E3FEF8" }}>
                 Número de Entradas
               </FormLabel>
@@ -231,6 +335,7 @@ export const PagoTarjeta = () => {
                 name="numero_entradas"
                 onChange={onChangeForm}
                 onBlur={handleInputBlur}
+                sx={{ width: "100%" }}
                 value={formData.numero_entradas}
                 slotProps={{
                   input: {
@@ -250,16 +355,19 @@ export const PagoTarjeta = () => {
             </FormControl>
 
             {/* validar cantidad de entradas aca */}
-
+   
+              <br/>
             {numberInputIsTouched &&
               numberMap.map((item, index) => (
                 <>
                   <Grid
-                    sx={{
-                      display: "grid",
-                      gap: "1em", // Espacio entre los elementos del grid
-                      gridColumn: "1/-1", // Esto hace que el `FormControl` ocupe todo el ancho disponible.
-                    }}
+                   sx={{ 
+                    display: "grid",
+                    gap: "1em",
+                    gridColumn: "1/-1",
+                    maxWidth: "1200px", // Ajusta según necesidad
+                    width: "100%"
+                 }}
                   >
                     <Card variant={"soft"} sx={{ width: "100%" }} key={index}>
                       <Typography level="h4" sx={{ color: "#C3FCEF" }}>
@@ -278,6 +386,7 @@ export const PagoTarjeta = () => {
                         <Radio value="12-16" label="12-16 años" />
                         <Radio value="16-20" label="16-20 años" />
                         <Radio value="20-24" label="20-24 años" />
+                        <Radio value="mayor a 25 años" label="mayor a 25 años" />
                       </RadioGroup>
 
                       <Checkbox label=" Bautizado"

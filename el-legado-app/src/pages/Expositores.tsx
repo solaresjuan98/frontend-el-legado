@@ -31,7 +31,7 @@ export const Expositores = () => {
     <Grid container justifyContent="center" style={{ padding: '5%' }} className="animate__animated animate__backInDown">
 
       <Grid item xs={12}>
-        <Typography level="h1" textColor={"#C3FCEF"} style={{ textAlign: 'center', marginTop: '-2%' }}>
+        <Typography level="h1" textColor={"#B5D534"} style={{ textAlign: 'center', marginTop: '-2%' }}>
           Conoce a los expositores
         </Typography>
 
