@@ -11,7 +11,7 @@ interface TarjePagoProps {
     return (
       <Card orientation="horizontal" variant="outlined" sx={{ width: 260, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <Typography level="h2" textColor="success.plainColor" mb={0.5}>
+          <Typography level="h2" textColor={"#B5D534"}  mb={0.5}>
             {total}
           </Typography>
           <Typography level="h4">Total A pagar</Typography>

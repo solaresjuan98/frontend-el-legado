@@ -41,7 +41,7 @@ export default function Footer() {
                 </AspectRatio>
               </CardOverflow>
               <CardContent>
-                <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
+                <Typography fontWeight="md" textColor={"#B5D534"}  mb={0.5}>
                   ConJóvenes
                 </Typography>
                 <Typography level="body-sm">Iglesia de Cristo</Typography>

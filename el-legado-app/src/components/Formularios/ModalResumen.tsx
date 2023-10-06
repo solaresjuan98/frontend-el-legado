@@ -31,7 +31,7 @@ export default function ModalResumen({
           <Typography
             id="alert-dialog-modal-title"
             level="h1"
-            textColor="success.plainColor"
+            textColor={"#B5D534"} 
             startDecorator={<ListAltIcon />}
           >
             Resumen           </Typography>

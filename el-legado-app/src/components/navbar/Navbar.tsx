@@ -91,7 +91,7 @@ export const Navbar = () => {
 
           {/* Drawer que muestra los NavLink para pantallas pequeñas */}
           <Barra
-            title="EL LEGADO"
+            title="  LEGADO"
             position="left"
             open={open === "left"}
             onClose={() => setOpen(null)}
