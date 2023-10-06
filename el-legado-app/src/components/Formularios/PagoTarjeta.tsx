@@ -1,5 +1,6 @@
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
+import  { ChangeEvent } from "react";
 // mui
 import { Checkbox, Radio, RadioGroup } from "@mui/joy";
 import { Grid } from "@mui/material"; // Importa el componente Grid
@@ -8,7 +9,7 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
-
+import ModalResumen from "./ModalResumen";
 import Divider from "@mui/joy/Divider";
 import EmailIcon from "@mui/icons-material/Email";
 import FormControl from "@mui/joy/FormControl";
@@ -24,13 +25,17 @@ import TarjetaPago from "./TarjetaPago";
 import { usePayment } from "../../hooks/usePayment";
 import { OrderData } from "../../hooks/interfaces";
 import { PagoDataType } from "../util/interfaces";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 export const PagoTarjeta = () => {
   // const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
   const [detallesTransaccion, setDetallesTransaccion] = useState<any[]>([])
+  const [paymentInfo, setpaymentinfo] = useState<any>(null)
   const [pagoData, setPagoData] = useState<PagoDataType | null>(null);
-
+  const [openModal, setOpenModal] = useState(false);
+ 
   // * Hook payment
   const { createCheckoutSession } = usePayment();
 
@@ -51,10 +56,10 @@ export const PagoTarjeta = () => {
     onChangeForm,
   } = useForm(
     {
-      nombre: "Josue Lopez",
-      telefono: 59099770,
-      correo: "josue99@correo.com",
-      congregacion: "centro historico",
+      nombre: "",
+      telefono: 0,
+      correo: " ",
+      congregacion: " ",
       numero_entradas: 0,
       numeroBoleta: "",
       detalle_transaccion: detallesTransaccion,
@@ -70,13 +75,28 @@ export const PagoTarjeta = () => {
   );
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
+  const esRangoEdadValido = () => {
+    const esvalido =Number(formData.numero_entradas)===detallesTransaccion.length
+    /*if (detallesTransaccion.length>0){
+      
+      if (Number(formData.numero_entradas)===detallesTransaccion.length){
+        esvalido=true
+        console.log("valido")
+      } else {
+        agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
+        console.log("no valido")
+      }  
 
+    }*/
+    
+    return esvalido
+  };
   const onSendPayment = () => {
+    setOpenModal(true);
+
+    
     formData.detalle_transaccion = detallesTransaccion;
-    console.log(formData);
-
-
-    const datosEntradas: OrderData[] = [];
+       const datosEntradas: OrderData[] = [];
     detallesTransaccion.map((item) => {
       datosEntradas.push(
         {
@@ -94,7 +114,7 @@ export const PagoTarjeta = () => {
     })
 
 
-    const paymentInfo: any = {
+    const paymentdata: any = {
       nombre: formData.nombre,
       telefono: formData.telefono,
       correo: formData.correo,
@@ -112,9 +132,9 @@ export const PagoTarjeta = () => {
     };
 
     // console.log(datosEntradas);
-
-
-    createCheckoutSession(paymentInfo);
+    setpaymentinfo(paymentdata)
+    setPagoData(paymentdata)
+  
   }
 
 
@@ -182,10 +202,30 @@ export const PagoTarjeta = () => {
     { label: "Canadá", value: "+1" },
     // ... (puedes seguir agregando más países si es necesario)
   ];
+  const handleSelectChange = (event: any, value: any) => {
+    const newCountryCode = value;
+    setCountryCode(newCountryCode);
+
+    console.log(event);
+    const newEvent = {
+      target: {
+        name: "telefono",
+        value:
+          newCountryCode +
+          (formData.telefono.toString().slice(countryCode.length) === "0"
+            ? ""
+            : formData.telefono.toString().slice(countryCode.length)) +
+          " ",
+      },
+    } as unknown as ChangeEvent<HTMLInputElement>;
+
+    onChangeForm(newEvent);
+  };
+
   const handleModalConfirm = (confirm: boolean) => {
     if (confirm) {
-      if (pagoData !== null) {
-     //   handleSubmit(pagoData);
+      if (paymentInfo !== null) {
+        createCheckoutSession(paymentInfo);
       } else {
         console.error("pagoData es null");
       }
@@ -246,6 +286,14 @@ export const PagoTarjeta = () => {
 
   return (
     <Grid container>
+        {openModal && (
+        <ModalResumen
+          pago={pagoData}
+          onConfirm={handleModalConfirm}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
+      )}
         <Grid item xs={12} md={12}>
       <Card
           variant="outlined"
@@ -263,7 +311,7 @@ export const PagoTarjeta = () => {
         >
           <Typography
             level="title-lg"
-            textColor={"#C3FCEF"}
+            textColor={"#B5D534"}
             startDecorator={<InfoOutlined />}
           >
             Información Personal
@@ -283,34 +331,76 @@ export const PagoTarjeta = () => {
                 endDecorator={<PersonIcon />}
                 name="nombre"
                 autoComplete="off"
+                onBlur={onBlur}
                 onChange={onChangeForm}
                 value={formData.nombre}
                 sx={{ width: "100%" }}
               />
+              {errorData
+                .filter((error) => error.campo === "nombre")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
+       
             </FormControl>
+
               <br/>
-            <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Télefono </FormLabel>
-              <Input
-                endDecorator={<PhoneIcon />}
-                name="telefono"
-                autoComplete="off"
-                onChange={onChangeForm}
-                value={formData.telefono}
-                sx={{ width: "100%" }}
-              />
+              <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>
+                Selecciona el país de donde nos visitas
+              </FormLabel>
+              <Select
+                placeholder="Seleccione un país..."
+                onChange={handleSelectChange}
+                value={countryCode}
+              >
+                {countryAndStates.map((item, index) => (
+                  <Option key={index} value={item.value}>
+                    {item.label}
+                  </Option>
+                ))}
+              </Select>
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Correo </FormLabel>
+              <FormLabel sx={{ color: "#F8F0FD" }}>Teléfono</FormLabel>
+              <Input
+                endDecorator={<PhoneIcon />}
+                name="telefono"
+                onChange={onChangeForm}
+                onBlur={onBlur}
+                sx={{ width: "100%" }}
+                value={formData.telefono ? formData.telefono : "+502 "}
+              />
+
+              {errorData
+                .filter((error) => error.campo === "telefono")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
+            </FormControl>
+            <br/>
+            <FormControl        sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#F8F0FD" }}>Correo </FormLabel>
               <Input
                 endDecorator={<EmailIcon />}
                 name="correo"
-                autoComplete="off"
                 onChange={onChangeForm}
-                value={formData.correo}
+                onBlur={onBlur}
                 sx={{ width: "100%" }}
+                value={formData.correo}
               />
+              {errorData
+                .filter((error) => error.campo === "correo")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
@@ -357,10 +447,11 @@ export const PagoTarjeta = () => {
             {/* validar cantidad de entradas aca */}
    
               <br/>
-            {numberInputIsTouched &&
+              {numberInputIsTouched &&
               numberMap.map((item, index) => (
                 <>
                   <Grid
+                     key={index}
                    sx={{ 
                     display: "grid",
                     gap: "1em",
@@ -369,8 +460,8 @@ export const PagoTarjeta = () => {
                     width: "100%"
                  }}
                   >
-                    <Card variant={"soft"} sx={{ width: "100%" }} key={index}>
-                      <Typography level="h4" sx={{ color: "#C3FCEF" }}>
+                    <Card variant={"soft"} sx={{ width: "100%" }}>
+                      <Typography level="h4" sx={{ color: "#B5D534" }}>
                         Entrada {item}
                       </Typography>
                       <RadioGroup
@@ -378,6 +469,7 @@ export const PagoTarjeta = () => {
                         onChange={(e) =>
                           handleRadioChange(index, e.target.value)
                         }
+                
                       >
                         <Radio
                           value="menor de 12 años"
@@ -388,11 +480,20 @@ export const PagoTarjeta = () => {
                         <Radio value="20-24" label="20-24 años" />
                         <Radio value="mayor a 25 años" label="mayor a 25 años" />
                       </RadioGroup>
-
-                      <Checkbox label=" Bautizado"
-                        onChange={(e) => handleCheckboxChange(index, e.target.checked)}
+                      <Checkbox
+                        label=" Bautizado"
+                        onChange={(e) =>
+                          handleCheckboxChange(index, e.target.checked)
+                        }
                       />
                     </Card>
+                    {errorData
+                  .filter((error) => error.campo === "rango")
+                  .map((error, index) => (
+                    <div key={index} style={{ color: "red" }}>
+                      {error.mensaje}
+                    </div>
+                  ))}
                   </Grid>
                   <br />
                 </>
@@ -433,12 +534,34 @@ export const PagoTarjeta = () => {
                   <Button
                     variant="plain"
                     style={{
-                      color: "#FFFFFF",
-                      background: "#3E00B9",
+                      color:
+                        totalAmount > 0 &&
+                        errorData.length === 0 &&
+                        formData.nombre &&
+                        formData.telefono &&
+                        formData.numero_autorizacion &&
+                        formData.correo  
+                          ? "#FFFFFF"
+                          : "#FFFFFF",
+                      background:
+                      totalAmount <= 0 ||
+                      errorData.length > 0   ||
+                      !formData.nombre ||
+                      !formData.telefono ||
+                      !formData.correo ||!esRangoEdadValido() 
+                          ? "#19004B"
+                          : "#3E00B9",
                       width: "80%",
                       height: "100%",
                     }}
                     onClick={onSendPayment}
+                    disabled={
+                      totalAmount <= 0 ||
+                      errorData.length > 0 ||
+                      !formData.nombre ||
+                      !formData.telefono ||
+                      !formData.correo ||!esRangoEdadValido() 
+                    }
                   >
                     Pagar con tarjeta
                   </Button>

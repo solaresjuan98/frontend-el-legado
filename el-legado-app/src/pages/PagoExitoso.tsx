@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 
 import AspectRatio from "@mui/joy/AspectRatio";
-import Button from "@mui/joy/Button";
+ 
 import Card from "@mui/joy/Card";
 import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
@@ -9,7 +9,7 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LinearProgress from "@mui/joy/LinearProgress";
-import { NavLink } from "react-router-dom";
+ 
 import { useState, useEffect } from "react";
 import Stack from '@mui/joy/Stack';
 import { UseRegistro } from "../hooks/userRegistro";
@@ -147,7 +147,7 @@ export const PagoExitoso: React.FC<PagoExitosoProps> = ({ validador }) => {
               style={{ textAlign: "center" }}
             >
               ¡Querido hermano(a)! Tu pago con tarjeta ha sido todo un éxito. Muy
-              pronto recibirás un correo con tus entradas. ¡Gracias por tu compra
+              pronto recibirás un correo la  confirmación de tu compra. ¡Gracias por tu compra
               😄!
             </Typography>
           </CardContent>
@@ -158,17 +158,7 @@ export const PagoExitoso: React.FC<PagoExitosoProps> = ({ validador }) => {
               "--Button-radius": "40px",
               width: "clamp(min(100%, 160px), 50%, min(100%, 200px))",
             }}
-          >   <NavLink
-            to="/registro"
-
-
-          >
-              <Button variant="solid" sx={{ background: "#1A1142" }}>
-                <Typography level="title-lg" textColor={"#9AF9E2"}>
-                  Continuar
-                </Typography>
-              </Button>
-            </NavLink>
+          > 
             <Stack spacing={2} sx={{ flex: 1 }}>
               <LinearProgress
                 determinate

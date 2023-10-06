@@ -5,7 +5,7 @@ export const Ubicacion = () => {
     return (
         <>
             <Grid item xs={12} marginTop={3} container justifyContent="center">
-                <Typography level="h1" sx={{ color: "#C3FCEF" }}>
+                <Typography level="h1" sx={{ color: "#B5D534" }}>
                     ¿Cómo Llegar?
                 </Typography>
             </Grid>

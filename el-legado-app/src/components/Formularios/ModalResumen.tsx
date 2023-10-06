@@ -40,31 +40,31 @@ export default function ModalResumen({
             <>
               <br></br>
               <Typography fontSize="1.2rem">
-                <Typography component="span" fontWeight="bold"  sx={{ color: "#C3FCEF" }} >
+                <Typography component="span" fontWeight="bold"  sx={{ color: "#B5D534" }} >
                   Nombree:{" "}
                 </Typography>
                 <Typography component="span">{pago.nombre}</Typography>
               </Typography>
               <Typography fontSize="1.2rem" >
-                <Typography component="span" fontWeight="bold"  sx={{ color: "#C3FCEF" }}>
+                <Typography component="span" fontWeight="bold"  sx={{ color: "#B5D534" }}>
                   Teléfono:{" "}
                 </Typography>
                 <Typography component="span">{pago.telefono}</Typography>
               </Typography>
               <Typography fontSize="1.2rem">
-                <Typography component="span" fontWeight="bold"  sx={{ color: "#C3FCEF" }}>
+                <Typography component="span" fontWeight="bold"  sx={{ color: "#B5D534" }}>
                   Correo:{" "}
                 </Typography>
                 <Typography component="span">{pago.correo}</Typography>
               </Typography>
               <Typography fontSize="1.2rem">
-                <Typography component="span" fontWeight="bold"  sx={{ color: "#C3FCEF" }}>
+                <Typography component="span" fontWeight="bold"  sx={{ color: "#B5D534" }}>
                   Total a Pagar :{" "}
                 </Typography>
                 <Typography component="span">Q.{pago.transaccion.total_pagar}.00</Typography>
               </Typography>
               <Typography fontSize="1.2rem">
-                <Typography component="span" fontWeight="bold"  sx={{ color: "#C3FCEF" }}>
+                <Typography component="span" fontWeight="bold"  sx={{ color: "#B5D534" }}>
                  Número de Entradas:{" "}
                 </Typography>
                 <Typography component="span"> {pago.transaccion.numero_entradas}</Typography>

@@ -1,5 +1,5 @@
 import { useForm } from "../../hooks/useForm";
-import { useState, useRef,useEffect } from "react";
+import { useState, useRef } from "react";
 import TarjetaPago from "./TarjetaPago";
 import "./Formulario.css";
 import React, { ChangeEvent } from "react";
@@ -44,7 +44,7 @@ export const PagoBoleta = () => {
   const [pagoData, setPagoData] = useState<PagoDataType | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
-
+ 
   const handlePago = () => {
    
 
@@ -131,6 +131,10 @@ export const PagoBoleta = () => {
 
   /* handle para cargar la fotoooo */
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+   
+    if (!esRangoEdadValido()) {
+      agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
+     }
     const files = e.target.files;
 
     if (files && files.length > 0) {
@@ -151,11 +155,23 @@ export const PagoBoleta = () => {
     }
   };
   const esRangoEdadValido = () => {
-    const esvalido=Number(formData.numero_entradas)===detallesTransaccion.length
- 
+    const esvalido =Number(formData.numero_entradas)===detallesTransaccion.length
+    console.log("entradas",Number(formData.numero_entradas),"arreglo",detallesTransaccion.length)
+    /*if (detallesTransaccion.length>0){
+      
+      if (Number(formData.numero_entradas)===detallesTransaccion.length){
+        esvalido=true
+        console.log("valido")
+      } else {
+        agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
+        console.log("no valido")
+      }  
+
+    }*/
+    
     return esvalido
   };
-  const handlevalidarRango = () => {
+ /* const handlevalidarRango = () => {
     if (!esRangoEdadValido()) {
       console.log("no valido?")
       agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
@@ -163,7 +179,7 @@ export const PagoBoleta = () => {
     }
   
     // Aquí el código para procesar o enviar los datos de detallesTransaccion...
-  };
+  };*/
   const agregarNuevoError = (campo: string, mensaje: string) => {
     setErrorData((prevErrors) => [...prevErrors, { campo, mensaje }]);
   };
@@ -396,7 +412,7 @@ export const PagoBoleta = () => {
             textColor={"#F8F0FD"}
             startDecorator={<InfoOutlined />}
           >
-            Ingrese la información
+             información Personal
           </Typography>     <Divider inset="none" />
           <CardContent
               sx={{
@@ -534,6 +550,7 @@ export const PagoBoleta = () => {
               numberMap.map((item, index) => (
                 <>
                   <Grid
+                     key={index}
                    sx={{ 
                     display: "grid",
                     gap: "1em",
@@ -543,7 +560,7 @@ export const PagoBoleta = () => {
                  }}
                   >
                     <Card variant={"soft"} sx={{ width: "100%" }}>
-                      <Typography level="h4" sx={{ color: "#C3FCEF" }}>
+                      <Typography level="h4" sx={{ color: "#B5D534" }}>
                         Entrada {item}
                       </Typography>
                       <RadioGroup
@@ -702,14 +719,14 @@ export const PagoBoleta = () => {
                           ? "#FFFFFF"
                           : "#FFFFFF",
                       background:
-                        totalAmount > 0 &&
-                        errorData.length === 0 &&
-                        linkImagen &&
-                        formData.nombre &&
-                        formData.telefono &&!esRangoEdadValido() &&
-                        formData.correo
-                          ? "#3E00B9"
-                          : "#19004B",
+                      totalAmount <= 0 ||
+                      errorData.length > 0 ||
+                      !linkImagen ||
+                      !formData.nombre ||
+                      !formData.telefono ||
+                      !formData.correo ||!esRangoEdadValido() 
+                          ? "#19004B"
+                          : "#3E00B9",
                       width: "80%",
                       height: "100%",
                     }}
