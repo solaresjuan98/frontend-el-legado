@@ -79,7 +79,7 @@ export const PagoError = () => {
         <CardContent sx={{ maxWidth: "40ch" }}>
           <Typography
             level="h3"
-            textColor={"#E3FEF8"}
+            textColor={"#C3FCEF"}
             style={{ textAlign: "center" }}
           >
          ¡Querido hermano(a)! Lamentamos informarte que tu pago con tarjeta no se pudo procesar correctamente. Por favor, verifica tus detalles e intenta de nuevo. Si el problema persiste, contacta a nuestro equipo de soporte. ¡Gracias por tu paciencia! 😓

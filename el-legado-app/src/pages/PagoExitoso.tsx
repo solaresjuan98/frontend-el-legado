@@ -129,13 +129,13 @@ export const PagoExitoso: React.FC<PagoExitosoProps> = ({ validador }) => {
               }}
             >
               <div>
-                <CheckCircleIcon sx={{ fontSize: "8rem", color: "#98FF98" }} />
+                <CheckCircleIcon sx={{ fontSize: "8rem", color: "#B5D534" }} />
               </div>
             </AspectRatio>
           </CardOverflow>
           <Typography
             level="h2"
-            textColor={"#9AF9E2"}
+            textColor={"#B5D534"}
             sx={{ mt: "calc(var(--icon-size) / 2)" }}
           >
             Pago realizado con éxito

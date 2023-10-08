@@ -120,10 +120,11 @@ export const PagoTarjeta = () => {
       correo: formData.correo,
       congregacion: formData.congregacion,
       transaccion: {
-          enlace: "_",
-          estado: "en_proceso",
+          enlace: "",
+          estado: "validado",
           total_pagar: totalAmount,
           numero_entradas: formData.numero_entradas,
+          tipo_pago:"tarjeta",
           numero_transaccion: "0",
           detalle_transaccion: detallesTransaccion,
       },
@@ -326,7 +327,7 @@ export const PagoTarjeta = () => {
               }}
             >
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Nombre </FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Nombre </FormLabel>
               <Input
                 endDecorator={<PersonIcon />}
                 name="nombre"
@@ -348,7 +349,7 @@ export const PagoTarjeta = () => {
 
               <br/>
               <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>
+              <FormLabel sx={{ color: "#C3FCEF" }}>
                 Selecciona el país de donde nos visitas
               </FormLabel>
               <Select
@@ -365,7 +366,7 @@ export const PagoTarjeta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>Teléfono</FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Teléfono</FormLabel>
               <Input
                 endDecorator={<PhoneIcon />}
                 name="telefono"
@@ -385,7 +386,7 @@ export const PagoTarjeta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>Correo </FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Correo </FormLabel>
               <Input
                 endDecorator={<EmailIcon />}
                 name="correo"
@@ -404,7 +405,7 @@ export const PagoTarjeta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>Congregación</FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Congregación</FormLabel>
               <Input
                 endDecorator={<BusinessIcon />}
                 name="congregacion"
@@ -416,7 +417,7 @@ export const PagoTarjeta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#E3FEF8" }}>
+              <FormLabel sx={{ color: "#C3FCEF" }}>
                 Número de Entradas
               </FormLabel>
               <Input

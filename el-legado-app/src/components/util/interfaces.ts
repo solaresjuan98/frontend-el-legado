@@ -23,6 +23,7 @@ export interface PagoDataType {
     estado: string | null;
     enlace: string | null;
     total_pagar: number;
+    tipo_pago:string;
     numero_entradas: number;
 
     numero_transaccion: number;

@@ -58,6 +58,7 @@ export const PagoBoleta = () => {
         estado: "en_proceso",
         total_pagar: totalAmount,
         numero_entradas: formData.numero_entradas,
+        tipo_pago:"boleta",
         numero_transaccion: formData.numero_autorizacion,
         detalle_transaccion: detallesTransaccion,
       },
@@ -397,10 +398,10 @@ export const PagoBoleta = () => {
               }}
             >
               {" "}
-              <Typography level="title-lg">
+              <Typography level="title-lg"  textColor={"#B5D534"}>
                 Realizar el depósito a la siguiente cuenta:{" "}
               </Typography>
-              <Typography level="title-md">
+              <Typography level="title-md"   textColor={"#C3FCEF"}>
                 Bi Monetaria Iglesia de Cristo 408-002325-4{" "}
               </Typography>
             </CardContent>
@@ -409,7 +410,7 @@ export const PagoBoleta = () => {
             
           <Typography
             level="title-lg"
-            textColor={"#F8F0FD"}
+            textColor={"#B5D534"}
             startDecorator={<InfoOutlined />}
           >
              información Personal
@@ -424,8 +425,8 @@ export const PagoBoleta = () => {
             >    <FormControl        sx={{ width: "100%" }}>
               <FormLabel
                 sx={{
-                  color: "#FFFFFF",
-                  textShadow: `-1px 0 #DFCAFF, 0 1px #DFCAFF, 1px 0 ##F2F6FA, 0 -1px ##F2F6FA`,
+                  color: "#C3FCEF",
+            
                 }}
               >
                 Nombre
@@ -449,7 +450,7 @@ export const PagoBoleta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>
+              <FormLabel sx={{ color: "#C3FCEF" }}>
                 Selecciona el país de donde nos visitas
               </FormLabel>
               <Select
@@ -466,7 +467,7 @@ export const PagoBoleta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>Teléfono</FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Teléfono</FormLabel>
               <Input
                 endDecorator={<PhoneIcon />}
                 name="telefono"
@@ -486,7 +487,7 @@ export const PagoBoleta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>Correo </FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Correo </FormLabel>
               <Input
                 endDecorator={<EmailIcon />}
                 name="correo"
@@ -505,7 +506,7 @@ export const PagoBoleta = () => {
             </FormControl>
             <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>Congregación</FormLabel>
+              <FormLabel sx={{ color: "#C3FCEF" }}>Congregación</FormLabel>
               <Input
                 endDecorator={<BusinessIcon />}
                 name="congregacion"
@@ -517,7 +518,7 @@ export const PagoBoleta = () => {
             <br/>
             
              <FormControl        sx={{ width: "100%" }}>
-                <FormLabel sx={{ color: "#F8F0FD" }}>
+                <FormLabel sx={{ color: "#C3FCEF" }}>
                   Número de Entradas
                 </FormLabel>
                 <Input
@@ -559,7 +560,7 @@ export const PagoBoleta = () => {
                     width: "100%"
                  }}
                   >
-                    <Card variant={"soft"} sx={{ width: "100%" }}>
+                    <Card variant={"soft"} sx={{ width: "100%" }}         key={index}>
                       <Typography level="h4" sx={{ color: "#B5D534" }}>
                         Entrada {item}
                       </Typography>
@@ -599,7 +600,7 @@ export const PagoBoleta = () => {
               ))}
                  <br/>
             <FormControl        sx={{ width: "100%" }}>
-              <FormLabel sx={{ color: "#F8F0FD" }}>
+              <FormLabel sx={{ color: "#C3FCEF" }}>
                 Numero de Autorización(opcional){" "}
               </FormLabel>
               <Input
@@ -622,7 +623,7 @@ export const PagoBoleta = () => {
               }}
             >
               <FormControl className="">
-                <FormLabel sx={{ color: "#F8F0FD" }}>
+                <FormLabel sx={{ color: "#D3D534" }}>
                   Carga la boleta de pago
                 </FormLabel>
 
