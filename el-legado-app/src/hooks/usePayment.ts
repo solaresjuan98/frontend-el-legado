@@ -14,8 +14,8 @@ export const usePayment = () => {
         {
           line_items: userData.line_items,
           mode: "payment",
-          success_url: "http://localhost:5173/validacion", //"https://www.conjoveneslegado.com/validacion",
-          cancel_url: "http://localhost:5173/pago-error", //"https://www.conjoveneslegado.com/pago-error",
+          success_url: "https://www.conjoveneslegado.com/validacion", //"https://www.conjoveneslegado.com/validacion",
+          cancel_url: "https://www.conjoveneslegado.com/pago-error", //"https://www.conjoveneslegado.com/pago-error",
         }
       )
       .then((res) => {
