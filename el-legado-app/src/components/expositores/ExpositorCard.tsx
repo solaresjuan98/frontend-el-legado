@@ -28,7 +28,7 @@ export const ExpositorCard = ({ expositor }: Props) => {
     
     >
       <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
-        <Avatar src="https://engineering.unl.edu/images/staff/Kayla-Person.jpg" sx={{ '--Avatar-size': '7rem' }} />
+        <Avatar src={expositor.img} sx={{ '--Avatar-size': '15rem' }} />
         {/* <Chip
           size="sm"
           variant="soft"
@@ -42,8 +42,8 @@ export const ExpositorCard = ({ expositor }: Props) => {
         >
           
         </Chip> */}
-        <Typography level="title-lg" textColor={"#241798"}>{expositor.nombre}</Typography>
-        <Typography level="body-md" textColor={"#3E3A3E"} sx={{ maxWidth: '24ch' }}>
+        <Typography level="h3" textColor={"#241798"}>{expositor.nombre}</Typography>
+        <Typography level="body-md" textColor={"#3E3A3E"} sx={{ maxWidth: '30ch' }}>
           {expositor.bio}
         </Typography>
      
