@@ -26,6 +26,11 @@ const arrExpositores: Expositor[] = [
     Esposo y padre de una niña de 6 años, maestro en biblia egresado de BICA honduras, con experiencia ministerial por más de 10 años. Ministro y Evangelista de la Iglesia de Cristo en las delicias, San Miguel El Salvador. Ministro de Jóvenes de la Iglesia de Cristo en Santiago de María, Usulutan, El Salavador. Un privilegio ser útil a la obra de Dios. .
     `,img:'https://fondos-legado.s3.us-east-2.amazonaws.com/salvadoreño.jpeg'
   },
+  {
+    nombre: 'Luis Navarrete',
+    bio: `Mexican 
+      `,img:'https://fondos-legado.s3.us-east-2.amazonaws.com/tallerista.jpg'
+  },
 ];
 
 export const Expositores = () => {
