@@ -1,5 +1,3 @@
-import Card from "@mui/joy/Card";
-import CardCover from "@mui/joy/CardCover";
 import Typography from "@mui/joy/Typography";
 import { Grid, Container } from "@mui/material";
 const arreglo_imagenes = [
