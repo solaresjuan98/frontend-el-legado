@@ -55,7 +55,7 @@ export const Hospedaje = () => {
           // Puedes ajustar este valor para cambiar la distancia entre las tarjetas
         >
                 <Grid item xs={12} marginTop={6} container justifyContent="center">
-          <Typography level="h1" sx={{ color: "#DEEEF1" }}>
+          <Typography level="h1" sx={{ color: "#B5D534" }}>
             Hospedaje
           </Typography>
         </Grid>

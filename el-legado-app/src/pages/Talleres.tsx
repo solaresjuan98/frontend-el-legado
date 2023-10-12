@@ -1,65 +1,98 @@
-import { Grid, Typography } from "@mui/joy"
+import Card from "@mui/joy/Card";
+import CardCover from "@mui/joy/CardCover";
+import Typography from "@mui/joy/Typography";
+import { Grid, Container } from "@mui/material";
+const arreglo_imagenes = [
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/1.png",
+  },
 
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/2.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/3.png",
+  },
+
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/4.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/5.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/6.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/7.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/8.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/9.png",
+  },
+  {
+    imagen:
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/talleristas/10.png",
+  },
+];
 export const Talleres = () => {
-    return (
-        <Grid container marginTop={2} sx={{ flexGrow: 1, marginTop: '5%' }} className="animate__animated animate__fadeInUp">
-         
-            <Grid xs={12}>
-                <Typography level="h1" textColor={"#B5D534"} style={{ textAlign: 'center', marginTop: '-2%' }}>
-                    Talleres
-                </Typography>
-
+  return (
+    <>
+      <Grid item xs={12} marginTop={6} container justifyContent="center">
+        <Typography level="h1" sx={{ color: "#B5D534" }}>
+          Talleres
+        </Typography>
+      </Grid>
+      <Container maxWidth="lg" style={{ marginTop: "20px" }}>
+        {" "}
+        {/* Cambiado a 'lg' para más espacio */}
+        <Grid container spacing={3} justifyContent="center">
+          {arreglo_imagenes.map((item, index) => (
+            <Grid
+              key={index}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                height: "100%",
+              }}
+            >
+              <img
+                src={item.imagen}
+                srcSet={item.imagen + " 2x"} // Suponiendo que quieres usar la misma URL para 2x
+                loading="lazy"
+                alt=""
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "cover",
+                  borderRadius: "15px"
+                }}
+              />
+              {/* <Card sx={{ width: "112%", height: "800px", flexGrow: 1 }}>
+                <CardCover>
+                 
+                </CardCover>
+              </Card> */}
             </Grid>
-        
-
-            <Grid xs={12} lg={6} sx={{ padding: '2%' }} >
-
-                <img
-                    src="https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg"
-                    alt=""
-                    className=""
-                    style={{
-                        width: '100%',
-                    }}
-                />
-
-
-            </Grid>
-
-            <Grid xs={12} lg={6} sx={{ padding: '2%' }} >
-
-
-                <Typography level="h2"  textColor={"#B5D534"} >
-                Taller de Jóvenes 1
-                </Typography>
-
-            </Grid>
-
-
-
-            <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
-
-
-                <Typography level="h2"  textColor={"#B5D534"} >
-                   Taller de Jóvenes 2
-                </Typography>
-
-            </Grid>
-
-            <Grid xs={12} lg={6} sx={{ padding: '2%' }}>
-
-                <img
-                    src="https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg"
-                    alt=""
-                    className=""
-                    style={{
-                        width: '100%',
-                    }}
-                />
-
-
-            </Grid>
-
+          ))}
         </Grid>
-    )
-}
+      </Container>
+    </>
+  );
+};
