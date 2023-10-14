@@ -5,7 +5,7 @@ import TabPanel from "@mui/joy/TabPanel";
 import { Typography } from "@mui/joy";
 import Box from "@mui/joy/Box";
 import { Grid } from "@mui/material";
-import { PagoTarjeta } from "../components/Formularios/PagoTarjeta";
+ 
 import { PagoBoleta } from "../components/Formularios/PagoBoleta";
 
 export const RegistroPage = () => {
@@ -65,15 +65,13 @@ export const RegistroPage = () => {
                   mt: { xs: 0, sm: 0, md: 0 }, // Aquí eliminamos el margen superior.
                 }}
               >
-                <Tab disableIndicator>Registro con Tarjeta</Tab>
-                <Tab disableIndicator>Registro con boleta</Tab>
+                <Tab disableIndicator>Registro con Boleta</Tab>
+             
               </TabList>
               <TabPanel value={0}>
-                <PagoTarjeta />
-              </TabPanel>
-              <TabPanel value={1}>
                 <PagoBoleta />
               </TabPanel>
+           
             </Tabs>
           </Box>
         </Grid>

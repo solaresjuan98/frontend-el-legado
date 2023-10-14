@@ -21,13 +21,7 @@ const Contenido: ContenidoItem[] = [
     descp: "Conoce a nuestros talleres,  que fueron seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
     img: "https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg",
     ruta :"/talleres"
-  } ,
-  {
-    Titulo: "Hospedaje",
-    descp: "Conoce a nuestros hoteles,  que fueron seleccionados cuidadosamente para poder hospedarte con tu familia y amigos. ",
-    img: "https://www.eltiempo.com/files/image_640_428/uploads/2022/10/14/6349de4783bd5.jpeg",
-    ruta :"/hospedaje"
-  }  
+  } 
 ];
 export const Menu = () => {
     return (

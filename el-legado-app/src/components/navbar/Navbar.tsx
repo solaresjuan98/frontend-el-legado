@@ -155,7 +155,7 @@ export const Navbar = () => {
                     Expositores
                   </NavLink>
                 </ListItemButton>
-                <ListItemButton>
+                {/*<ListItemButton>
                   <ListItemDecorator>
                     <ChevronRightIcon />
                   </ListItemDecorator>
@@ -166,7 +166,7 @@ export const Navbar = () => {
                   >
                     Hospedaje
                   </NavLink>
-                </ListItemButton>
+              </ListItemButton>*/}
               </List>
              
             </Box>
@@ -226,7 +226,7 @@ export const Navbar = () => {
               </Typography>
             </NavLink>
             
-            <NavLink to="/hospedaje" style={linkStyle}>
+          {/*}  <NavLink to="/hospedaje" style={linkStyle}>
               <Typography
                 level="h2"
                 fontSize="xl"
@@ -235,7 +235,7 @@ export const Navbar = () => {
               >
                 Hospedaje
               </Typography>
-            </NavLink>
+          </NavLink>*/}
           </Box>
         </Box>
       </Layout.Header>
