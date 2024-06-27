@@ -45,7 +45,7 @@ export const LandingPage = () => {
         
         <div style={{ textAlign: 'center' }}>
           {/* Agregamos el componente Countdown arriba del botón */}
-          <Countdown targetDate={new Date('2023-11-04 09:00:00')} /> {/* Ajustado para las 9 am */}
+          <Countdown targetDate={new Date('2024-11-04 09:00:00')} /> {/* Ajustado para las 9 am */}
           <br/> 
           <NavLink
                     to="/registro"

@@ -646,7 +646,7 @@ export const PagoBoleta = () => {
                     alt="Vista previa"
                     style={{ maxWidth: "100%", height: "200px" }}
                   />
-                ) : (
+                ) : (-
                   <div>
                     <img
                       src="https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg"

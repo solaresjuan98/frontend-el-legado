@@ -5,7 +5,7 @@ import TabPanel from "@mui/joy/TabPanel";
 import { Typography } from "@mui/joy";
 import Box from "@mui/joy/Box";
 import { Grid } from "@mui/material";
- 
+
 import { PagoBoleta } from "../components/Formularios/PagoBoleta";
 
 export const RegistroPage = () => {
@@ -20,9 +20,8 @@ export const RegistroPage = () => {
           sx={{
             textAlign: "center",
             marginTop: "1.5rem",
-           
+
             color: "#B5D534",
-         
           }}
         >
           Registro
@@ -38,7 +37,7 @@ export const RegistroPage = () => {
               alignItems: "center",
               bgcolor: "background.body",
 
-              marginLeft: 0, // Agregamos este margen para evitar que el usuario pueda mover el Box hacia la izquierda
+              marginLeft: 0,
 
               borderRadius: "md",
               mt: 2,
@@ -61,17 +60,15 @@ export const RegistroPage = () => {
                     boxShadow: "sm",
                     bgcolor: "background.surface",
                   },
-                  mx: { xs: 0, sm: 0, md: 0 }, // Aquí agregamos el margen horizontal para que las tabs estén centradas en pantallas grandes.
-                  mt: { xs: 0, sm: 0, md: 0 }, // Aquí eliminamos el margen superior.
+                  mx: { xs: 0, sm: 0, md: 0 },
+                  mt: { xs: 0, sm: 0, md: 0 },
                 }}
               >
                 <Tab disableIndicator>Registro con Boleta</Tab>
-             
               </TabList>
               <TabPanel value={0}>
                 <PagoBoleta />
               </TabPanel>
-           
             </Tabs>
           </Box>
         </Grid>
