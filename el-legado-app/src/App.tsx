@@ -1,8 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { RegistroPage } from "./pages/RegistroPage"
-import { Navbar } from "./components/navbar/Navbar"
- 
-import Footer from "./components/Footer" 
 import { CssVarsProvider } from "@mui/joy"
 import { ToastContainer } from 'react-toastify';
   
@@ -15,7 +12,6 @@ function App() {
 
         <BrowserRouter>
           <ToastContainer />
-          <Navbar />
           <Routes>
             <Route path="/" element={<RegistroPage />} />
           {  /* <Route path="/registro" element={<RegistroPage />} />
@@ -34,7 +30,6 @@ function App() {
 
           <br /> <br /> <br /> <br /> <br /> <br />
           <Footer /> */}
-            <Footer />
            </Routes>
         </BrowserRouter>
       </CssVarsProvider>
