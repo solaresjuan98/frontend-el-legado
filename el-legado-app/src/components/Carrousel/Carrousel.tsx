@@ -18,7 +18,7 @@ export const Carrousel = () => {
         {/* Contenido del primer slide */}
         <div>
           <img
-            src="https://fondos-legado.s3.us-east-2.amazonaws.com/PORTAD+1.jpg"
+            src="https://fondos-legado.s3.us-east-2.amazonaws.com/CongresoPortada.jpg"
             alt="Imagen 1"
           />
           
