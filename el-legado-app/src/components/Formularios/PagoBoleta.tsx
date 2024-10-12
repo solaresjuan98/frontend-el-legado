@@ -251,7 +251,7 @@ export const PagoBoleta = () => {
     // ... (puedes seguir agregando más países si es necesario)
   ];
 
-  const handleSelectChange = (event: any, value: any) => {
+  const handleSelectChange = (value: any) => {
     const newCountryCode = value;
     setCountryCode(newCountryCode);
  
@@ -430,7 +430,7 @@ export const PagoBoleta = () => {
                 maxHeight: "max-content",
                 maxWidth: "100%",
                 mx: "auto",
-               overflow: "auto",
+                overflow: "auto",
                 resize: "horizontal",
                 width: {
                   xs: "100%",  // 100% del ancho en pantallas pequeñas (teléfonos)
