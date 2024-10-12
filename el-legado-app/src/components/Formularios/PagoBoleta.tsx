@@ -69,13 +69,13 @@ export const PagoBoleta = () => {
   };
   const handleSubmit = async (pagoData: PagoDataType) => {
     // Llama a la función de registro con los datos de pago
-    const response = await registro(pagoData);
-    console.log(response);
+   await registro(pagoData);
+ 
     resetForm();
     setCountryCode("");
     formData.numero_entradas = 0;
     setLinkImagen(null);
-    setPreviewImage(null);
+    setPreviewImage("https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg");
     setDetallesTransaccion([]);
   };
 
@@ -97,7 +97,7 @@ export const PagoBoleta = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [linkImagen, setLinkImagen] = useState<string | null>(null);
 
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>("https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg");
 
   const handleFileInputClick = () => {
     if (fileInputRef.current) {
@@ -157,7 +157,7 @@ export const PagoBoleta = () => {
   };
   const esRangoEdadValido = () => {
     const esvalido =Number(formData.numero_entradas)===detallesTransaccion.length
-    console.log("entradas",Number(formData.numero_entradas),"arreglo",detallesTransaccion.length)
+    
     /*if (detallesTransaccion.length>0){
       
       if (Number(formData.numero_entradas)===detallesTransaccion.length){
@@ -192,8 +192,7 @@ export const PagoBoleta = () => {
 
   const cargar = async (image: string, fileExt: string) => {
     setLoading(true);
-    const imageUrl = await cargarBoleta(fileExt, image);
-    console.log("image url", imageUrl);
+    const imageUrl = await cargarBoleta(fileExt, image); 
     if (imageUrl == "error") {
       seterrorLoading(true);
       setLoading(false);
@@ -255,8 +254,7 @@ export const PagoBoleta = () => {
   const handleSelectChange = (event: any, value: any) => {
     const newCountryCode = value;
     setCountryCode(newCountryCode);
-
-    console.log(event);
+ 
     const newEvent = {
       target: {
         name: "telefono",
@@ -646,10 +644,10 @@ export const PagoBoleta = () => {
                     alt="Vista previa"
                     style={{ maxWidth: "100%", height: "200px" }}
                   />
-                ) : (-
+                ) : (
                   <div>
                     <img
-                      src="https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg"
+                      src={previewImage}
                       alt="Vista previa"
                       style={{ maxWidth: "100%", height: "200px" }}
                     />
