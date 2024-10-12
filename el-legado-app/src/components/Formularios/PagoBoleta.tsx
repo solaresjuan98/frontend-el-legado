@@ -376,6 +376,13 @@ export const PagoBoleta = () => {
             alignItems: "center", // Añadido esto
             overflow: "auto",
             resize: "horizontal",
+            width: {
+              xs: "100%",  // 100% del ancho en pantallas pequeñas (teléfonos)
+              sm: "600px",   // 600px en tablets
+              md: "800px",   // 800px en pantallas medianas
+              lg: "1000px",   // 1000px en pantallas grandes
+              xl: "1200px",   // 1200px en pantallas extra grandes
+            },
           }}
         >
           <Card
@@ -393,6 +400,7 @@ export const PagoBoleta = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+               
               }}
             >
               {" "}
@@ -419,6 +427,18 @@ export const PagoBoleta = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                maxHeight: "max-content",
+                maxWidth: "100%",
+                mx: "auto",
+               overflow: "auto",
+                resize: "horizontal",
+                width: {
+                  xs: "100%",  // 100% del ancho en pantallas pequeñas (teléfonos)
+                  sm: "600px",   // 600px en tablets
+                  md: "800px",   // 800px en pantallas medianas
+                  lg: "1000px",   // 1000px en pantallas grandes
+                  xl: "1200px",   // 1200px en pantallas extra grandes
+                },
               }}
             >    <FormControl        sx={{ width: "100%" }}>
               <FormLabel
