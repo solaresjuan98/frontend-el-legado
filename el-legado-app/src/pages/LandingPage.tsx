@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Carrousel } from "../components/Carrousel/Carrousel";
 import { Menu } from "./Menu";
-import { Programa } from "../components/Programa/Programa";
 //import { Programa } from "../components/Programa/Programa"
 import { Ubicacion } from "../components/Ubicacion/Ubicacion";
 import Button from "@mui/joy/Button";
@@ -75,8 +74,8 @@ export const LandingPage = () => {
       <br /> <br /> <br />
       <Menu />
       {/*  <Programa/>*/}
-      <br /> <br /> <br />
-      <Programa/>
+      {/* <br /> <br /> <br /> */}
+      {/* <Programa/> */}
       <br /> <br /> <br />
       <Ubicacion />
     </div>
