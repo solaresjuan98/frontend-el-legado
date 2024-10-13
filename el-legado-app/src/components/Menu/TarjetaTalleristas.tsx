@@ -28,7 +28,7 @@ export const TarjetaTalleristas: React.FC<TarjetaTalleristasProps> = ({ titulo, 
           </AspectRatio>
         </CardOverflow>
         <CardContent>
-          <Typography level="title-md" textAlign="center" textColor={"#B5D534"}>{titulo}</Typography>
+          {/* <Typography level="title-md" textAlign="center" textColor={"#B5D534"}>{titulo}</Typography> */}
           <Typography level="body-sm" textColor={"#E3FEF8"} >{descripcion}</Typography>
         </CardContent>
         <CardOverflow variant="soft" sx={{ bgcolor: 'background.level1' }}>
