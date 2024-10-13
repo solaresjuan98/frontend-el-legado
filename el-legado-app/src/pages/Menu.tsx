@@ -2,6 +2,7 @@ import { Grid, Container } from '@mui/material'; // No olvides importar Containe
 
 
 import { TarjetaTalleristas } from '../components/Menu/TarjetaTalleristas';
+import { S3_BUCKET_URL } from '../constants/constants';
 interface ContenidoItem {
   Titulo: string;
   descp: string;
@@ -13,13 +14,13 @@ const Contenido: ContenidoItem[] = [
   {
     Titulo: "Expositores",
     descp: "Conoce a nuestros expertos Expositores, seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
-    img: "https://fondos-legado.s3.us-east-2.amazonaws.com/tallerista.jpg",
+    img: `${S3_BUCKET_URL}/principal/EXPOSITORES.jpg`,
     ruta :"/expositores"
   },
   {
     Titulo: "Talleres",
-    descp: "Conoce a nuestros talleres,  que fueron seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
-    img: "https://fondos-legado.s3.us-east-2.amazonaws.com/taller.jpg",
+    descp: "Conoce a nuestros talleristas,  que fueron seleccionados cuidadosamente para brindarte una experiencia enriquecedora y educativa. ",
+    img: `${S3_BUCKET_URL}/principal/TALLERES.jpg`,
     ruta :"/talleres"
   } 
 ];
