@@ -41,7 +41,7 @@ export const usePayment = () => {
 
   const validatePayment = async (sessionId: string) => {
     // console.log(sessionId);
-    let validacion=false
+    let validacion = false;
     await axios
       .post(
         `https://uuj7unf2r3.execute-api.us-east-2.amazonaws.com/validate-payment`,
@@ -54,26 +54,17 @@ export const usePayment = () => {
         //console.log("peticion: ", isValidPayment);
         setValidPayment(isValidPayment);
 
-        if(response.data.status) {
- 
-          validacion=isValidPayment
-     
+        if (response.data.status) {
+          validacion = isValidPayment;
         }
-    
-
-                
-        
-        
       })
       .catch((err) => {
         console.log(err);
         setValidPayment(false);
       });
 
-      return validacion
-
+    return validacion;
   };
- 
 
   useEffect(() => {
     // const idSession = localStorage.getItem("idSession");
@@ -85,6 +76,6 @@ export const usePayment = () => {
   return {
     createCheckoutSession,
     validatePayment,
-    validPayment
+    validPayment,
   };
 };

@@ -50,7 +50,6 @@ export const UseRegistro =  () => {
       }
     };
     const registro = async (registro:any)   => {
-        console.log(registro)
         const nombre= registro.nombre
         const telefono = registro.telefono
         const correo= registro.correo

@@ -44,10 +44,8 @@ export const PagoBoleta = () => {
   const [pagoData, setPagoData] = useState<PagoDataType | null>(null);
 
   const [errorData, setErrorData] = useState<ErrorMessage[]>([]);
- 
-  const handlePago = () => {
-   
 
+  const handlePago = () => {
     const pago: PagoDataType = {
       nombre: formData.nombre,
       telefono: formData.telefono,
@@ -58,24 +56,28 @@ export const PagoBoleta = () => {
         estado: "en_proceso",
         total_pagar: totalAmount,
         numero_entradas: formData.numero_entradas,
-        tipo_pago:"boleta",
-        numero_transaccion: formData.numero_autorizacion,
+        tipo_pago: "boleta",
+        numero_autorizacion: formData.numero_autorizacion,
         detalle_transaccion: detallesTransaccion,
       },
     };
-     
-    setOpenModal(true);
-    setPagoData(pago);
+ 
+
+      setOpenModal(true);
+   setPagoData(pago);
   };
   const handleSubmit = async (pagoData: PagoDataType) => {
     // Llama a la función de registro con los datos de pago
-   await registro(pagoData);
- 
+
+    await registro(pagoData);
+
     resetForm();
     setCountryCode("");
     formData.numero_entradas = 0;
     setLinkImagen(null);
-    setPreviewImage("https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg");
+    setPreviewImage(
+      "https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg"
+    );
     setDetallesTransaccion([]);
   };
 
@@ -97,7 +99,9 @@ export const PagoBoleta = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [linkImagen, setLinkImagen] = useState<string | null>(null);
 
-  const [previewImage, setPreviewImage] = useState<string>("https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg");
+  const [previewImage, setPreviewImage] = useState<string>(
+    "https://fondos-legado.s3.us-east-2.amazonaws.com/boletavacia.jpg"
+  );
 
   const handleFileInputClick = () => {
     if (fileInputRef.current) {
@@ -132,10 +136,12 @@ export const PagoBoleta = () => {
 
   /* handle para cargar la fotoooo */
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-   
     if (!esRangoEdadValido()) {
-      agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
-     }
+      agregarNuevoError(
+        "rango",
+        "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar"
+      );
+    }
     const files = e.target.files;
 
     if (files && files.length > 0) {
@@ -156,8 +162,9 @@ export const PagoBoleta = () => {
     }
   };
   const esRangoEdadValido = () => {
-    const esvalido =Number(formData.numero_entradas)===detallesTransaccion.length
-    
+    const esvalido =
+      Number(formData.numero_entradas) === detallesTransaccion.length;
+
     /*if (detallesTransaccion.length>0){
       
       if (Number(formData.numero_entradas)===detallesTransaccion.length){
@@ -169,10 +176,10 @@ export const PagoBoleta = () => {
       }  
 
     }*/
-    
-    return esvalido
+
+    return esvalido;
   };
- /* const handlevalidarRango = () => {
+  /* const handlevalidarRango = () => {
     if (!esRangoEdadValido()) {
       console.log("no valido?")
       agregarNuevoError("rango", "Se tiene un ingresar un rango de edad para todas las entradas que desea comprar");
@@ -192,7 +199,7 @@ export const PagoBoleta = () => {
 
   const cargar = async (image: string, fileExt: string) => {
     setLoading(true);
-    const imageUrl = await cargarBoleta(fileExt, image); 
+    const imageUrl = await cargarBoleta(fileExt, image);
     if (imageUrl == "error") {
       seterrorLoading(true);
       setLoading(false);
@@ -251,24 +258,33 @@ export const PagoBoleta = () => {
     // ... (puedes seguir agregando más países si es necesario)
   ];
 
-  const handleSelectChange = (value: any) => {
-    const newCountryCode = value;
+  const handleSelectChange = (newCountryCode: string) => {
     setCountryCode(newCountryCode);
- 
+    
+    // Imprime el nuevo código de país seleccionado para depuración
+    console.log("Nuevo código de país:", newCountryCode);
+  
+    // Obtiene el teléfono actual sin el código de país anterior
+    const phoneWithoutCode = formData.telefono.toString().slice(countryCode.length);
+  
+    // Si el número comienza con "0", lo eliminamos
+    const adjustedPhone = phoneWithoutCode.startsWith("0") ? "" : phoneWithoutCode;
+  
+    // Construimos el nuevo número de teléfono
+    const newPhoneNumber = newCountryCode + adjustedPhone;
+  
+    // Creamos un nuevo evento con el valor actualizado del teléfono
     const newEvent = {
       target: {
         name: "telefono",
-        value:
-          newCountryCode +
-          (formData.telefono.toString().slice(countryCode.length) === "0"
-            ? ""
-            : formData.telefono.toString().slice(countryCode.length)) +
-          " ",
+        value: newPhoneNumber.trim(), // Aseguramos que no haya espacios innecesarios
       },
     } as unknown as ChangeEvent<HTMLInputElement>;
-
+  
+    // Llamamos a la función que maneja el formulario con el nuevo valor
     onChangeForm(newEvent);
   };
+  
 
   const validateCorreo = (value: string) => {
     const correoRegExp =
@@ -278,6 +294,9 @@ export const PagoBoleta = () => {
   };
 
   const validateNumeroEntradas = (value: string) => {
+    return parseInt(value, 10) > 0;
+  };
+  const validateAutorization = (value: string) => {
     return parseInt(value, 10) > 0;
   };
   const validateNombre = (value: string) => {
@@ -310,7 +329,10 @@ export const PagoBoleta = () => {
           campo: name,
           mensaje: "Debe ingresar un nombre para poder realizar su transacción",
         });
-      } else if (name === "numero_autorizacion" && !validateNombre(value)) {
+      } else if (
+        name === "numero_autorizacion" &&
+        !validateAutorization(value)
+      ) {
         newErrors.push({
           campo: name,
           mensaje:
@@ -353,7 +375,7 @@ export const PagoBoleta = () => {
   const totalAmount = numberMap.length * 150;
   const formattedTotal = `Q${totalAmount.toFixed(2)}`;
   return (
-    <Grid container >
+    <Grid container>
       {openModal && (
         <ModalResumen
           pago={pagoData}
@@ -377,11 +399,11 @@ export const PagoBoleta = () => {
             overflow: "auto",
             resize: "horizontal",
             width: {
-              xs: "100%",  // 100% del ancho en pantallas pequeñas (teléfonos)
-              sm: "600px",   // 600px en tablets
-              md: "800px",   // 800px en pantallas medianas
-              lg: "1000px",   // 1000px en pantallas grandes
-              xl: "1200px",   // 1200px en pantallas extra grandes
+              xs: "100%", // 100% del ancho en pantallas pequeñas (teléfonos)
+              sm: "600px", // 600px en tablets
+              md: "800px", // 800px en pantallas medianas
+              lg: "1000px", // 1000px en pantallas grandes
+              xl: "1200px", // 1200px en pantallas extra grandes
             },
           }}
         >
@@ -391,7 +413,8 @@ export const PagoBoleta = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",width:'100%'
+              height: "100%",
+              width: "100%",
             }}
           >
             <CardContent
@@ -400,51 +423,50 @@ export const PagoBoleta = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-               
               }}
             >
               {" "}
-              <Typography level="title-lg"  textColor={"#B5D534"}>
+              <Typography level="title-lg" textColor={"#B5D534"}>
                 Realizar el depósito a la siguiente cuenta:{" "}
               </Typography>
-              <Typography level="title-md"   textColor={"#C3FCEF"}>
+              <Typography level="title-md" textColor={"#C3FCEF"}>
                 Bi Monetaria Iglesia de Cristo 408-002325-4{" "}
               </Typography>
             </CardContent>
           </Card>
-     
-            
           <Typography
             level="title-lg"
             textColor={"#B5D534"}
             startDecorator={<InfoOutlined />}
           >
-             información Personal
-          </Typography>     <Divider inset="none" />
+            información Personal
+          </Typography>{" "}
+          <Divider inset="none" />
           <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                maxHeight: "max-content",
-                maxWidth: "100%",
-                mx: "auto",
-                overflow: "auto",
-                resize: "horizontal",
-                width: {
-                  xs: "100%",  // 100% del ancho en pantallas pequeñas (teléfonos)
-                  sm: "600px",   // 600px en tablets
-                  md: "800px",   // 800px en pantallas medianas
-                  lg: "1000px",   // 1000px en pantallas grandes
-                  xl: "1200px",   // 1200px en pantallas extra grandes
-                },
-              }}
-            >    <FormControl        sx={{ width: "100%" }}>
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              maxHeight: "max-content",
+              maxWidth: "100%",
+              mx: "auto",
+              overflow: "auto",
+              resize: "horizontal",
+              width: {
+                xs: "100%", // 100% del ancho en pantallas pequeñas (teléfonos)
+                sm: "600px", // 600px en tablets
+                md: "800px", // 800px en pantallas medianas
+                lg: "1000px", // 1000px en pantallas grandes
+                xl: "1200px", // 1200px en pantallas extra grandes
+              },
+            }}
+          >
+            {" "}
+            <FormControl sx={{ width: "100%" }}>
               <FormLabel
                 sx={{
                   color: "#C3FCEF",
-            
                 }}
               >
                 Nombre
@@ -466,25 +488,27 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-            <br/>
-            <FormControl        sx={{ width: "100%" }}>
+            <br />
+            <FormControl sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#C3FCEF" }}>
                 Selecciona el país de donde nos visitas
               </FormLabel>
               <Select
                 placeholder="Seleccione un país..."
-                onChange={handleSelectChange}
-                value={countryCode}
+                onChange={(_event, newValue) => handleSelectChange(newValue ?? "+ 502")}
+                value={countryCode} // Muestra el valor seleccionado
               >
                 {countryAndStates.map((item, index) => (
-                  <Option key={index} value={item.value}>
+                  <Option key={index} value={item.value.toString()}>
+                    {" "}
+                    {/* Asegúrate de que el valor sea un string */}
                     {item.label}
                   </Option>
                 ))}
               </Select>
             </FormControl>
-            <br/>
-            <FormControl        sx={{ width: "100%" }}>
+            <br />
+            <FormControl sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#C3FCEF" }}>Teléfono</FormLabel>
               <Input
                 endDecorator={<PhoneIcon />}
@@ -503,8 +527,8 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-            <br/>
-            <FormControl        sx={{ width: "100%" }}>
+            <br />
+            <FormControl sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#C3FCEF" }}>Correo </FormLabel>
               <Input
                 endDecorator={<EmailIcon />}
@@ -522,8 +546,8 @@ export const PagoBoleta = () => {
                   </div>
                 ))}
             </FormControl>
-            <br/>
-            <FormControl        sx={{ width: "100%" }}>
+            <br />
+            <FormControl sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#C3FCEF" }}>Congregación</FormLabel>
               <Input
                 endDecorator={<BusinessIcon />}
@@ -533,52 +557,50 @@ export const PagoBoleta = () => {
                 value={formData.congregacion}
               />
             </FormControl>
-            <br/>
-            
-             <FormControl        sx={{ width: "100%" }}>
-                <FormLabel sx={{ color: "#C3FCEF" }}>
-                  Número de Entradas
-                </FormLabel>
-                <Input
-                  type="number"
-                  endDecorator={<LocalActivityIcon />}
-                  name="numero_entradas"
-                  onChange={onChangeForm}
-                  onBlur={handleInputBlur}
-                  sx={{ width: "100%" }}
-                  value={formData.numero_entradas}
-                  slotProps={{
-                    input: {
-                      min: 1,
-                      max: 10,
-                      step: 1,
-                    },
-                  }}
-                />
-                {errorData
-                  .filter((error) => error.campo === "numero_entradas")
-                  .map((error, index) => (
-                    <div key={index} style={{ color: "red" }}>
-                      {error.mensaje}
-                    </div>
-                  ))}
-              </FormControl>
-              <br/>
-            
+            <br />
+            <FormControl sx={{ width: "100%" }}>
+              <FormLabel sx={{ color: "#C3FCEF" }}>
+                Número de Entradas
+              </FormLabel>
+              <Input
+                type="number"
+                endDecorator={<LocalActivityIcon />}
+                name="numero_entradas"
+                onChange={onChangeForm}
+                onBlur={handleInputBlur}
+                sx={{ width: "100%" }}
+                value={formData.numero_entradas}
+                slotProps={{
+                  input: {
+                    min: 1,
+                    max: 10,
+                    step: 1,
+                  },
+                }}
+              />
+              {errorData
+                .filter((error) => error.campo === "numero_entradas")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
+            </FormControl>
+            <br />
             {numberInputIsTouched &&
               numberMap.map((item, index) => (
                 <>
                   <Grid
-                     key={index}
-                   sx={{ 
-                    display: "grid",
-                    gap: "1em",
-                    gridColumn: "1/-1",
-                    maxWidth: "1200px", // Ajusta según necesidad
-                    width: "100%"
-                 }}
+                    key={index}
+                    sx={{
+                      display: "grid",
+                      gap: "1em",
+                      gridColumn: "1/-1",
+                      maxWidth: "1200px", // Ajusta según necesidad
+                      width: "100%",
+                    }}
                   >
-                    <Card variant={"soft"} sx={{ width: "100%" }}         key={index}>
+                    <Card variant={"soft"} sx={{ width: "100%" }} key={index}>
                       <Typography level="h4" sx={{ color: "#B5D534" }}>
                         Entrada {item}
                       </Typography>
@@ -587,7 +609,6 @@ export const PagoBoleta = () => {
                         onChange={(e) =>
                           handleRadioChange(index, e.target.value)
                         }
-                
                       >
                         <Radio
                           value="menor de 12 años"
@@ -596,7 +617,10 @@ export const PagoBoleta = () => {
                         <Radio value="12-16" label="12-16 años" />
                         <Radio value="16-20" label="16-20 años" />
                         <Radio value="20-24" label="20-24 años" />
-                        <Radio value="mayor a 25 años" label="mayor a 25 años" />
+                        <Radio
+                          value="mayor a 25 años"
+                          label="mayor a 25 años"
+                        />
                       </RadioGroup>
                       <Checkbox
                         label=" Bautizado"
@@ -606,18 +630,18 @@ export const PagoBoleta = () => {
                       />
                     </Card>
                     {errorData
-                  .filter((error) => error.campo === "rango")
-                  .map((error, index) => (
-                    <div key={index} style={{ color: "red" }}>
-                      {error.mensaje}
-                    </div>
-                  ))}
+                      .filter((error) => error.campo === "rango")
+                      .map((error, index) => (
+                        <div key={index} style={{ color: "red" }}>
+                          {error.mensaje}
+                        </div>
+                      ))}
                   </Grid>
                   <br />
                 </>
               ))}
-                 <br/>
-            <FormControl        sx={{ width: "100%" }}>
+            <br />
+            <FormControl sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#C3FCEF" }}>
                 Numero de Autorización(opcional){" "}
               </FormLabel>
@@ -626,12 +650,20 @@ export const PagoBoleta = () => {
                 name="numero_autorizacion"
                 placeholder="opcional"
                 type="number"
+                onBlur={onBlur}
                 sx={{ width: "100%" }}
                 onChange={onChangeForm}
                 value={formData.numero_autorizacion}
               />
+              {errorData
+                .filter((error) => error.campo === "numero_autorizacion")
+                .map((error, index) => (
+                  <div key={index} style={{ color: "red" }}>
+                    {error.mensaje}
+                  </div>
+                ))}
             </FormControl>
-            <br/>
+            <br />
             <Grid
               sx={{
                 display: "grid",
@@ -734,16 +766,19 @@ export const PagoBoleta = () => {
                         formData.nombre &&
                         formData.telefono &&
                         formData.numero_autorizacion &&
-                        formData.correo  
+                        formData.correo &&
+                        formData.numero_autorizacion
                           ? "#FFFFFF"
                           : "#FFFFFF",
                       background:
-                      totalAmount <= 0 ||
-                      errorData.length > 0 ||
-                      !linkImagen ||
-                      !formData.nombre ||
-                      !formData.telefono ||
-                      !formData.correo ||!esRangoEdadValido() 
+                        totalAmount <= 0 ||
+                        errorData.length > 0 ||
+                        !linkImagen ||
+                        !formData.nombre ||
+                        !formData.telefono ||
+                        !formData.numero_autorizacion ||
+                        !formData.correo ||
+                        !esRangoEdadValido()
                           ? "#19004B"
                           : "#3E00B9",
                       width: "80%",
@@ -756,7 +791,9 @@ export const PagoBoleta = () => {
                       !linkImagen ||
                       !formData.nombre ||
                       !formData.telefono ||
-                      !formData.correo ||!esRangoEdadValido() 
+                      !formData.numero_autorizacion ||
+                      !formData.correo ||
+                      !esRangoEdadValido()
                     }
                   >
                     Registrarse

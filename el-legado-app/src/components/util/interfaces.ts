@@ -26,7 +26,7 @@ export interface PagoDataType {
     tipo_pago:string;
     numero_entradas: number;
 
-    numero_transaccion: number;
+    numero_autorizacion: number;
     detalle_transaccion: any[];
   };
 }
