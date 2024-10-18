@@ -643,7 +643,7 @@ export const PagoBoleta = () => {
             <br />
             <FormControl sx={{ width: "100%" }}>
               <FormLabel sx={{ color: "#C3FCEF" }}>
-                Numero de Autorización(opcional){" "}
+                Número de Autorización / Número de boleta {" "}
               </FormLabel>
               <Input
                 endDecorator={<ConfirmationNumberIcon />}
