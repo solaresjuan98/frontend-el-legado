@@ -674,7 +674,7 @@ export const PagoBoleta = () => {
             >
               <FormControl className="">
                 <FormLabel sx={{ color: "#D3D534" }}>
-                  Carga la boleta de pago
+                  Carga la boleta de pago (obligatorio)
                 </FormLabel>
 
                 <input
