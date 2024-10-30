@@ -578,13 +578,14 @@ export const PagoBoleta = () => {
                   },
                 }}
               />
-              {errorData
-                .filter((error) => error.campo === "numero_entradas")
-                .map((error, index) => (
-                  <div key={index} style={{ color: "red" }}>
-                    {error.mensaje}
-                  </div>
-                ))}
+                    {errorData.find((error) => error.campo === "numero_entradas") && (
+                <div style={{ color: "red" }}>
+                  {
+                    errorData.find((error) => error.campo === "numero_entradas")
+                      ?.mensaje
+                  }
+                </div>
+              )}
             </FormControl>
             <br />
             {numberInputIsTouched &&
@@ -777,8 +778,7 @@ export const PagoBoleta = () => {
                         !formData.nombre ||
                         !formData.telefono ||
                         !formData.numero_autorizacion ||
-                        !formData.correo ||
-                        !esRangoEdadValido()
+                        !formData.correo  
                           ? "#19004B"
                           : "#3E00B9",
                       width: "80%",
@@ -792,8 +792,7 @@ export const PagoBoleta = () => {
                       !formData.nombre ||
                       !formData.telefono ||
                       !formData.numero_autorizacion ||
-                      !formData.correo ||
-                      !esRangoEdadValido()
+                      !formData.correo 
                     }
                   >
                     Registrarse
