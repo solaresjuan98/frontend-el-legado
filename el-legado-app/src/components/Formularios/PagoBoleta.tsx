@@ -797,6 +797,20 @@ export const PagoBoleta = () => {
                   >
                     Registrarse
                   </Button>
+                  {(
+                    errorData.length > 0 
+                   ) && (
+                    <div
+                      style={{
+                        color: "red",
+                        marginTop: "10px",
+                        textAlign: "center",
+                      }}
+                    >
+                      Por favor, completa todos los campos y asegúrate de que no
+                      haya errores.
+                    </div>
+                  )}
                 </Grid>
               </Grid>
             </CardActions>
